@@ -49,7 +49,7 @@
       color: #c0392b;
       margin-bottom: 20px;
     }
-    .features {
+    .features, .videos, .resources {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
@@ -59,6 +59,11 @@
       padding: 25px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    iframe {
+      width: 100%;
+      height: 315px;
+      border-radius: 10px;
     }
     footer {
       background: #1e1e1e;
@@ -82,6 +87,8 @@
 <nav>
   <a href="#about">About</a>
   <a href="#lessons">Lessons</a>
+  <a href="#videos">Video Lessons</a>
+  <a href="#resources">Resources</a>
   <a href="#egyptian">Egyptian Arabic</a>
   <a href="#contact">Contact</a>
 </nav>
@@ -112,6 +119,36 @@
       <h3>Speak with Confidence</h3>
       <p>Stop translating in your head and start speaking naturally.</p>
     </div>
+  </div>
+</section>
+
+<section id="videos">
+  <h2>Video Lessons</h2>
+  <div class="videos">
+    <!-- فيديو شورت 1 -->
+    <div class="box">
+      <h3>Lesson 1: Greetings in Egyptian Arabic</h3>
+      <iframe src="https://www.youtube.com/embed/nKUIVL5RDaQ" title="YouTube Shorts Video" allowfullscreen></iframe>
+      <p>Learn how Egyptians greet each other in everyday conversations.</p>
+    </div>
+    <!-- يمكنك إضافة المزيد من الفيديوهات بنفس الطريقة -->
+  </div>
+</section>
+
+<section id="resources">
+  <h2>Downloadable Resources</h2>
+  <div class="resources">
+    <div class="box">
+      <h3>PDF Lesson 1</h3>
+      <p>Download phrases and vocabulary for Lesson 1.</p>
+      <a href="lesson1.pdf" download>Download PDF</a>
+    </div>
+    <div class="box">
+      <h3>PDF Lesson 2</h3>
+      <p>Download phrases and vocabulary for Lesson 2.</p>
+      <a href="lesson2.pdf" download>Download PDF</a>
+    </div>
+    <!-- أضف المزيد من ملفات PDF حسب الحاجة -->
   </div>
 </section>
 
