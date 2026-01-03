@@ -295,23 +295,32 @@ addVideoBtn.addEventListener('click', () => {
 });
 
 /* ===============================
-       Read More functionality
+       Read More functionality مع انتقال
 ================================= */
 document.querySelectorAll('.readMoreBtn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     const contentId = btn.getAttribute('data-content');
     const contentDiv = document.getElementById(contentId);
-    contentDiv.style.display = contentDiv.style.display === 'block' ? 'none' : 'block';
-    // Scroll إلى المحتوى الموسع عند فتحه
-    if(contentDiv.style.display === 'block'){
-      contentDiv.scrollIntoView({behavior:'smooth'});
-    }
+
+    // إخفاء كل محتوى lessons الحالي لإحساس بالانتقال
+    document.querySelectorAll('#lessons .features').forEach(f => f.style.display='none');
+
+    // عرض المحتوى الموسع
+    contentDiv.style.display = 'block';
+
+    // الانتقال إلى موقع المحتوى قبل قسم Contact
+    const contactSection = document.getElementById('contact');
+    const yOffset = -20; // مسافة بسيطة فوق
+    const y = contactSection.offsetTop - contactSection.offsetHeight - yOffset;
+    window.scrollTo({top: y > 0 ? y : 0, behavior: 'smooth'});
   });
 });
+
 </script>
 
 </body>
 </html>
+
 
 
 
