@@ -16,25 +16,6 @@ body {
   min-height:100vh;
 }
 
-.sidebar button { 
-  width:100%; 
-  padding:10px; 
-  margin-top:20px; 
-  border:none; 
-  border-radius:6px; 
-  background:#0d47a1; 
-  color:#fff; 
-  cursor:pointer; 
-  font-weight:bold;
-}
-
-/* تغيير لون زر "إضافة فيديو جديد" فقط */
-#showFormBtn {
-  background-color: #e91e63;
-  color: #fff;
-}
-#showFormBtn:hover { background-color: #d81b60; }
-
 /* Sidebar */
 .sidebar {
   width: 250px;
@@ -51,6 +32,26 @@ body {
 .sidebar h2 { color:#1976d2; margin-bottom:20px; font-size:1.6rem; border-bottom:2px solid #1976d2; padding-bottom:5px; }
 .sidebar a { display:block; color:#fff; text-decoration:none; margin:10px 0; transition: color 0.3s ease; }
 .sidebar a:hover { color:#1976d2; }
+.sidebar button { 
+  width:100%; 
+  padding:10px; 
+  margin-top:20px; 
+  border:none; 
+  border-radius:6px; 
+  background:#0d47a1; 
+  color:#fff; 
+  cursor:pointer; 
+  font-weight:bold;
+}
+
+/* تغيير لون زر "إضافة فيديو جديد" فقط */
+#showFormBtn {
+  background-color: #e91e63; 
+  color: #fff; 
+}
+#showFormBtn:hover {
+  background-color: #d81b60; 
+}
 
 /* Main content */
 main { flex-grow:1; padding:20px 40px; max-width:1000px; margin:auto; }
@@ -102,11 +103,19 @@ section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.videoBox:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+.videoBox:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
 .videoBox iframe { width:100%; height:200px; border-radius:10px; }
 
 /* Admin Buttons */
-.videoButtons { display:flex; justify-content:center; gap:10px; margin-top:5px; }
+.videoButtons {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:5px;
+}
 .videoButtons button {
   padding:5px 10px;
   border:none;
@@ -153,13 +162,22 @@ footer a { color:#1976d2; text-decoration:none; }
   font-size:1rem;
 }
 
-/* Logout Button */
-#logoutAdminBtn {
+/* Admin Logout Button */
+#logoutBtn {
   display:none;
-  margin-top:10px;
-  background:#f44336;
+  width:100%;
+  padding:10px;
+  margin-top:15px;
+  border:none;
+  border-radius:6px;
+  background:#ff5722;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
 }
-#logoutAdminBtn:hover { background:#d32f2f; }
+
+/* Visitor Counter */
+#visitorCounter { margin-top:30px; text-align:center; color:#fff; font-weight:bold; font-size:0.9rem; }
 
 /* Responsive */
 @media(max-width:992px){
@@ -183,14 +201,19 @@ footer a { color:#1976d2; text-decoration:none; }
   <!-- زر لإظهار الفورم لإضافة فيديو -->
   <button id="showFormBtn">إضافة فيديو جديد</button>
 
-  <!-- زر خروج الأدمين -->
-  <button id="logoutAdminBtn">خروج الأدمين</button>
-
   <!-- الفورم لإضافة الفيديو -->
   <div id="videoForm">
       <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
       <input type="text" id="videoURL" placeholder="رابط YouTube">
       <button id="addVideoBtn">إضافة الفيديو</button>
+  </div>
+
+  <!-- زر خروج الأدمين -->
+  <button id="logoutBtn">خروج الأدمين</button>
+
+  <!-- عداد الزوار -->
+  <div id="visitorCounter">
+    عدد الزوار: <span id="count">0</span>
   </div>
 </div>
 
@@ -205,7 +228,7 @@ footer a { color:#1976d2; text-decoration:none; }
 
 <section id="about">
   <h2>About This Website</h2>
-  <p>This website teaches <strong>Egyptian Spoken Arabic</strong> through engaging videos and downloadable PDFs. Learn practical phrases, pronunciation, and everyday conversations, suitable for beginners and advanced learners alike..</p>
+  <p>This website teaches <strong>Egyptian Spoken Arabic</strong> through engaging videos and downloadable PDFs. Learn practical phrases, pronunciation, and everyday conversations, suitable for beginners and advanced learners alike.</p>
 </section>
 
 <section id="videos">
@@ -239,22 +262,35 @@ footer a { color:#1976d2; text-decoration:none; }
 </footer>
 
 <script>
-const ADMIN_PASSWORD = "1234"; // كلمة المرور
-let isAdmin = sessionStorage.getItem("isAdmin") === "true"; // حفظ حالة الأدمين ضمن الجلسة
+// كلمة مرور الأدمين
+let isAdmin = false;
 
+function promptAdmin() {
+  const pass = prompt("ادخل كلمة مرور الأدمين:");
+  if(pass === "1234") {
+    isAdmin = true;
+    showAdminUI();
+  } else alert("كلمة المرور خاطئة!");
+}
+
+// عناصر الواجهة
 const showFormBtn = document.getElementById('showFormBtn');
-const logoutAdminBtn = document.getElementById('logoutAdminBtn');
 const videoForm = document.getElementById('videoForm');
 const addVideoBtn = document.getElementById('addVideoBtn');
 const videoTitleInput = document.getElementById('videoTitle');
 const videoURLInput = document.getElementById('videoURL');
 const videoList = document.getElementById('videoList');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
+const logoutBtn = document.getElementById('logoutBtn');
 
+// إخفاء الأزرار والفورم للأدمن حتى إدخال كلمة المرور
+showFormBtn.style.display = "none";
+videoForm.style.display = "none";
+
+// عداد الفيديوهات
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
 let visibleCount = 6;
 
-// دالة إنشاء عنصر فيديو
 function createVideoElement(video, index) {
   const container = document.createElement('div');
 
@@ -306,52 +342,39 @@ function createVideoElement(video, index) {
   return container;
 }
 
-// عرض الفيديوهات
 function renderVideos() {
   videoList.innerHTML = "";
-  videos.slice(0, visibleCount).forEach((v,i)=> videoList.appendChild(createVideoElement(v,i)));
+  videos.slice(0, visibleCount).forEach((v,i)=>{
+    videoList.appendChild(createVideoElement(v,i));
+  });
   loadMoreBtn.style.display = visibleCount >= videos.length ? 'none' : 'block';
 }
 
-// تحميل المزيد
-loadMoreBtn.addEventListener('click', ()=> { visibleCount += 6; renderVideos(); });
-
-// تحديث واجهة الأدمين
-function updateAdminUI() {
-  if(isAdmin){
-    showFormBtn.style.display = "block";
-    logoutAdminBtn.style.display = "block";
-    videoForm.style.display = "flex";
-  } else {
-    showFormBtn.style.display = "block";
-    logoutAdminBtn.style.display = "none";
-    videoForm.style.display = "none";
-  }
-}
-
-// زر إضافة فيديو - يطلب كلمة المرور إذا لم يكن الأدمين
-showFormBtn.addEventListener('click', () => {
-  if(!isAdmin){
-    const pass = prompt("أدخل كلمة مرور الأدمين:");
-    if(pass === ADMIN_PASSWORD){
-      isAdmin = true;
-      sessionStorage.setItem("isAdmin","true");
-      updateAdminUI();
-      renderVideos();
-    } else {
-      alert("كلمة المرور غير صحيحة!");
-    }
-  } else {
-    videoForm.style.display = videoForm.style.display === "flex" ? "none" : "flex";
-  }
+loadMoreBtn.addEventListener('click', ()=> {
+  visibleCount += 6;
+  renderVideos();
 });
 
-// زر خروج الأدمين
-logoutAdminBtn.addEventListener('click', () => {
+renderVideos();
+
+// تفعيل واجهة الأدمن بعد إدخال كلمة المرور
+function showAdminUI() {
+  showFormBtn.style.display = "block";
+  logoutBtn.style.display = "block";
+  videoForm.style.display = "none";
+
+  showFormBtn.addEventListener('click', () => {
+    videoForm.style.display = videoForm.style.display === "flex" ? "none" : "flex";
+  });
+}
+
+// خروج الأدمن
+logoutBtn.addEventListener('click', ()=> {
   isAdmin = false;
-  sessionStorage.setItem("isAdmin","false");
-  updateAdminUI();
-  renderVideos();
+  showFormBtn.style.display = "none";
+  videoForm.style.display = "none";
+  logoutBtn.style.display = "none";
+  alert("تم تسجيل الخروج من وضع الأدمين");
 });
 
 // إضافة فيديو جديد
@@ -372,16 +395,32 @@ addVideoBtn.addEventListener('click', () => {
 
   videoTitleInput.value = "";
   videoURLInput.value = "";
+
   renderVideos();
 });
 
-// تحميل الفيديوهات عند بدء الصفحة
-updateAdminUI();
-renderVideos();
-</script>
+// طلب كلمة المرور عند تحميل الصفحة
+window.onload = promptAdmin;
 
+// عداد الزوار
+const countElement = document.getElementById('count');
+const namespace = "spoken-arabic-now";
+const key = "homepage";
+
+fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+  .then(res => res.json())
+  .then(data => {
+    countElement.textContent = data.value;
+  })
+  .catch(err => {
+    console.error("خطأ في عداد الزوار:", err);
+    countElement.textContent = "?";
+  });
+
+</script>
 </body>
 </html>
+
 
 
 
