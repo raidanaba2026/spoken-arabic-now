@@ -16,7 +16,7 @@ body {
   min-height:100vh;
 }
 
-/* Sidebar */
+/* القائمة الجانبية */
 .sidebar {
   width: 250px;
   background: #1e1e1e;
@@ -95,7 +95,6 @@ section h2 {
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  position: relative;
 }
 .box:hover {
   transform: translateY(-6px);
@@ -115,22 +114,20 @@ section h2 {
 }
 .box a.button:hover { background-color:#0d47a1; }
 
+iframe { width:100%; height:315px; border-radius:12px; }
+
 /* زر الحذف */
-.box button.deleteBtn {
-  background-color:#e74c3c;
+.deleteBtn {
+  background-color: #e74c3c;
   color:#fff;
   border:none;
   padding:8px 12px;
   border-radius:6px;
   cursor:pointer;
-  font-weight:bold;
-  position:absolute;
-  top:15px;
-  right:15px;
+  margin-top:10px;
+  transition: background-color 0.3s ease;
 }
-.box button.deleteBtn:hover { background-color:#c0392b; }
-
-iframe { width:100%; height:315px; border-radius:12px; }
+.deleteBtn:hover { background-color:#c0392b; }
 
 /* Footer */
 footer {
@@ -142,25 +139,30 @@ footer {
 }
 footer a { color:#1976d2; text-decoration:none; }
 
-/* زر إضافة الفيديو في القائمة الجانبية */
-#addVideoSection {
-  margin-top:30px;
-  border-top:1px solid #444;
-  padding-top:15px;
+/* عناصر إضافة الفيديو */
+#videoForm {
+  display:none;
+  margin-top:20px;
 }
-#addVideoSection button {
+#videoForm input {
   width:100%;
+  padding:8px 10px;
   margin-bottom:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
 }
-#addVideoSection input {
+#videoForm button {
   width:100%;
-  padding:6px;
-  margin-bottom:8px;
-  border-radius:5px;
+  padding:10px;
   border:none;
+  border-radius:6px;
+  background:#1976d2;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
 }
+#videoForm button:hover { background:#0d47a1; }
 
-/* Responsive */
 @media(max-width:992px){
   body { flex-direction:column; }
   .sidebar { width:100%; height:auto; position:relative; }
@@ -171,7 +173,7 @@ footer a { color:#1976d2; text-decoration:none; }
 </head>
 <body>
 
-<!-- Sidebar -->
+<!-- القائمة الجانبية -->
 <div class="sidebar">
   <h2>Navigation</h2>
   <a href="#about">About</a>
@@ -181,18 +183,19 @@ footer a { color:#1976d2; text-decoration:none; }
   <a href="#egyptian">Egyptian Arabic</a>
   <a href="#contact">Contact</a>
 
-  <!-- قسم إضافة الفيديو في القائمة الجانبية -->
-  <div id="addVideoSection">
-    <button id="showAddVideoBtn" class="button">إضافة فيديو</button>
-    <div id="addVideoForm" style="display:none;">
-      <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
-      <input type="text" id="videoURL" placeholder="رابط الفيديو">
-      <button id="addVideoBtn" class="button">أضف الفيديو</button>
-    </div>
+  <!-- زر إضافة الفيديو -->
+  <button id="showFormBtn" style="margin-top:20px; width:100%; padding:10px; border:none; border-radius:6px; background:#0d47a1; color:#fff; cursor:pointer;">إضافة فيديو جديد</button>
+
+  <!-- نموذج إضافة الفيديو -->
+  <div id="videoForm">
+    <input type="text" id="videoPassword" placeholder="أدخل كلمة المرور">
+    <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
+    <input type="text" id="videoURL" placeholder="رابط YouTube">
+    <button id="addVideoBtn">إضافة الفيديو</button>
   </div>
 </div>
 
-<!-- Main content -->
+<!-- المحتوى الرئيسي -->
 <main>
 <header>
   <img src="logo.png" alt="Spoken Arabic Now Logo">
@@ -226,30 +229,11 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
+<!-- قسم فيديوهات الدروس -->
 <section id="videos">
   <h2>Video Lessons</h2>
   <div class="videos" id="videoContainer">
-    <!-- فيديوهات موجودة مسبقاً -->
-    <div class="box">
-      <h3>Lesson 1: Mind your own business</h3>
-      <iframe src="https://www.youtube.com/embed/nKUIVL5RDaQ" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/nKUIVL5RDaQ" target="_blank">Watch on YouTube</a>
-      <button class="deleteBtn">حذف</button>
-    </div>
-
-    <div class="box">
-      <h3>Lesson 2: You Command – I’m at Your Service</h3>
-      <iframe src="https://www.youtube.com/embed/NXmhi7uiX7k" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/NXmhi7uiX7k" target="_blank">Watch on YouTube</a>
-      <button class="deleteBtn">حذف</button>
-    </div>
-
-    <div class="box">
-      <h3>Lesson 3: Stop Showing Off</h3>
-      <iframe src="https://www.youtube.com/embed/pn6B8bHghek" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/pn6B8bHghek" target="_blank">Watch on YouTube</a>
-      <button class="deleteBtn">حذف</button>
-    </div>
+    <!-- الفيديوهات ستُضاف هنا تلقائياً -->
   </div>
 </section>
 
@@ -288,44 +272,42 @@ footer a { color:#1976d2; text-decoration:none; }
 </footer>
 
 <script>
-const password = "1234";
-const showAddVideoBtn = document.getElementById('showAddVideoBtn');
-const addVideoForm = document.getElementById('addVideoForm');
-const addVideoBtn = document.getElementById('addVideoBtn');
+// العنصر الرئيسي لحاوية الفيديوهات
 const videoContainer = document.getElementById('videoContainer');
+const showFormBtn = document.getElementById('showFormBtn');
+const videoForm = document.getElementById('videoForm');
+const addVideoBtn = document.getElementById('addVideoBtn');
+const videoPasswordInput = document.getElementById('videoPassword');
+const videoTitleInput = document.getElementById('videoTitle');
+const videoURLInput = document.getElementById('videoURL');
 
-// إظهار نموذج إضافة الفيديو بعد التحقق من كلمة المرور
-showAddVideoBtn.addEventListener('click', () => {
-  const userPass = prompt("أدخل كلمة المرور لإضافة فيديو:");
-  if(userPass === password){
-    addVideoForm.style.display = 'block';
+// كلمة المرور
+const PASSWORD = "1234"; // ضع هنا كلمة المرور الخاصة بك
+
+// إظهار نموذج إضافة الفيديو بعد إدخال كلمة المرور الصحيحة
+showFormBtn.addEventListener('click', () => {
+  const pass = prompt("أدخل كلمة المرور:");
+  if(pass === PASSWORD){
+    videoForm.style.display = "block";
   } else {
     alert("كلمة المرور غير صحيحة!");
   }
 });
 
-// إضافة فيديو جديد تلقائياً للقسم
-addVideoBtn.addEventListener('click', () => {
-  const title = document.getElementById('videoTitle').value.trim();
-  const url = document.getElementById('videoURL').value.trim();
-  if(!title || !url){
-    alert("يرجى ملء جميع الحقول!");
-    return;
-  }
+// تحميل الفيديوهات من LocalStorage عند البداية
+const savedVideos = JSON.parse(localStorage.getItem('myVideos')) || [];
+savedVideos.forEach(video => addVideoToPage(video.title, video.url));
 
+// دالة لإضافة فيديو إلى الصفحة
+function addVideoToPage(title, url){
   let videoId = "";
-  try{
-    if(url.includes("youtube.com/watch?v=")){
-      videoId = url.split("v=")[1].split("&")[0];
-    } else if(url.includes("youtu.be/")){
-      videoId = url.split("youtu.be/")[1].split("?")[0];
-    } else if(url.includes("/shorts/")){
-      videoId = url.split("/shorts/")[1].split("?")[0];
-    } else {
-      alert("رابط YouTube غير صالح!");
-      return;
-    }
-  } catch(e){
+  if(url.includes("youtube.com/watch?v=")){
+    videoId = url.split("v=")[1].split("&")[0];
+  } else if(url.includes("youtu.be/")){
+    videoId = url.split("youtu.be/")[1].split("?")[0];
+  } else if(url.includes("/shorts/")){
+    videoId = url.split("/shorts/")[1].split("?")[0];
+  } else {
     alert("رابط YouTube غير صالح!");
     return;
   }
@@ -340,29 +322,45 @@ addVideoBtn.addEventListener('click', () => {
   `;
   videoContainer.appendChild(box);
 
+  // زر الحذف مع رسالة التأكيد
   box.querySelector('.deleteBtn').addEventListener('click', () => {
     if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
       box.remove();
+      saveVideosToStorage();
     }
   });
+}
 
-  document.getElementById('videoTitle').value = "";
-  document.getElementById('videoURL').value = "";
-});
-
-// تفعيل زر الحذف لكل الفيديوهات الموجودة مسبقاً
-document.querySelectorAll('.deleteBtn').forEach(btn => {
-  btn.addEventListener('click', e => {
-    const box = e.target.parentElement;
-    if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
-      box.remove();
-    }
+// حفظ الفيديوهات في LocalStorage
+function saveVideosToStorage(){
+  const videos = [];
+  document.querySelectorAll('#videoContainer .box').forEach(box => {
+    const title = box.querySelector('h3').innerText;
+    const url = box.querySelector('a.button').href;
+    videos.push({title, url});
   });
+  localStorage.setItem('myVideos', JSON.stringify(videos));
+}
+
+// إضافة فيديو جديد عند الضغط على الزر
+addVideoBtn.addEventListener('click', () => {
+  const title = videoTitleInput.value.trim();
+  const url = videoURLInput.value.trim();
+  if(!title || !url){
+    alert("يرجى ملء جميع الحقول!");
+    return;
+  }
+  addVideoToPage(title, url);
+  saveVideosToStorage();
+  videoTitleInput.value = "";
+  videoURLInput.value = "";
 });
 </script>
 
 </body>
 </html>
+
+
 
 
 
