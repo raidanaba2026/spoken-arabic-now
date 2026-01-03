@@ -15,7 +15,29 @@ body {
   display:flex;
   min-height:100vh;
 }
+.sidebar button { 
+  width:100%; 
+  padding:10px; 
+  margin-top:20px; 
+  border:none; 
+  border-radius:6px; 
+  background:#0d47a1; 
+  color:#fff; 
+  cursor:pointer; 
+  font-weight:bold;
+}
 
+/* تغيير لون زر "إضافة فيديو جديد" فقط */
+#showFormBtn {
+  background-color: #e91e63; /* اللون الجديد للزر */
+  color: #fff; /* لون النص */
+}
+
+#showFormBtn:hover {
+  background-color: #d81b60; /* لون عند المرور بالماوس */
+}
+
+ 
 /* Sidebar */
 .sidebar {
   width: 250px;
@@ -344,6 +366,7 @@ addVideoBtn.addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
 
