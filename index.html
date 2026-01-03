@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -39,13 +38,12 @@ body {
 main { flex-grow:1; padding:20px 40px; max-width:1000px; margin:auto; }
 
 /* Header */
-header { display:flex; align-items:center; gap:30px; margin-bottom:30px; flex-wrap:wrap; }
-header img { height:130px; width:auto; border-radius:12px; border:3px solid #1976d2; }
-header div h1 { font-size:2.4rem; color:#0d47a1; margin-bottom:8px; }
-header div p { font-size:1.2rem; color:#555; }
-
-/* Header styles */
 header {
+  display:flex;
+  align-items:center;
+  gap:30px;
+  margin-bottom:40px;
+  flex-wrap:wrap;
   padding:20px 30px;
   border-radius:15px;
   background: linear-gradient(135deg, #2196f3, #64b5f6);
@@ -53,19 +51,23 @@ header {
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   border: 2px solid #1976d2;
 }
-header img { height:140px; border-radius:12px; border:3px solid #fff; box-shadow:0 4px 15px rgba(0,0,0,0.15);}
-header div h1 { font-size:2.8rem; color:#fff; margin-bottom:8px; text-shadow: 1px 1px 4px rgba(0,0,0,0.4);}
-header div p { font-size:1.3rem; color:#e0f7fa; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);}
-
-/* Responsive */
-@media(max-width:992px){
-  body { flex-direction:column; }
-  .sidebar { width:100%; height:auto; position:relative; border-right:none; border-bottom:3px solid #1976d2; }
-  main { padding:20px; }
-  header { justify-content:center; text-align:center; }
-  header div h1 { font-size:2.2rem; }
-  header div p { font-size:1.1rem; }
-  header img { height:120px; }
+header img {
+  height:140px;
+  width:auto;
+  border-radius:12px;
+  border:3px solid #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+header div h1 {
+  font-size:2.8rem;
+  color:#fff;
+  margin-bottom:8px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+header div p {
+  font-size:1.3rem;
+  color:#e0f7fa;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
 /* Sections */
@@ -73,7 +75,7 @@ section { margin-bottom:50px; }
 section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom: 2px solid #1976d2; display:inline-block; padding-bottom:4px; }
 
 /* Boxes */
-.features, .videos, .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:25px; }
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:25px; }
 .box {
   background: linear-gradient(145deg, #e3f2fd, #bbdefb);
   padding:20px;
@@ -86,28 +88,40 @@ section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom
   align-items:center;
   position:relative;
 }
-.box:hover { transform: translateY(-6px); box-shadow:0 12px 30px rgba(0,0,0,0.2); background: linear-gradient(145deg, #bbdefb, #90caf9); }
-
-.box h3 { color:#0d47a1; margin-bottom:10px; font-size:1.2rem; transition: color 0.3s ease; text-align:center;
-  display: -webkit-box; -webkit-line-clamp:2; -webkit-box-orient: vertical; overflow:hidden; text-overflow:ellipsis; word-break:break-word; }
+.box:hover { 
+  transform: translateY(-6px); 
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2); 
+  background: linear-gradient(145deg, #bbdefb, #90caf9);
+}
+.box h3 { color:#0d47a1; margin-bottom:10px; font-size:1.2rem; transition: color 0.3s ease; text-align:center; 
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
 .box:hover h3 { color:#0b3d91; }
 .box p { flex-grow:1; margin-bottom:12px; color:#444; font-size:0.95rem; text-align:center; }
-iframe { width:100%; height:200px; border-radius:12px; object-fit:cover; }
+button.readMoreBtn { padding:6px 12px; border:none; border-radius:5px; background:#1976d2; color:#fff; cursor:pointer; }
 
-/* Footer */
-footer { background: #1e1e1e; color: #fff; text-align:center; padding:25px 20px; font-size:0.9rem; }
-footer a { color:#1976d2; text-decoration:none; }
+/* Expanded Section داخل كل صندوق */
+.expandedSection { 
+  display:none; 
+  margin-top:10px; 
+  background:#d0e8ff; 
+  padding:10px; 
+  border-radius:8px;
+  text-align:right;
+}
 
-/* Form */
-#videoForm { display:none; flex-direction:column; gap:10px; margin-top:15px; }
-#videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
-#videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
-
-/* زر الحذف */
-.deleteBtn { position:absolute; top:10px; right:10px; background:red; color:#fff; border:none; border-radius:5px; padding:5px 8px; cursor:pointer; display:none; }
-
-/* القسم الموسع لكل صندوق */
-.expandedSection { display:none; width:100%; margin-top:15px; }
+/* Responsive */
+@media(max-width:992px){
+  body { flex-direction:column; }
+  .sidebar { width:100%; height:auto; position:relative; border-right:none; border-bottom:3px solid #1976d2; }
+  main { padding:20px; }
+  header { justify-content:center; text-align:center; }
+}
 </style>
 </head>
 <body>
@@ -121,13 +135,6 @@ footer a { color:#1976d2; text-decoration:none; }
   <a href="#resources">Resources</a>
   <a href="#egyptian">Egyptian Arabic</a>
   <a href="#contact">Contact</a>
-
-  <button id="showFormBtn">إضافة فيديو جديد</button>
-  <div id="videoForm">
-      <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
-      <input type="text" id="videoURL" placeholder="رابط YouTube">
-      <button id="addVideoBtn">إضافة الفيديو</button>
-  </div>
 </div>
 
 <main>
@@ -144,83 +151,61 @@ footer a { color:#1976d2; text-decoration:none; }
   <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic.</p>
 </section>
 
+<!-- قسم Lessons مع الصناديق والاقسام الموسعة -->
 <section id="lessons">
   <h2>What You Will Learn</h2>
   <div class="features">
 
-    <!-- صندوق Everyday Conversations -->
+    <!-- صندوق 1 -->
     <div class="box">
       <h3>Everyday Conversations</h3>
-      <p>Real phrases used daily</p>
+      <p>عبارتين فقط كمثال</p>
       <button class="readMoreBtn">Read More</button>
-
-      <!-- القسم الموسع مخفي تحت الصندوق -->
+      <!-- القسم الموسع الخاص بهذا الصندوق فقط -->
       <div class="expandedSection">
-        <div class="box"><h3>Sabah el-kheir</h3><p>Good morning</p></div>
-        <div class="box"><h3>Ezayak?</h3><p>How are you?</p></div>
-        <div class="box"><h3>Shokran</h3><p>Thank you</p></div>
+        <p>عبارة موسعة 1</p>
+        <p>عبارة موسعة 2</p>
+        <p>عبارة موسعة 3</p>
+        <p>عبارة موسعة 4</p>
       </div>
     </div>
 
-    <!-- صندوق Egyptian Pronunciation -->
+    <!-- صندوق 2 -->
     <div class="box">
       <h3>Egyptian Pronunciation</h3>
-      <p>Learn pronunciation</p>
+      <p>عبارتين فقط كمثال</p>
       <button class="readMoreBtn">Read More</button>
-
+      <!-- القسم الموسع الخاص بهذا الصندوق فقط -->
       <div class="expandedSection">
-        <div class="box"><h3>Sahtain</h3><p>Bon appétit</p></div>
-        <div class="box"><h3>Mashy</h3><p>OK</p></div>
-        <div class="box"><h3>Maalesh</h3><p>Never mind</p></div>
+        <p>عبارة نطق موسعة 1</p>
+        <p>عبارة نطق موسعة 2</p>
+        <p>عبارة نطق موسعة 3</p>
+        <p>عبارة نطق موسعة 4</p>
       </div>
     </div>
 
-    <!-- صندوق Speak with Confidence -->
+    <!-- صندوق 3 -->
     <div class="box">
       <h3>Speak with Confidence</h3>
-      <p>Start speaking naturally</p>
+      <p>عبارتين فقط كمثال</p>
       <button class="readMoreBtn">Read More</button>
-
+      <!-- القسم الموسع الخاص بهذا الصندوق فقط -->
       <div class="expandedSection">
-        <div class="box"><h3>Ahlan</h3><p>Hello</p></div>
-        <div class="box"><h3>Forsa Saeeda</h3><p>Nice to meet you</p></div>
-        <div class="box"><h3>Shokran kteer</h3><p>Thanks a lot</p></div>
+        <p>عبارة ثقة موسعة 1</p>
+        <p>عبارة ثقة موسعة 2</p>
+        <p>عبارة ثقة موسعة 3</p>
+        <p>عبارة ثقة موسعة 4</p>
       </div>
     </div>
 
   </div>
-</section>
-
-<section id="videos">
-  <h2>Video Lessons</h2>
-  <div class="videos" id="videoList"></div>
-</section>
-
-<section id="resources">
-  <h2>Downloadable Resources</h2>
-  <div class="resources">
-    <div class="box">
-      <h3>PDF Lesson 1</h3>
-      <p>Download phrases and vocabulary for Lesson 1.</p>
-      <a class="button" href="lesson1.pdf" download>Download PDF</a>
-    </div>
-    <div class="box">
-      <h3>PDF Lesson 2</h3>
-      <p>Download phrases and vocabulary for Lesson 2.</p>
-      <a class="button" href="lesson2.pdf" download>Download PDF</a>
-    </div>
-  </div>
-</section>
-
-<section id="egyptian">
-  <h2>Why Egyptian Arabic?</h2>
-  <p>Egyptian Arabic is widely understood. Learning it helps communicate with millions.</p>
 </section>
 
 <section id="contact">
   <h2>Contact</h2>
-  <p>YouTube: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br>
-     Email: spokenarabicnow@gmail.com
+  <p>
+    YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
+    Email: spokenarabicnow@gmail.com
   </p>
 </section>
 
@@ -228,96 +213,28 @@ footer a { color:#1976d2; text-decoration:none; }
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
+<!-- JS للتحكم في الأقسام الموسعة لكل صندوق -->
 <script>
-const PASSWORD = "1234";
-let isAdmin = false;
-const showFormBtn = document.getElementById('showFormBtn');
-const videoForm = document.getElementById('videoForm');
-const addVideoBtn = document.getElementById('addVideoBtn');
-const videoTitleInput = document.getElementById('videoTitle');
-const videoURLInput = document.getElementById('videoURL');
-const videoList = document.getElementById('videoList');
-
-let videos = JSON.parse(localStorage.getItem('videos')) || [];
-
-function createVideoElement(video){
-  const box = document.createElement('div');
-  box.classList.add('box');
-  box.innerHTML = `<h3>${video.title}</h3>
-                   <iframe src="https://www.youtube.com/embed/${video.id}" allowfullscreen></iframe>
-                   <button class="deleteBtn">حذف الفيديو</button>`;
-  const deleteBtn = box.querySelector('.deleteBtn');
-  if(isAdmin) deleteBtn.style.display="block";
-  deleteBtn.addEventListener('click', () => {
-    if(confirm("هل أنت متأكد؟")){
-      box.remove();
-      videos = videos.filter(v=>v.id!==video.id);
-      localStorage.setItem('videos',JSON.stringify(videos));
-    }
-  });
-  videoList.appendChild(box);
-}
-
-videos.forEach(v=>createVideoElement(v));
-
-showFormBtn.addEventListener('click', ()=>{
-  if(!isAdmin){
-    const pass=prompt("أدخل كلمة المرور:");
-    if(pass===PASSWORD){
-      videoForm.style.display="flex";
-      isAdmin=true;
-      document.querySelectorAll('.deleteBtn').forEach(btn=>btn.style.display="block");
-    }else alert("كلمة المرور غير صحيحة!");
-  }
-});
-
-addVideoBtn.addEventListener('click', ()=>{
-  const title=videoTitleInput.value.trim();
-  const url=videoURLInput.value.trim();
-  if(!title||!url){alert("يرجى إدخال عنوان الفيديو والرابط!"); return;}
-  let videoId="";
-  if(url.includes("youtu.be/")) videoId=url.split("youtu.be/")[1].split("?")[0];
-  else if(url.includes("youtube.com/watch?v=")) videoId=url.split("v=")[1].split("&")[0];
-  else if(url.includes("youtube.com/shorts/")) videoId=url.split("shorts/")[1].split("?")[0];
-  else {alert("رابط YouTube غير صالح!"); return;}
-  const newVideo={title,url,id:videoId};
-  videos.push(newVideo);
-  localStorage.setItem('videos',JSON.stringify(videos));
-  createVideoElement(newVideo);
-  videoTitleInput.value=""; videoURLInput.value="";
-});
-
-// زر Read More لإظهار القسم الموسع الخاص بالصندوق فقط
 document.querySelectorAll('.readMoreBtn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const parentBox = btn.closest('.box'); // الصندوق الذي ينتمي إليه الزر
+  btn.addEventListener('click', ()=>{
+    const parentBox = btn.closest('.box');        // الصندوق الحالي
     const expanded = parentBox.querySelector('.expandedSection'); // القسم الموسع الخاص به
 
-    // إخفاء جميع الأقسام الموسعة الأخرى
-    document.querySelectorAll('.expandedSection').forEach(sec=>{
-      if(sec !== expanded){
-        sec.style.display = "none";
-        // إعادة نص زر Show Less إلى Read More لجميع الصناديق الأخرى
-        const otherBtn = sec.closest('.box').querySelector('.readMoreBtn');
-        if(otherBtn) otherBtn.textContent = "Read More";
-      }
-    });
-
-    // تبديل العرض للقسم الخاص بالصندوق الحالي
-    if(expanded.style.display==="none" || expanded.style.display===""){
-      expanded.style.display="block";
-      btn.textContent="Show Less";
+    // تبديل العرض للقسم الخاص بهذا الصندوق فقط
+    if(expanded.style.display === "none" || expanded.style.display === ""){
+      expanded.style.display = "block";  // إظهار القسم الموسع
+      btn.textContent = "Show Less";     // تغيير نص الزر
     } else {
-      expanded.style.display="none";
-      btn.textContent="Read More";
+      expanded.style.display = "none";   // إخفاء القسم الموسع
+      btn.textContent = "Read More";     // إعادة نص الزر
     }
   });
 });
-
 </script>
 
 </body>
 </html>
+
 
 
 
