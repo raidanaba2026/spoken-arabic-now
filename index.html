@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spoken Arabic Now – Egyptian Dialect</title>
-
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -16,6 +15,25 @@ body {
   display:flex;
   min-height:100vh;
 }
+
+.sidebar button { 
+  width:100%; 
+  padding:10px; 
+  margin-top:20px; 
+  border:none; 
+  border-radius:6px; 
+  background:#0d47a1; 
+  color:#fff; 
+  cursor:pointer; 
+  font-weight:bold;
+}
+
+/* تغيير لون زر "إضافة فيديو جديد" فقط */
+#showFormBtn {
+  background-color: #e91e63;
+  color: #fff;
+}
+#showFormBtn:hover { background-color: #d81b60; }
 
 /* Sidebar */
 .sidebar {
@@ -30,134 +48,131 @@ body {
   overflow-y:auto;
   border-right: 3px solid #1976d2;
 }
-
-.sidebar h2 {
-  color:#1976d2;
-  margin-bottom:20px;
-  font-size:1.6rem;
-  border-bottom:2px solid #1976d2;
-  padding-bottom:5px;
-}
-
-.sidebar a {
-  display:block;
-  color:#fff;
-  text-decoration:none;
-  margin:10px 0;
-}
+.sidebar h2 { color:#1976d2; margin-bottom:20px; font-size:1.6rem; border-bottom:2px solid #1976d2; padding-bottom:5px; }
+.sidebar a { display:block; color:#fff; text-decoration:none; margin:10px 0; transition: color 0.3s ease; }
 .sidebar a:hover { color:#1976d2; }
 
-.sidebar button {
-  width:100%;
-  padding:10px;
-  margin-top:15px;
-  border:none;
-  border-radius:6px;
-  background:#0d47a1;
+/* Main content */
+main { flex-grow:1; padding:20px 40px; max-width:1000px; margin:auto; }
+
+/* Header */
+header {
+  display:flex;
+  align-items:center;
+  gap:30px;
+  margin-bottom:40px;
+  flex-wrap:wrap;
+  padding:20px 30px;
+  border-radius:15px;
+  background: linear-gradient(135deg, #2196f3, #64b5f6);
+  color: #fff;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  border: 2px solid #1976d2;
+}
+header img {
+  height:140px;
+  width:auto;
+  border-radius:12px;
+  border:3px solid #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+header div h1 {
+  font-size:2.8rem;
   color:#fff;
-  cursor:pointer;
-  font-weight:bold;
+  margin-bottom:8px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+header div p {
+  font-size:1.3rem;
+  color:#e0f7fa;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
-/* زر إضافة فيديو */
-#showFormBtn { background:#e91e63; }
-#showFormBtn:hover { background:#d81b60; }
+/* Sections */
+section { margin-bottom:50px; }
+section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom: 2px solid #1976d2; display:inline-block; padding-bottom:4px; }
 
-/* زر خروج الأدمين */
+/* Video Lessons */
+.videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:40px; }
+.videoTitle { font-size:0.9rem; color:#0d47a1; text-align:center; margin-bottom:5px; }
+.videoBox {
+  background: #e3f2fd;
+  padding:0;
+  border-radius:12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.videoBox:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+.videoBox iframe { width:100%; height:200px; border-radius:10px; }
+
+/* Admin Buttons */
+.videoButtons { display:flex; justify-content:center; gap:10px; margin-top:5px; }
+.videoButtons button {
+  padding:5px 10px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:0.8rem;
+}
+.deleteBtn { background:red; color:#fff; }
+.editBtn { background:#1976d2; color:#fff; }
+
+/* PDF Resources */
+.resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
+.pdfBox {
+  background: #d0e8ff;
+  padding:15px;
+  border-radius:12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  text-align:center;
+}
+.pdfBox h3 { color:#0d47a1; margin-bottom:8px; font-size:1.1rem; }
+.pdfBox a { display:inline-block; padding:8px 12px; background:#1976d2; color:#fff; border-radius:6px; text-decoration:none; transition: background 0.3s; }
+.pdfBox a:hover { background:#0b3d91; }
+
+/* Footer */
+footer { background: #1e1e1e; color: #fff; text-align:center; padding:25px 20px; font-size:0.9rem; }
+footer a { color:#1976d2; text-decoration:none; }
+
+/* Form لإضافة فيديو */
+#videoForm { display:flex; flex-direction:column; gap:10px; margin-top:15px; }
+#videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
+#videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
+
+/* Load More Button */
+#loadMoreBtn {
+  display:block;
+  margin:20px auto 50px;
+  padding:10px 20px;
+  border:none;
+  border-radius:6px;
+  background:#1976d2;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:1rem;
+}
+
+/* Logout Button */
 #logoutAdminBtn {
   display:none;
+  margin-top:10px;
   background:#f44336;
 }
 #logoutAdminBtn:hover { background:#d32f2f; }
 
-/* Form */
-#videoForm {
-  display:none;
-  flex-direction:column;
-  gap:10px;
-  margin-top:15px;
-}
-#videoForm input {
-  padding:8px;
-  border-radius:5px;
-  border:1px solid #ccc;
-}
-#videoForm button {
-  padding:8px;
-  background:#0d47a1;
-  color:#fff;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-}
-
-/* Main */
-main {
-  flex-grow:1;
-  padding:20px 40px;
-  max-width:1000px;
-  margin:auto;
-}
-
-/* Videos */
-.videos {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:40px;
-}
-.videoTitle {
-  text-align:center;
-  color:#0d47a1;
-  margin-bottom:5px;
-}
-.videoBox iframe {
-  width:100%;
-  height:200px;
-  border-radius:10px;
-}
-
-/* Admin buttons */
-.videoButtons {
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-top:5px;
-}
-.editBtn { background:#1976d2; color:#fff; }
-.deleteBtn { background:red; color:#fff; }
-.videoButtons button {
-  border:none;
-  border-radius:5px;
-  padding:5px 10px;
-  cursor:pointer;
-}
-
-/* Load more */
-#loadMoreBtn {
-  margin:20px auto;
-  display:block;
-  padding:10px 20px;
-  background:#1976d2;
-  color:#fff;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-/* Visitor counter */
-#visitorCounter {
-  margin-top:40px;
-  padding-top:15px;
-  border-top:1px solid #444;
-  text-align:center;
-  font-size:0.9rem;
-  color:#ccc;
+/* Responsive */
+@media(max-width:992px){
+  body { flex-direction:column; }
+  .sidebar { width:100%; height:auto; position:relative; border-right:none; border-bottom:3px solid #1976d2; }
+  main { padding:20px; }
+  header { justify-content:center; text-align:center; }
 }
 </style>
 </head>
-
 <body>
 
+<!-- Sidebar -->
 <div class="sidebar">
   <h2>Navigation</h2>
   <a href="#about">About</a>
@@ -165,50 +180,157 @@ main {
   <a href="#pdfs">PDF</a>
   <a href="#contact">Contact Us</a>
 
+  <!-- زر لإظهار الفورم لإضافة فيديو -->
   <button id="showFormBtn">إضافة فيديو جديد</button>
+
+  <!-- زر خروج الأدمين -->
   <button id="logoutAdminBtn">خروج الأدمين</button>
 
+  <!-- الفورم لإضافة الفيديو -->
   <div id="videoForm">
-    <input id="videoTitle" placeholder="عنوان الفيديو">
-    <input id="videoURL" placeholder="رابط YouTube">
-    <button id="addVideoBtn">إضافة الفيديو</button>
-  </div>
-
-  <!-- Visitor Counter -->
-  <div id="visitorCounter">
-    Visitors: <span id="visitorCount">...</span>
+      <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
+      <input type="text" id="videoURL" placeholder="رابط YouTube">
+      <button id="addVideoBtn">إضافة الفيديو</button>
   </div>
 </div>
 
 <main>
+<header>
+  <img src="logo.png" alt="Spoken Arabic Now Logo">
+  <div>
+    <h1>Spoken Arabic Now</h1>
+    <p>Learn Egyptian Arabic and speak like a local.</p>
+  </div>
+</header>
+
 <section id="about">
-<h2>About</h2>
-<p>Learn Egyptian Arabic easily.</p>
+  <h2>About This Website</h2>
+  <p>This website teaches <strong>Egyptian Spoken Arabic</strong> through engaging videos and downloadable PDFs. Learn practical phrases, pronunciation, and everyday conversations, suitable for beginners and advanced learners alike..</p>
 </section>
 
 <section id="videos">
-<h2>Video Lessons</h2>
-<div class="videos" id="videoList"></div>
-<button id="loadMoreBtn">Load More</button>
+  <h2>Video Lessons</h2>
+  <div class="videos" id="videoList"></div>
+  <button id="loadMoreBtn">Load More</button>
 </section>
-</main>
+
+<section id="pdfs">
+  <h2>Downloadable PDFs</h2>
+  <div class="resources">
+    <div class="pdfBox">
+      <h3>Lesson 1 PDF</h3>
+      <a href="lesson1.pdf" download>Download PDF</a>
+    </div>
+    <div class="pdfBox">
+      <h3>Lesson 2 PDF</h3>
+      <a href="lesson2.pdf" download>Download PDF</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p>YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
+  Email: spokenarabicnow@gmail.com</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
+</footer>
 
 <script>
-/* ===== Admin Logic ===== */
-const ADMIN_PASSWORD = "1234";
-let isAdmin = sessionStorage.getItem("isAdmin") === "true";
+const ADMIN_PASSWORD = "1234"; // كلمة المرور
+let isAdmin = sessionStorage.getItem("isAdmin") === "true"; // حفظ حالة الأدمين ضمن الجلسة
 
-const showFormBtn = document.getElementById("showFormBtn");
-const logoutAdminBtn = document.getElementById("logoutAdminBtn");
-const videoForm = document.getElementById("videoForm");
+const showFormBtn = document.getElementById('showFormBtn');
+const logoutAdminBtn = document.getElementById('logoutAdminBtn');
+const videoForm = document.getElementById('videoForm');
+const addVideoBtn = document.getElementById('addVideoBtn');
+const videoTitleInput = document.getElementById('videoTitle');
+const videoURLInput = document.getElementById('videoURL');
+const videoList = document.getElementById('videoList');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
 
-function updateAdminUI(){
-  showFormBtn.style.display = "block";
-  logoutAdminBtn.style.display = isAdmin ? "block" : "none";
-  videoForm.style.display = "none";
+let videos = JSON.parse(localStorage.getItem('videos')) || [];
+let visibleCount = 6;
+
+// دالة إنشاء عنصر فيديو
+function createVideoElement(video, index) {
+  const container = document.createElement('div');
+
+  const title = document.createElement('div');
+  title.classList.add('videoTitle');
+  title.textContent = video.title;
+  container.appendChild(title);
+
+  const box = document.createElement('div');
+  box.classList.add('videoBox');
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.youtube.com/embed/${video.id}`;
+  iframe.allowFullscreen = true;
+  box.appendChild(iframe);
+  container.appendChild(box);
+
+  if(isAdmin){
+    const buttonsDiv = document.createElement('div');
+    buttonsDiv.classList.add('videoButtons');
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = "تعديل";
+    editBtn.classList.add('editBtn');
+    editBtn.addEventListener('click', ()=> {
+      const newTitle = prompt("ادخل عنوان جديد للفيديو:", video.title);
+      if(newTitle) {
+        video.title = newTitle;
+        localStorage.setItem('videos', JSON.stringify(videos));
+        title.textContent = newTitle;
+      }
+    });
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = "حذف";
+    deleteBtn.classList.add('deleteBtn');
+    deleteBtn.addEventListener('click', ()=> {
+      if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
+        videos.splice(index,1);
+        localStorage.setItem('videos', JSON.stringify(videos));
+        renderVideos();
+      }
+    });
+
+    buttonsDiv.appendChild(editBtn);
+    buttonsDiv.appendChild(deleteBtn);
+    container.appendChild(buttonsDiv);
+  }
+
+  return container;
 }
 
-showFormBtn.onclick = () => {
+// عرض الفيديوهات
+function renderVideos() {
+  videoList.innerHTML = "";
+  videos.slice(0, visibleCount).forEach((v,i)=> videoList.appendChild(createVideoElement(v,i)));
+  loadMoreBtn.style.display = visibleCount >= videos.length ? 'none' : 'block';
+}
+
+// تحميل المزيد
+loadMoreBtn.addEventListener('click', ()=> { visibleCount += 6; renderVideos(); });
+
+// تحديث واجهة الأدمين
+function updateAdminUI() {
+  if(isAdmin){
+    showFormBtn.style.display = "block";
+    logoutAdminBtn.style.display = "block";
+    videoForm.style.display = "flex";
+  } else {
+    showFormBtn.style.display = "block";
+    logoutAdminBtn.style.display = "none";
+    videoForm.style.display = "none";
+  }
+}
+
+// زر إضافة فيديو - يطلب كلمة المرور إذا لم يكن الأدمين
+showFormBtn.addEventListener('click', () => {
   if(!isAdmin){
     const pass = prompt("أدخل كلمة مرور الأدمين:");
     if(pass === ADMIN_PASSWORD){
@@ -216,82 +338,93 @@ showFormBtn.onclick = () => {
       sessionStorage.setItem("isAdmin","true");
       updateAdminUI();
       renderVideos();
+    } else {
+      alert("كلمة المرور غير صحيحة!");
     }
   } else {
-    videoForm.style.display =
-      videoForm.style.display === "flex" ? "none" : "flex";
+    videoForm.style.display = videoForm.style.display === "flex" ? "none" : "flex";
   }
-};
+});
 
-logoutAdminBtn.onclick = () => {
+// زر خروج الأدمين
+logoutAdminBtn.addEventListener('click', () => {
   isAdmin = false;
-  sessionStorage.removeItem("isAdmin");
+  sessionStorage.setItem("isAdmin","false");
   updateAdminUI();
   renderVideos();
-};
+});
 
-/* ===== Videos ===== */
-const videoList = document.getElementById("videoList");
-const loadMoreBtn = document.getElementById("loadMoreBtn");
+// إضافة فيديو جديد
+addVideoBtn.addEventListener('click', () => {
+  const title = videoTitleInput.value.trim();
+  const url = videoURLInput.value.trim();
+  if(!title || !url){ alert("يرجى إدخال عنوان الفيديو والرابط!"); return; }
 
-let videos = JSON.parse(localStorage.getItem("videos")) || [];
-let visibleCount = 6;
+  let videoId = "";
+  if(url.includes("youtu.be/")) videoId = url.split("youtu.be/")[1].split("?")[0];
+  else if(url.includes("youtube.com/watch?v=")) videoId = url.split("v=")[1].split("&")[0];
+  else if(url.includes("youtube.com/shorts/")) videoId = url.split("shorts/")[1].split("?")[0];
+  else { alert("رابط YouTube غير صالح!"); return; }
 
-function renderVideos(){
-  videoList.innerHTML = "";
-  videos.slice(0,visibleCount).forEach((v,i)=>{
-    const div = document.createElement("div");
-    div.innerHTML = `
-      <div class="videoTitle">${v.title}</div>
-      <div class="videoBox">
-        <iframe src="https://www.youtube.com/embed/${v.id}" allowfullscreen></iframe>
-      </div>
-      ${isAdmin ? `
-      <div class="videoButtons">
-        <button class="editBtn" onclick="editVideo(${i})">تعديل</button>
-        <button class="deleteBtn" onclick="deleteVideo(${i})">حذف</button>
-      </div>` : ""}
-    `;
-    videoList.appendChild(div);
-  });
-  loadMoreBtn.style.display =
-    visibleCount >= videos.length ? "none" : "block";
-}
+  const newVideo = { title, url, id: videoId };
+  videos.push(newVideo);
+  localStorage.setItem('videos', JSON.stringify(videos));
 
-loadMoreBtn.onclick = ()=>{ visibleCount+=6; renderVideos(); };
+  videoTitleInput.value = "";
+  videoURLInput.value = "";
+  renderVideos();
+});
 
-function editVideo(i){
-  const t = prompt("عنوان جديد:", videos[i].title);
-  if(t){
-    videos[i].title = t;
-    localStorage.setItem("videos",JSON.stringify(videos));
-    renderVideos();
-  }
-}
-function deleteVideo(i){
-  if(confirm("حذف الفيديو؟")){
-    videos.splice(i,1);
-    localStorage.setItem("videos",JSON.stringify(videos));
-    renderVideos();
-  }
-}
-
-/* ===== Visitor Counter ===== */
-fetch("https://api.countapi.xyz/hit/spoken-arabic-now/homepage")
-  .then(r=>r.json())
-  .then(d=>{
-    document.getElementById("visitorCount").textContent = d.value;
-  })
-  .catch(()=>{
-    document.getElementById("visitorCount").textContent = "—";
-  });
-
+// تحميل الفيديوهات عند بدء الصفحة
 updateAdminUI();
 renderVideos();
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
