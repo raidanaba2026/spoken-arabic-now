@@ -15,6 +15,7 @@ body {
   display:flex;
   min-height:100vh;
 }
+
 .sidebar button { 
   width:100%; 
   padding:10px; 
@@ -27,7 +28,7 @@ body {
   font-weight:bold;
 }
 
-/* زر إضافة فيديو */
+/* تغيير لون زر "إضافة فيديو جديد" فقط */
 #showFormBtn {
   background-color: #e91e63;
   color: #fff;
@@ -68,9 +69,24 @@ header {
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   border: 2px solid #1976d2;
 }
-header img { height:140px; width:auto; border-radius:12px; border:3px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.15);}
-header div h1 { font-size:2.8rem; color:#fff; margin-bottom:8px; text-shadow: 1px 1px 4px rgba(0,0,0,0.4);}
-header div p { font-size:1.3rem; color:#e0f7fa; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);}
+header img {
+  height:140px;
+  width:auto;
+  border-radius:12px;
+  border:3px solid #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+header div h1 {
+  font-size:2.8rem;
+  color:#fff;
+  margin-bottom:8px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+header div p {
+  font-size:1.3rem;
+  color:#e0f7fa;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
 
 /* Sections */
 section { margin-bottom:50px; }
@@ -79,19 +95,37 @@ section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom
 /* Video Lessons */
 .videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:40px; }
 .videoTitle { font-size:0.9rem; color:#0d47a1; text-align:center; margin-bottom:5px; }
-.videoBox { background: #e3f2fd; padding:0; border-radius:12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.videoBox {
+  background: #e3f2fd;
+  padding:0;
+  border-radius:12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 .videoBox:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
 .videoBox iframe { width:100%; height:200px; border-radius:10px; }
 
 /* Admin Buttons */
 .videoButtons { display:flex; justify-content:center; gap:10px; margin-top:5px; }
-.videoButtons button { padding:5px 10px; border:none; border-radius:5px; cursor:pointer; font-size:0.8rem; }
+.videoButtons button {
+  padding:5px 10px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:0.8rem;
+}
 .deleteBtn { background:red; color:#fff; }
 .editBtn { background:#1976d2; color:#fff; }
 
 /* PDF Resources */
 .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
-.pdfBox { background: #d0e8ff; padding:15px; border-radius:12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); text-align:center; }
+.pdfBox {
+  background: #d0e8ff;
+  padding:15px;
+  border-radius:12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  text-align:center;
+}
 .pdfBox h3 { color:#0d47a1; margin-bottom:8px; font-size:1.1rem; }
 .pdfBox a { display:inline-block; padding:8px 12px; background:#1976d2; color:#fff; border-radius:6px; text-decoration:none; transition: background 0.3s; }
 .pdfBox a:hover { background:#0b3d91; }
@@ -106,11 +140,26 @@ footer a { color:#1976d2; text-decoration:none; }
 #videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
 
 /* Load More Button */
-#loadMoreBtn { display:block; margin:20px auto 50px; padding:10px 20px; border:none; border-radius:6px; background:#1976d2; color:#fff; font-weight:bold; cursor:pointer; font-size:1rem; }
+#loadMoreBtn {
+  display:block;
+  margin:20px auto 50px;
+  padding:10px 20px;
+  border:none;
+  border-radius:6px;
+  background:#1976d2;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:1rem;
+}
 
 /* Logout Button */
-#logoutBtn { display:none; margin-top:10px; background:#ff5722; color:#fff; }
-#logoutBtn:hover { background:#e64a19; }
+#logoutAdminBtn {
+  display:none;
+  margin-top:10px;
+  background:#f44336;
+}
+#logoutAdminBtn:hover { background:#d32f2f; }
 
 /* Responsive */
 @media(max-width:992px){
@@ -132,7 +181,10 @@ footer a { color:#1976d2; text-decoration:none; }
   <a href="#contact">Contact Us</a>
 
   <!-- زر لإظهار الفورم لإضافة فيديو -->
-  <button id="showFormBtn" style="display:none;">إضافة فيديو جديد</button>
+  <button id="showFormBtn">إضافة فيديو جديد</button>
+
+  <!-- زر خروج الأدمين -->
+  <button id="logoutAdminBtn">خروج الأدمين</button>
 
   <!-- الفورم لإضافة الفيديو -->
   <div id="videoForm">
@@ -140,9 +192,6 @@ footer a { color:#1976d2; text-decoration:none; }
       <input type="text" id="videoURL" placeholder="رابط YouTube">
       <button id="addVideoBtn">إضافة الفيديو</button>
   </div>
-
-  <!-- زر خروج الأدمين -->
-  <button id="logoutBtn">خروج الأدمين</button>
 </div>
 
 <main>
@@ -190,23 +239,25 @@ footer a { color:#1976d2; text-decoration:none; }
 </footer>
 
 <script>
-let isAdmin = false;
+const ADMIN_PASSWORD = "1234"; // كلمة المرور
+let isAdmin = sessionStorage.getItem("isAdmin") === "true"; // حفظ حالة الأدمين ضمن الجلسة
 
 const showFormBtn = document.getElementById('showFormBtn');
+const logoutAdminBtn = document.getElementById('logoutAdminBtn');
 const videoForm = document.getElementById('videoForm');
 const addVideoBtn = document.getElementById('addVideoBtn');
 const videoTitleInput = document.getElementById('videoTitle');
 const videoURLInput = document.getElementById('videoURL');
 const videoList = document.getElementById('videoList');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
-const logoutBtn = document.getElementById('logoutBtn');
 
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
 let visibleCount = 6;
 
-// دالة لإنشاء عنصر الفيديو
+// دالة إنشاء عنصر فيديو
 function createVideoElement(video, index) {
   const container = document.createElement('div');
+
   const title = document.createElement('div');
   title.classList.add('videoTitle');
   title.textContent = video.title;
@@ -255,60 +306,55 @@ function createVideoElement(video, index) {
   return container;
 }
 
-// عرض الفيديوهات حسب العدد المرئي
+// عرض الفيديوهات
 function renderVideos() {
   videoList.innerHTML = "";
-  videos.slice(0, visibleCount).forEach((v,i)=>{
-    videoList.appendChild(createVideoElement(v,i));
-  });
+  videos.slice(0, visibleCount).forEach((v,i)=> videoList.appendChild(createVideoElement(v,i)));
   loadMoreBtn.style.display = visibleCount >= videos.length ? 'none' : 'block';
 }
 
 // تحميل المزيد
-loadMoreBtn.addEventListener('click', ()=> {
-  visibleCount += 6;
-  renderVideos();
-});
+loadMoreBtn.addEventListener('click', ()=> { visibleCount += 6; renderVideos(); });
 
-// إنشاء الفيديوهات عند تحميل الصفحة
-renderVideos();
-
-// دالة إظهار واجهة الأدمين
-function showAdminUI() {
-  isAdmin = true;
-  showFormBtn.style.display = "block";
-  logoutBtn.style.display = "block";
-  videoForm.style.display = "none";
-
-  renderVideos(); // إعادة رسم الفيديوهات لإظهار أزرار الحذف والتعديل
-
-  showFormBtn.addEventListener('click', () => {
-    videoForm.style.display = videoForm.style.display === "flex" ? "none" : "flex";
-  });
-}
-
-// تسجيل الخروج
-logoutBtn.addEventListener('click', () => {
-  isAdmin = false;
-  showFormBtn.style.display = "none";
-  logoutBtn.style.display = "none";
-  videoForm.style.display = "none";
-  renderVideos();
-  requestPassword(); // إعادة طلب كلمة المرور عند الخروج
-});
-
-// طلب كلمة المرور
-function requestPassword() {
-  const pass = prompt("أدخل كلمة المرور:");
-  if(pass === "1234"){
-    showAdminUI();
+// تحديث واجهة الأدمين
+function updateAdminUI() {
+  if(isAdmin){
+    showFormBtn.style.display = "block";
+    logoutAdminBtn.style.display = "block";
+    videoForm.style.display = "flex";
   } else {
-    alert("كلمة مرور خاطئة!");
-    requestPassword();
+    showFormBtn.style.display = "block";
+    logoutAdminBtn.style.display = "none";
+    videoForm.style.display = "none";
   }
 }
 
-// فورم إضافة فيديو
+// زر إضافة فيديو - يطلب كلمة المرور إذا لم يكن الأدمين
+showFormBtn.addEventListener('click', () => {
+  if(!isAdmin){
+    const pass = prompt("أدخل كلمة مرور الأدمين:");
+    if(pass === ADMIN_PASSWORD){
+      isAdmin = true;
+      sessionStorage.setItem("isAdmin","true");
+      updateAdminUI();
+      renderVideos();
+    } else {
+      alert("كلمة المرور غير صحيحة!");
+    }
+  } else {
+    videoForm.style.display = videoForm.style.display === "flex" ? "none" : "flex";
+  }
+});
+
+// زر خروج الأدمين
+logoutAdminBtn.addEventListener('click', () => {
+  isAdmin = false;
+  sessionStorage.setItem("isAdmin","false");
+  updateAdminUI();
+  renderVideos();
+});
+
+// إضافة فيديو جديد
 addVideoBtn.addEventListener('click', () => {
   const title = videoTitleInput.value.trim();
   const url = videoURLInput.value.trim();
@@ -326,16 +372,59 @@ addVideoBtn.addEventListener('click', () => {
 
   videoTitleInput.value = "";
   videoURLInput.value = "";
-
   renderVideos();
 });
 
-// عند تحميل الصفحة، طلب كلمة المرور أول مرة
-requestPassword();
+// تحميل الفيديوهات عند بدء الصفحة
+updateAdminUI();
+renderVideos();
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
