@@ -16,7 +16,7 @@ body {
   min-height:100vh;
 }
 
-/* الشريط الجانبي */
+/* Sidebar */
 .sidebar {
   width: 250px;
   background: #1e1e1e;
@@ -44,7 +44,7 @@ body {
 }
 .sidebar a:hover { color:#1976d2; }
 
-/* المحتوى الرئيسي */
+/* Main content */
 main {
   flex-grow:1;
   padding:20px 40px;
@@ -52,7 +52,7 @@ main {
   margin:auto;
 }
 
-/* الرأس */
+/* Header */
 header {
   display:flex;
   align-items:center;
@@ -61,7 +61,7 @@ header {
   flex-wrap:wrap;
 }
 header img {
-  height:160px;
+  height:140px;
   width:auto;
   border-radius:12px;
   border:2px solid #fff;
@@ -69,7 +69,7 @@ header img {
 header div h1 { font-size:2.8rem; color:#0d47a1; margin-bottom:10px; }
 header div p { font-size:1.3rem; }
 
-/* الأقسام */
+/* Sections */
 section { margin-bottom:60px; }
 section h2 {
   color: #1976d2;
@@ -80,7 +80,7 @@ section h2 {
   padding-bottom:5px;
 }
 
-/* البوكسات */
+/* Boxes */
 .features, .videos, .resources {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
@@ -136,20 +136,18 @@ footer a { color:#1976d2; text-decoration:none; }
 </head>
 <body>
 
-<!-- الشريط الجانبي -->
+<!-- Sidebar -->
 <div class="sidebar">
   <h2>Navigation</h2>
   <a href="#about">About</a>
   <a href="#lessons">Lessons</a>
   <a href="#videos">Video Lessons</a>
-  <a href="#hotel">Hotel & Booking Arabic</a>
-  <a href="#survival">Arabic Survival Phrases</a>
   <a href="#resources">Resources</a>
   <a href="#egyptian">Egyptian Arabic</a>
   <a href="#contact">Contact</a>
 </div>
 
-<!-- المحتوى الرئيسي -->
+<!-- Main content -->
 <main>
 <header>
   <img src="logo.png" alt="Spoken Arabic Now Logo">
@@ -159,14 +157,12 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </header>
 
-<!-- قسم عن الموقع -->
 <section id="about">
   <h2>About This Website</h2>
   <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic. Communicate naturally with real-life expressions Egyptians use daily.</p>
   <p>Focus on conversation, pronunciation, and real phrases heard in streets, cafes, and daily life.</p>
 </section>
 
-<!-- قسم الدروس -->
 <section id="lessons">
   <h2>What You Will Learn</h2>
   <div class="features">
@@ -185,11 +181,9 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
-<!-- قسم فيديوهات الموقع -->
 <section id="videos">
   <h2>Video Lessons</h2>
   <div class="videos">
-    <!-- فيديوهات الدروس الرئيسية -->
     <div class="box">
       <h3>Lesson 1: Mind your own business</h3>
       <iframe src="https://www.youtube.com/embed/nKUIVL5RDaQ" allowfullscreen></iframe>
@@ -220,34 +214,25 @@ footer a { color:#1976d2; text-decoration:none; }
       <iframe src="https://www.youtube.com/embed/_n0iZjkTZQI" allowfullscreen></iframe>
       <a class="button" href="https://www.youtube.com/shorts/_n0iZjkTZQI" target="_blank">Watch on YouTube</a>
     </div>
-  </div>
-</section>
 
-<!-- قسم Hotel & Booking Arabic -->
-<section id="hotel">
-  <h2>Hotel & Booking Arabic</h2>
-  <div class="videos">
+    <!-- فيديو شورت 7 -->
     <div class="box">
-      <h3>Lesson 1: Hotel & Booking Arabic – Video 01</h3>
-      <iframe src="https://www.youtube.com/embed/_n0iZjkTZQI" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/watch?v=_n0iZjkTZQI&list=PL8QWngw15QN42teodZwRlLvLlhhGhdJuJ" target="_blank">Watch Playlist on YouTube</a>
+      <h3>Lesson 7: Essential Phrases for Foreigners at Arab Airports – Part 02</h3>
+      <iframe src="https://www.youtube.com/embed/YOmZGtcyDgo" allowfullscreen></iframe>
+      <a class="button" href="https://www.youtube.com/watch?v=YOmZGtcyDgo" target="_blank">Watch on YouTube</a>
     </div>
+
+    <!-- فيديو شورت 8 -->
+<div class="box">
+  <h3>Lesson 8: Essential Phrases for Foreigners at Arab Airports – Part 03</h3>
+  <iframe src="https://www.youtube.com/embed/5dziHaKjj_g" allowfullscreen></iframe>
+  <a class="button" href="https://www.youtube.com/watch?v=5dziHaKjj_g" target="_blank">Watch on YouTube</a>
   </div>
+    
 </section>
 
-<!-- قسم Arabic Survival Phrases -->
-<section id="survival">
-  <h2>Arabic Survival Phrases</h2>
-  <div class="videos">
-    <div class="box">
-      <h3>Lesson 1: Arabic Survival Phrases – Video 01</h3>
-      <iframe src="https://www.youtube.com/embed/NXmhi7uiX7k" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/watch?v=NXmhi7uiX7k&list=PL8QWngw15QN7yGUvzEpQTrz5E0SDQW6kj" target="_blank">Watch Playlist on YouTube</a>
-    </div>
-  </div>
-</section>
 
-<!-- قسم الموارد القابلة للتحميل -->
+
 <section id="resources">
   <h2>Downloadable Resources</h2>
   <div class="resources">
@@ -264,14 +249,12 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
-<!-- قسم لماذا اللهجة المصرية -->
 <section id="egyptian">
   <h2>Why Egyptian Arabic?</h2>
   <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
   <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
 </section>
 
-<!-- قسم التواصل -->
 <section id="contact">
   <h2>Contact</h2>
   <p>
@@ -280,7 +263,6 @@ footer a { color:#1976d2; text-decoration:none; }
   </p>
 </section>
 
-<!-- الفوتر -->
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
