@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spoken Arabic Now – Egyptian Dialect</title>
 <style>
@@ -168,6 +168,36 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
+<section id="resources">
+  <h2>Downloadable Resources</h2>
+  <div class="resources">
+    <div class="box">
+      <h3>PDF Lesson 1</h3>
+      <p>Download phrases and vocabulary for Lesson 1.</p>
+      <a class="button" href="lesson1.pdf" download>Download PDF</a>
+    </div>
+    <div class="box">
+      <h3>PDF Lesson 2</h3>
+      <p>Download phrases and vocabulary for Lesson 2.</p>
+      <a class="button" href="lesson2.pdf" download>Download PDF</a>
+    </div>
+  </div>
+</section>
+
+<section id="egyptian">
+  <h2>Why Egyptian Arabic?</h2>
+  <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
+  <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>
+    YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
+    Email: spokenarabicnow@gmail.com
+  </p>
+</section>
+
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
@@ -213,13 +243,15 @@ videos.forEach(v => createVideoElement(v));
 
 // عند الضغط على زر إضافة فيديو
 showFormBtn.addEventListener('click', () => {
-  const pass = prompt("أدخل كلمة المرور:");
-  if(pass === PASSWORD){
-    videoForm.style.display = "flex";
-    isAdmin = true;
-    document.querySelectorAll('.deleteBtn').forEach(btn => btn.style.display = "block");
-  } else {
-    alert("كلمة المرور غير صحيحة!");
+  if(!isAdmin){
+    const pass = prompt("أدخل كلمة المرور:");
+    if(pass === PASSWORD){
+      videoForm.style.display = "flex";
+      isAdmin = true;
+      document.querySelectorAll('.deleteBtn').forEach(btn => btn.style.display = "block");
+    } else {
+      alert("كلمة المرور غير صحيحة!");
+    }
   }
 });
 
@@ -248,6 +280,8 @@ addVideoBtn.addEventListener('click', () => {
 
 </body>
 </html>
+
+
 
 
 
