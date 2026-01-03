@@ -15,6 +15,24 @@ body {
   display:flex;
   min-height:100vh;
 }
+.sidebar button { 
+  width:100%; 
+  padding:10px; 
+  margin-top:20px; 
+  border:none; 
+  border-radius:6px; 
+  background:#0d47a1; 
+  color:#fff; 
+  cursor:pointer; 
+  font-weight:bold;
+}
+
+/* زر إضافة فيديو */
+#showFormBtn {
+  background-color: #e91e63;
+  color: #fff;
+}
+#showFormBtn:hover { background-color: #d81b60; }
 
 /* Sidebar */
 .sidebar {
@@ -32,26 +50,6 @@ body {
 .sidebar h2 { color:#1976d2; margin-bottom:20px; font-size:1.6rem; border-bottom:2px solid #1976d2; padding-bottom:5px; }
 .sidebar a { display:block; color:#fff; text-decoration:none; margin:10px 0; transition: color 0.3s ease; }
 .sidebar a:hover { color:#1976d2; }
-.sidebar button { 
-  width:100%; 
-  padding:10px; 
-  margin-top:20px; 
-  border:none; 
-  border-radius:6px; 
-  background:#0d47a1; 
-  color:#fff; 
-  cursor:pointer; 
-  font-weight:bold;
-}
-
-/* تغيير لون زر "إضافة فيديو جديد" فقط */
-#showFormBtn {
-  background-color: #e91e63; 
-  color: #fff; 
-}
-#showFormBtn:hover {
-  background-color: #d81b60; 
-}
 
 /* Main content */
 main { flex-grow:1; padding:20px 40px; max-width:1000px; margin:auto; }
@@ -70,24 +68,9 @@ header {
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   border: 2px solid #1976d2;
 }
-header img {
-  height:140px;
-  width:auto;
-  border-radius:12px;
-  border:3px solid #fff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-}
-header div h1 {
-  font-size:2.8rem;
-  color:#fff;
-  margin-bottom:8px;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
-}
-header div p {
-  font-size:1.3rem;
-  color:#e0f7fa;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-}
+header img { height:140px; width:auto; border-radius:12px; border:3px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.15);}
+header div h1 { font-size:2.8rem; color:#fff; margin-bottom:8px; text-shadow: 1px 1px 4px rgba(0,0,0,0.4);}
+header div p { font-size:1.3rem; color:#e0f7fa; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);}
 
 /* Sections */
 section { margin-bottom:50px; }
@@ -96,45 +79,19 @@ section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom
 /* Video Lessons */
 .videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:40px; }
 .videoTitle { font-size:0.9rem; color:#0d47a1; text-align:center; margin-bottom:5px; }
-.videoBox {
-  background: #e3f2fd;
-  padding:0;
-  border-radius:12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.videoBox:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-}
+.videoBox { background: #e3f2fd; padding:0; border-radius:12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.videoBox:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
 .videoBox iframe { width:100%; height:200px; border-radius:10px; }
 
 /* Admin Buttons */
-.videoButtons {
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-top:5px;
-}
-.videoButtons button {
-  padding:5px 10px;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-  font-size:0.8rem;
-}
+.videoButtons { display:flex; justify-content:center; gap:10px; margin-top:5px; }
+.videoButtons button { padding:5px 10px; border:none; border-radius:5px; cursor:pointer; font-size:0.8rem; }
 .deleteBtn { background:red; color:#fff; }
 .editBtn { background:#1976d2; color:#fff; }
 
 /* PDF Resources */
 .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
-.pdfBox {
-  background: #d0e8ff;
-  padding:15px;
-  border-radius:12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  text-align:center;
-}
+.pdfBox { background: #d0e8ff; padding:15px; border-radius:12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); text-align:center; }
 .pdfBox h3 { color:#0d47a1; margin-bottom:8px; font-size:1.1rem; }
 .pdfBox a { display:inline-block; padding:8px 12px; background:#1976d2; color:#fff; border-radius:6px; text-decoration:none; transition: background 0.3s; }
 .pdfBox a:hover { background:#0b3d91; }
@@ -149,35 +106,11 @@ footer a { color:#1976d2; text-decoration:none; }
 #videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
 
 /* Load More Button */
-#loadMoreBtn {
-  display:block;
-  margin:20px auto 50px;
-  padding:10px 20px;
-  border:none;
-  border-radius:6px;
-  background:#1976d2;
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-  font-size:1rem;
-}
+#loadMoreBtn { display:block; margin:20px auto 50px; padding:10px 20px; border:none; border-radius:6px; background:#1976d2; color:#fff; font-weight:bold; cursor:pointer; font-size:1rem; }
 
-/* Admin Logout Button */
-#logoutBtn {
-  display:none;
-  width:100%;
-  padding:10px;
-  margin-top:15px;
-  border:none;
-  border-radius:6px;
-  background:#ff5722;
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* Visitor Counter */
-#visitorCounter { margin-top:30px; text-align:center; color:#fff; font-weight:bold; font-size:0.9rem; }
+/* Logout Button */
+#logoutBtn { display:none; margin-top:10px; background:#ff5722; color:#fff; }
+#logoutBtn:hover { background:#e64a19; }
 
 /* Responsive */
 @media(max-width:992px){
@@ -199,7 +132,7 @@ footer a { color:#1976d2; text-decoration:none; }
   <a href="#contact">Contact Us</a>
 
   <!-- زر لإظهار الفورم لإضافة فيديو -->
-  <button id="showFormBtn">إضافة فيديو جديد</button>
+  <button id="showFormBtn" style="display:none;">إضافة فيديو جديد</button>
 
   <!-- الفورم لإضافة الفيديو -->
   <div id="videoForm">
@@ -210,11 +143,6 @@ footer a { color:#1976d2; text-decoration:none; }
 
   <!-- زر خروج الأدمين -->
   <button id="logoutBtn">خروج الأدمين</button>
-
-  <!-- عداد الزوار -->
-  <div id="visitorCounter">
-    عدد الزوار: <span id="count">0</span>
-  </div>
 </div>
 
 <main>
@@ -228,7 +156,7 @@ footer a { color:#1976d2; text-decoration:none; }
 
 <section id="about">
   <h2>About This Website</h2>
-  <p>This website teaches <strong>Egyptian Spoken Arabic</strong> through engaging videos and downloadable PDFs. Learn practical phrases, pronunciation, and everyday conversations, suitable for beginners and advanced learners alike.</p>
+  <p>This website teaches <strong>Egyptian Spoken Arabic</strong> through engaging videos and downloadable PDFs. Learn practical phrases, pronunciation, and everyday conversations, suitable for beginners and advanced learners alike..</p>
 </section>
 
 <section id="videos">
@@ -262,18 +190,8 @@ footer a { color:#1976d2; text-decoration:none; }
 </footer>
 
 <script>
-// كلمة مرور الأدمين
 let isAdmin = false;
 
-function promptAdmin() {
-  const pass = prompt("ادخل كلمة مرور الأدمين:");
-  if(pass === "1234") {
-    isAdmin = true;
-    showAdminUI();
-  } else alert("كلمة المرور خاطئة!");
-}
-
-// عناصر الواجهة
 const showFormBtn = document.getElementById('showFormBtn');
 const videoForm = document.getElementById('videoForm');
 const addVideoBtn = document.getElementById('addVideoBtn');
@@ -283,17 +201,12 @@ const videoList = document.getElementById('videoList');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 const logoutBtn = document.getElementById('logoutBtn');
 
-// إخفاء الأزرار والفورم للأدمن حتى إدخال كلمة المرور
-showFormBtn.style.display = "none";
-videoForm.style.display = "none";
-
-// عداد الفيديوهات
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
 let visibleCount = 6;
 
+// دالة لإنشاء عنصر الفيديو
 function createVideoElement(video, index) {
   const container = document.createElement('div');
-
   const title = document.createElement('div');
   title.classList.add('videoTitle');
   title.textContent = video.title;
@@ -342,6 +255,7 @@ function createVideoElement(video, index) {
   return container;
 }
 
+// عرض الفيديوهات حسب العدد المرئي
 function renderVideos() {
   videoList.innerHTML = "";
   videos.slice(0, visibleCount).forEach((v,i)=>{
@@ -350,34 +264,51 @@ function renderVideos() {
   loadMoreBtn.style.display = visibleCount >= videos.length ? 'none' : 'block';
 }
 
+// تحميل المزيد
 loadMoreBtn.addEventListener('click', ()=> {
   visibleCount += 6;
   renderVideos();
 });
 
+// إنشاء الفيديوهات عند تحميل الصفحة
 renderVideos();
 
-// تفعيل واجهة الأدمن بعد إدخال كلمة المرور
+// دالة إظهار واجهة الأدمين
 function showAdminUI() {
+  isAdmin = true;
   showFormBtn.style.display = "block";
   logoutBtn.style.display = "block";
   videoForm.style.display = "none";
+
+  renderVideos(); // إعادة رسم الفيديوهات لإظهار أزرار الحذف والتعديل
 
   showFormBtn.addEventListener('click', () => {
     videoForm.style.display = videoForm.style.display === "flex" ? "none" : "flex";
   });
 }
 
-// خروج الأدمن
-logoutBtn.addEventListener('click', ()=> {
+// تسجيل الخروج
+logoutBtn.addEventListener('click', () => {
   isAdmin = false;
   showFormBtn.style.display = "none";
-  videoForm.style.display = "none";
   logoutBtn.style.display = "none";
-  alert("تم تسجيل الخروج من وضع الأدمين");
+  videoForm.style.display = "none";
+  renderVideos();
+  requestPassword(); // إعادة طلب كلمة المرور عند الخروج
 });
 
-// إضافة فيديو جديد
+// طلب كلمة المرور
+function requestPassword() {
+  const pass = prompt("أدخل كلمة المرور:");
+  if(pass === "1234"){
+    showAdminUI();
+  } else {
+    alert("كلمة مرور خاطئة!");
+    requestPassword();
+  }
+}
+
+// فورم إضافة فيديو
 addVideoBtn.addEventListener('click', () => {
   const title = videoTitleInput.value.trim();
   const url = videoURLInput.value.trim();
@@ -399,27 +330,14 @@ addVideoBtn.addEventListener('click', () => {
   renderVideos();
 });
 
-// طلب كلمة المرور عند تحميل الصفحة
-window.onload = promptAdmin;
-
-// عداد الزوار
-const countElement = document.getElementById('count');
-const namespace = "spoken-arabic-now";
-const key = "homepage";
-
-fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-  .then(res => res.json())
-  .then(data => {
-    countElement.textContent = data.value;
-  })
-  .catch(err => {
-    console.error("خطأ في عداد الزوار:", err);
-    countElement.textContent = "?";
-  });
-
+// عند تحميل الصفحة، طلب كلمة المرور أول مرة
+requestPassword();
 </script>
+
 </body>
 </html>
+
+
 
 
 
