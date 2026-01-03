@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -104,19 +102,23 @@ section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom
 .videoBox h6 { color:#0d47a1; margin-bottom:10px; font-size:1rem; }
 .videoBox iframe { width:100%; height:200px; border-radius:10px; }
 
-/* أزرار تعديل وحذف الفيديو */
-.deleteBtn, .editBtn {
-  display:none; /* يظهر فقط للادمن */
-  position:absolute;
-  top:10px;
-  padding:5px 8px;
+/* أزرار تعديل وحذف الفيديو أسفل الفيديو */
+.videoBox .buttonsContainer {
+  display: flex;
+  justify-content: center;
+  gap:10px;
+  margin-top:10px;
+}
+.videoBox button {
+  padding:6px 12px;
   border-radius:5px;
   color:#fff;
   cursor:pointer;
   border:none;
+  font-size:0.9rem;
 }
-.deleteBtn { right:10px; background:red; }
-.editBtn { right:80px; background:orange; }
+.videoBox .deleteBtn { background:red; display:none; }
+.videoBox .editBtn { background:orange; display:none; }
 
 /* PDF Resources */
 .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
@@ -243,8 +245,10 @@ function createVideoElement(video){
   box.innerHTML = `
     <h6>${video.title}</h6>
     <iframe src="https://www.youtube.com/embed/${video.id}" allowfullscreen></iframe>
-    <button class="editBtn">تعديل العنوان</button>
-    <button class="deleteBtn">حذف الفيديو</button>
+    <div class="buttonsContainer">
+      <button class="editBtn">تعديل</button>
+      <button class="deleteBtn">حذف</button>
+    </div>
   `;
 
   const deleteBtn = box.querySelector('.deleteBtn');
@@ -320,17 +324,6 @@ addVideoBtn.addEventListener('click', () => {
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
