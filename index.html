@@ -33,20 +33,25 @@ body {
 .sidebar h2 { color:#1976d2; margin-bottom:20px; font-size:1.6rem; border-bottom:2px solid #1976d2; padding-bottom:5px; }
 .sidebar a { display:block; color:#fff; text-decoration:none; margin:10px 0; transition: color 0.3s ease; }
 .sidebar a:hover { color:#1976d2; }
-
-/* أزرار الأدمين مخفية افتراضياً */
-#showFormBtn,
-#videoForm,
-.videoButtons {
-  display:none;
+.sidebar button { 
+  width:100%; 
+  padding:10px; 
+  margin-top:20px; 
+  border:none; 
+  border-radius:6px; 
+  background:#0d47a1; 
+  color:#fff; 
+  cursor:pointer; 
+  font-weight:bold;
 }
 
 /* زر إضافة فيديو */
 #showFormBtn {
   background-color: #e91e63;
-  color: #fff;
+  color:#fff;
+  display:none; /* مخفي للزائر */
 }
-#showFormBtn:hover { background-color: #d81b60; }
+#showFormBtn:hover { background-color:#d81b60; }
 
 /* Main content */
 main { flex-grow:1; padding:20px 40px; max-width:1000px; margin:auto; }
@@ -65,9 +70,24 @@ header {
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   border: 2px solid #1976d2;
 }
-header img { height:140px; width:auto; border-radius:12px; border:3px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
-header div h1 { font-size:2.8rem; color:#fff; margin-bottom:8px; text-shadow:1px 1px 4px rgba(0,0,0,0.4); }
-header div p { font-size:1.3rem; color:#e0f7fa; text-shadow:1px 1px 3px rgba(0,0,0,0.3); }
+header img {
+  height:140px;
+  width:auto;
+  border-radius:12px;
+  border:3px solid #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+header div h1 {
+  font-size:2.8rem;
+  color:#fff;
+  margin-bottom:8px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+header div p {
+  font-size:1.3rem;
+  color:#e0f7fa;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
 
 /* Sections */
 section { margin-bottom:50px; }
@@ -76,19 +96,45 @@ section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom
 /* Video Lessons */
 .videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:40px; }
 .videoTitle { font-size:0.9rem; color:#0d47a1; text-align:center; margin-bottom:5px; }
-.videoBox { background:#e3f2fd; padding:0; border-radius:12px; box-shadow:0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.videoBox:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+.videoBox {
+  background: #e3f2fd;
+  padding:0;
+  border-radius:12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.videoBox:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
 .videoBox iframe { width:100%; height:200px; border-radius:10px; }
 
 /* Admin Buttons */
-.videoButtons { display:flex; justify-content:center; gap:10px; margin-top:5px; }
-.videoButtons button { padding:5px 10px; border:none; border-radius:5px; cursor:pointer; font-size:0.8rem; }
+.videoButtons {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:5px;
+}
+.videoButtons button {
+  padding:5px 10px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:0.8rem;
+}
 .deleteBtn { background:red; color:#fff; }
 .editBtn { background:#1976d2; color:#fff; }
 
 /* PDF Resources */
 .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
-.pdfBox { background: #d0e8ff; padding:15px; border-radius:12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); text-align:center; }
+.pdfBox {
+  background: #d0e8ff;
+  padding:15px;
+  border-radius:12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  text-align:center;
+}
 .pdfBox h3 { color:#0d47a1; margin-bottom:8px; font-size:1.1rem; }
 .pdfBox a { display:inline-block; padding:8px 12px; background:#1976d2; color:#fff; border-radius:6px; text-decoration:none; transition: background 0.3s; }
 .pdfBox a:hover { background:#0b3d91; }
@@ -97,13 +143,58 @@ section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom
 footer { background: #1e1e1e; color: #fff; text-align:center; padding:25px 20px; font-size:0.9rem; }
 footer a { color:#1976d2; text-decoration:none; }
 
-/* Form لإضافة فيديو */
-#videoForm { display:flex; flex-direction:column; gap:10px; margin-top:15px; }
+/* Form إضافة فيديو */
+#videoForm { display:none; flex-direction:column; gap:10px; margin-top:15px; }
 #videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
 #videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
 
 /* Load More Button */
-#loadMoreBtn { display:block; margin:20px auto 50px; padding:10px 20px; border:none; border-radius:6px; background:#1976d2; color:#fff; font-weight:bold; cursor:pointer; font-size:1rem; }
+#loadMoreBtn {
+  display:block;
+  margin:20px auto 50px;
+  padding:10px 20px;
+  border:none;
+  border-radius:6px;
+  background:#1976d2;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:1rem;
+}
+
+/* Admin Login Form */
+#adminLogin {
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,0.7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:1000;
+}
+#adminLogin div {
+  background:#fff;
+  padding:30px;
+  border-radius:10px;
+  text-align:center;
+  width:300px;
+}
+#adminLogin input {
+  width:100%;
+  padding:8px;
+  margin:10px 0;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+#adminLogin button {
+  padding:8px 12px;
+  border:none;
+  border-radius:5px;
+  background:#0d47a1;
+  color:#fff;
+  cursor:pointer;
+  font-weight:bold;
+}
 
 /* Responsive */
 @media(max-width:992px){
@@ -179,20 +270,17 @@ footer a { color:#1976d2; text-decoration:none; }
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
-<!-- نافذة دخول الأدمين -->
-<div id="adminLogin" style="
-  position:fixed; inset:0; background:rgba(0,0,0,0.7);
-  display:flex; align-items:center; justify-content:center; z-index:9999;
-">
-  <div style="background:#fff; padding:25px; border-radius:10px; width:300px; text-align:center;">
-    <h3>Admin Login</h3>
-    <input type="password" id="adminPass" placeholder="كلمة المرور" style="width:100%;padding:8px;margin:15px 0;">
-    <button onclick="checkAdmin()" style="padding:8px 15px;background:#1976d2;color:#fff;border:none;border-radius:5px;">دخول</button>
+<!-- Admin Login Modal -->
+<div id="adminLogin">
+  <div>
+    <h3>Login as Admin</h3>
+    <input type="password" id="adminPass" placeholder="Enter Password">
+    <button onclick="checkAdmin()">Login</button>
   </div>
 </div>
 
 <script>
-const ADMIN_PASSWORD = "1234"; // عدّل كلمة المرور هنا
+const ADMIN_PASSWORD = "1234"; 
 let isAdmin = sessionStorage.getItem('admin') === 'true';
 
 const showFormBtn = document.getElementById('showFormBtn');
@@ -207,7 +295,7 @@ const adminLogin = document.getElementById('adminLogin');
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
 let visibleCount = 6;
 
-// دالة إنشاء عنصر الفيديو
+// إنشاء عنصر الفيديو
 function createVideoElement(video, index) {
   const container = document.createElement('div');
 
@@ -224,7 +312,6 @@ function createVideoElement(video, index) {
   box.appendChild(iframe);
   container.appendChild(box);
 
-  // أزرار الأدمن
   if(isAdmin){
     const buttonsDiv = document.createElement('div');
     buttonsDiv.classList.add('videoButtons');
@@ -260,7 +347,7 @@ function createVideoElement(video, index) {
   return container;
 }
 
-// عرض الفيديوهات حسب العدد
+// عرض الفيديوهات
 function renderVideos() {
   videoList.innerHTML = "";
   videos.slice(0, visibleCount).forEach((v,i)=>{
@@ -278,12 +365,12 @@ loadMoreBtn.addEventListener('click', ()=> {
 // إنشاء الفيديوهات عند تحميل الصفحة
 renderVideos();
 
-// عرض الفورم عند الضغط على زر إضافة فيديو
+// عرض الفورم
 showFormBtn.addEventListener('click', () => {
   videoForm.style.display = videoForm.style.display === "flex" ? "none" : "flex";
 });
 
-// إضافة فيديو جديد
+// إضافة فيديو
 addVideoBtn.addEventListener('click', () => {
   const title = videoTitleInput.value.trim();
   const url = videoURLInput.value.trim();
@@ -305,27 +392,30 @@ addVideoBtn.addEventListener('click', () => {
   renderVideos();
 });
 
-// التحقق من كلمة مرور الأدمن
+// التحقق من كلمة المرور
 function checkAdmin() {
   const pass = document.getElementById('adminPass').value;
   if(pass === ADMIN_PASSWORD){
     sessionStorage.setItem('admin', 'true');
-    location.reload();
+    isAdmin = true;
+    adminLogin.style.display = 'none';
+    showFormBtn.style.display = 'block';
+    renderVideos();
   } else {
     alert("كلمة المرور غير صحيحة");
   }
 }
 
-// إظهار نافذة دخول الأدمن إذا لم يكن أدمين
-if(!isAdmin){
-  adminLogin.style.display = 'flex';
-} else {
+// عند تحميل الصفحة
+if(isAdmin){
+  adminLogin.style.display = 'none';
   showFormBtn.style.display = 'block';
 }
 </script>
 
 </body>
 </html>
+
 
 
 
