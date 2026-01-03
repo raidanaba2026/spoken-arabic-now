@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spoken Arabic Now – Egyptian Dialect</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -28,64 +28,26 @@ body {
   height:100vh;
   overflow-y:auto;
 }
-.sidebar h2 {
-  color:#1976d2;
-  margin-bottom:20px;
-  font-size:1.8rem;
-  border-bottom:2px solid #1976d2;
-  padding-bottom:5px;
-}
-.sidebar a {
-  display:block;
-  color:#fff;
-  text-decoration:none;
-  margin:10px 0;
-  transition: color 0.3s ease;
-}
+.sidebar h2 { color:#1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom:2px solid #1976d2; padding-bottom:5px; }
+.sidebar a { display:block; color:#fff; text-decoration:none; margin:10px 0; transition: color 0.3s ease; }
 .sidebar a:hover { color:#1976d2; }
+.sidebar button { width:100%; padding:10px; margin-top:20px; border:none; border-radius:6px; background:#0d47a1; color:#fff; cursor:pointer; }
 
 /* Main content */
-main {
-  flex-grow:1;
-  padding:20px 40px;
-  max-width:1000px;
-  margin:auto;
-}
+main { flex-grow:1; padding:20px 40px; max-width:1000px; margin:auto; }
 
 /* Header */
-header {
-  display:flex;
-  align-items:center;
-  gap:30px;
-  margin-bottom:30px;
-  flex-wrap:wrap;
-}
-header img {
-  height:140px;
-  width:auto;
-  border-radius:12px;
-  border:2px solid #fff;
-}
+header { display:flex; align-items:center; gap:30px; margin-bottom:30px; flex-wrap:wrap; }
+header img { height:140px; width:auto; border-radius:12px; border:2px solid #fff; }
 header div h1 { font-size:2.8rem; color:#0d47a1; margin-bottom:10px; }
 header div p { font-size:1.3rem; }
 
 /* Sections */
 section { margin-bottom:60px; }
-section h2 {
-  color: #1976d2;
-  margin-bottom:25px;
-  font-size:2rem;
-  border-bottom: 2px solid #1976d2;
-  display:inline-block;
-  padding-bottom:5px;
-}
+section h2 { color: #1976d2; margin-bottom:25px; font-size:2rem; border-bottom: 2px solid #1976d2; display:inline-block; padding-bottom:5px; }
 
 /* Boxes */
-.features, .videos, .resources {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-  gap:25px;
-}
+.features, .videos, .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:25px; }
 .box {
   background:#fff;
   padding:25px;
@@ -95,11 +57,9 @@ section h2 {
   display:flex;
   flex-direction:column;
   justify-content:space-between;
+  position:relative;
 }
-.box:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
+.box:hover { transform: translateY(-6px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
 .box h3 { color:#0d47a1; margin-bottom:12px; font-size:1.4rem; }
 .box p { flex-grow:1; margin-bottom:15px; }
 .box a.button {
@@ -113,22 +73,29 @@ section h2 {
   transition: background-color 0.3s ease;
 }
 .box a.button:hover { background-color:#0d47a1; }
-
 iframe { width:100%; height:315px; border-radius:12px; }
 
-/* Footer */
-footer {
-  background: #1e1e1e;
-  color: #fff;
-  text-align:center;
-  padding:25px 20px;
-  font-size:0.9rem;
-}
+footer { background: #1e1e1e; color: #fff; text-align:center; padding:25px 20px; font-size:0.9rem; }
 footer a { color:#1976d2; text-decoration:none; }
 
+/* نموذج إضافة الفيديو */
 #videoForm { display:none; flex-direction:column; gap:10px; margin-top:15px; }
 #videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
 #videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
+
+/* زر الحذف فقط للمدير */
+.deleteBtn {
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:red;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  padding:5px 8px;
+  cursor:pointer;
+  display:none;
+}
 
 @media(max-width:992px){
   body { flex-direction:column; }
@@ -151,9 +118,9 @@ footer a { color:#1976d2; text-decoration:none; }
   <a href="#contact">Contact</a>
 
   <!-- زر إضافة فيديو -->
-  <button id="showFormBtn" style="margin-top:20px; width:100%; padding:10px; border:none; border-radius:6px; background:#0d47a1; color:#fff; cursor:pointer;">إضافة فيديو جديد</button>
+  <button id="showFormBtn">إضافة فيديو جديد</button>
 
-  <!-- نموذج إضافة الفيديو (حقل عنوان الفيديو ورابطه فقط بعد إدخال كلمة المرور) -->
+  <!-- نموذج إضافة الفيديو -->
   <div id="videoForm">
       <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
       <input type="text" id="videoURL" placeholder="رابط YouTube">
@@ -173,8 +140,7 @@ footer a { color:#1976d2; text-decoration:none; }
 
 <section id="about">
   <h2>About This Website</h2>
-  <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic. Communicate naturally with real-life expressions Egyptians use daily.</p>
-  <p>Focus on conversation, pronunciation, and real phrases heard in streets, cafes, and daily life.</p>
+  <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic.</p>
 </section>
 
 <section id="lessons">
@@ -198,64 +164,17 @@ footer a { color:#1976d2; text-decoration:none; }
 <section id="videos">
   <h2>Video Lessons</h2>
   <div class="videos" id="videoList">
-    <!-- الفيديوهات المضافة يدويًا -->
-    <div class="box">
-      <h3>Lesson 1: Mind your own business</h3>
-      <iframe src="https://www.youtube.com/embed/nKUIVL5RDaQ" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/nKUIVL5RDaQ" target="_blank">Watch on YouTube</a>
-    </div>
-    <div class="box">
-      <h3>Lesson 2: You Command – I’m at Your Service</h3>
-      <iframe src="https://www.youtube.com/embed/NXmhi7uiX7k" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/NXmhi7uiX7k" target="_blank">Watch on YouTube</a>
-    </div>
-    <div class="box">
-      <h3>Lesson 3: Stop Showing Off</h3>
-      <iframe src="https://www.youtube.com/embed/pn6B8bHghek" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/pn6B8bHghek" target="_blank">Watch on YouTube</a>
-    </div>
+    <!-- سيتم إضافة الفيديوهات هنا -->
   </div>
-</section>
-
-<section id="resources">
-  <h2>Downloadable Resources</h2>
-  <div class="resources">
-    <div class="box">
-      <h3>PDF Lesson 1</h3>
-      <p>Download phrases and vocabulary for Lesson 1.</p>
-      <a class="button" href="lesson1.pdf" download>Download PDF</a>
-    </div>
-    <div class="box">
-      <h3>PDF Lesson 2</h3>
-      <p>Download phrases and vocabulary for Lesson 2.</p>
-      <a class="button" href="lesson2.pdf" download>Download PDF</a>
-    </div>
-  </div>
-</section>
-
-<section id="egyptian">
-  <h2>Why Egyptian Arabic?</h2>
-  <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
-  <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
-</section>
-
-<section id="contact">
-  <h2>Contact</h2>
-  <p>
-    YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
-    Email: spokenarabicnow@gmail.com
-  </p>
 </section>
 
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
-</main>
-
 <script>
-// كلمة المرور
-const PASSWORD = "1234"; // ضع هنا كلمة المرور الخاصة بك
+const PASSWORD = "1234"; // كلمة المرور للمدير
+let isAdmin = false;
 
 const showFormBtn = document.getElementById('showFormBtn');
 const videoForm = document.getElementById('videoForm');
@@ -264,55 +183,72 @@ const videoTitleInput = document.getElementById('videoTitle');
 const videoURLInput = document.getElementById('videoURL');
 const videoList = document.getElementById('videoList');
 
-// إظهار نموذج إضافة الفيديو بعد إدخال كلمة المرور الصحيحة
+// تحميل الفيديوهات من localStorage عند بدء الصفحة
+let videos = JSON.parse(localStorage.getItem('videos')) || [];
+
+// دالة إنشاء عنصر الفيديو
+function createVideoElement(video) {
+  const box = document.createElement('div');
+  box.classList.add('box');
+  box.innerHTML = `
+    <h3>${video.title}</h3>
+    <iframe src="https://www.youtube.com/embed/${video.id}" allowfullscreen></iframe>
+    <a class="button" href="${video.url}" target="_blank">Watch on YouTube</a>
+    <button class="deleteBtn">حذف الفيديو</button>
+  `;
+  const deleteBtn = box.querySelector('.deleteBtn');
+  if(isAdmin) deleteBtn.style.display = "block";
+  deleteBtn.addEventListener('click', () => {
+    if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
+      box.remove();
+      videos = videos.filter(v => v.id !== video.id);
+      localStorage.setItem('videos', JSON.stringify(videos));
+    }
+  });
+  videoList.appendChild(box);
+}
+
+// إضافة جميع الفيديوهات المحفوظة
+videos.forEach(v => createVideoElement(v));
+
+// عند الضغط على زر إضافة فيديو
 showFormBtn.addEventListener('click', () => {
   const pass = prompt("أدخل كلمة المرور:");
   if(pass === PASSWORD){
-    videoForm.style.display = "flex"; // يظهر الحقول بعد التحقق
+    videoForm.style.display = "flex";
+    isAdmin = true;
+    document.querySelectorAll('.deleteBtn').forEach(btn => btn.style.display = "block");
   } else {
     alert("كلمة المرور غير صحيحة!");
   }
 });
 
-// إضافة الفيديو إلى قسم الفيديوهات
+// عند الضغط على زر "إضافة الفيديو" بعد إدخال البيانات
 addVideoBtn.addEventListener('click', () => {
   const title = videoTitleInput.value.trim();
   const url = videoURLInput.value.trim();
-  if(title && url){
-    // استخراج معرف الفيديو إذا كان رابط شورت أو رابط عادي
-    let videoId = "";
-    if(url.includes("youtu.be/")){
-      videoId = url.split("youtu.be/")[1].split("?")[0];
-    } else if(url.includes("youtube.com/watch?v=")){
-      videoId = url.split("v=")[1].split("&")[0];
-    } else if(url.includes("youtube.com/shorts/")){
-      videoId = url.split("shorts/")[1].split("?")[0];
-    } else {
-      alert("رابط YouTube غير صالح!");
-      return;
-    }
+  if(!title || !url){ alert("يرجى إدخال عنوان الفيديو والرابط!"); return; }
 
-    // إنشاء عنصر الفيديو
-    const box = document.createElement('div');
-    box.classList.add('box');
-    box.innerHTML = `
-      <h3>${title}</h3>
-      <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
-      <a class="button" href="${url}" target="_blank">Watch on YouTube</a>
-    `;
-    videoList.appendChild(box);
+  let videoId = "";
+  if(url.includes("youtu.be/")) videoId = url.split("youtu.be/")[1].split("?")[0];
+  else if(url.includes("youtube.com/watch?v=")) videoId = url.split("v=")[1].split("&")[0];
+  else if(url.includes("youtube.com/shorts/")) videoId = url.split("shorts/")[1].split("?")[0];
+  else { alert("رابط YouTube غير صالح!"); return; }
 
-    // إعادة تعيين الحقول
-    videoTitleInput.value = "";
-    videoURLInput.value = "";
-  } else {
-    alert("يرجى إدخال عنوان الفيديو والرابط!");
-  }
+  const newVideo = { title, url, id: videoId };
+  videos.push(newVideo);
+  localStorage.setItem('videos', JSON.stringify(videos));
+
+  createVideoElement(newVideo);
+
+  videoTitleInput.value = "";
+  videoURLInput.value = "";
 });
 </script>
 
 </body>
 </html>
+
 
 
 
