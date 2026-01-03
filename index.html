@@ -263,6 +263,7 @@ footer {
 
 </main>
 
+
 <script>
 const PASSWORD = "1234";
 let isAdmin = false;
@@ -285,29 +286,26 @@ function createVideoElement(video) {
     <a class="button" href="${video.url}" target="_blank">Watch on YouTube</a>
     <button class="deleteBtn">حذف الفيديو</button>
   `;
-
   const deleteBtn = box.querySelector('.deleteBtn');
-  if (isAdmin) deleteBtn.style.display = "block";
-
+  if(isAdmin) deleteBtn.style.display = "block";
   deleteBtn.addEventListener('click', () => {
-    if (confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")) {
+    if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
       box.remove();
       videos = videos.filter(v => v.id !== video.id);
       localStorage.setItem('videos', JSON.stringify(videos));
     }
   });
-
   videoList.appendChild(box);
 }
 
 videos.forEach(v => createVideoElement(v));
 
 showFormBtn.addEventListener('click', () => {
-  if (!isAdmin) {
+  if(!isAdmin){
     const pass = prompt("أدخل كلمة المرور:");
-    if (pass === PASSWORD) {
-      isAdmin = true;
+    if(pass === PASSWORD){
       videoForm.style.display = "flex";
+      isAdmin = true;
       document.querySelectorAll('.deleteBtn').forEach(btn => btn.style.display = "block");
     } else {
       alert("كلمة المرور غير صحيحة!");
@@ -318,23 +316,13 @@ showFormBtn.addEventListener('click', () => {
 addVideoBtn.addEventListener('click', () => {
   const title = videoTitleInput.value.trim();
   const url = videoURLInput.value.trim();
-
-  if (!title || !url) {
-    alert("يرجى إدخال عنوان الفيديو والرابط!");
-    return;
-  }
+  if(!title || !url){ alert("يرجى إدخال عنوان الفيديو والرابط!"); return; }
 
   let videoId = "";
-  if (url.includes("youtu.be/")) {
-    videoId = url.split("youtu.be/")[1].split("?")[0];
-  } else if (url.includes("youtube.com/watch?v=")) {
-    videoId = url.split("v=")[1].split("&")[0];
-  } else if (url.includes("youtube.com/shorts/")) {
-    videoId = url.split("shorts/")[1].split("?")[0];
-  } else {
-    alert("رابط YouTube غير صالح!");
-    return;
-  }
+  if(url.includes("youtu.be/")) videoId = url.split("youtu.be/")[1].split("?")[0];
+  else if(url.includes("youtube.com/watch?v=")) videoId = url.split("v=")[1].split("&")[0];
+  else if(url.includes("youtube.com/shorts/")) videoId = url.split("shorts/")[1].split("?")[0];
+  else { alert("رابط YouTube غير صالح!"); return; }
 
   const newVideo = { title, url, id: videoId };
   videos.push(newVideo);
@@ -346,10 +334,9 @@ addVideoBtn.addEventListener('click', () => {
   videoURLInput.value = "";
 });
 </script>
-
-
 </body>
 </html>
+
 
 
 
