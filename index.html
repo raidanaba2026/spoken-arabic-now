@@ -95,20 +95,36 @@ section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom
   position:relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.videoBox:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
-.videoBox h6 { 
-  color:#0d47a1; 
-  margin-bottom:10px; 
-  font-size:0.85rem; /* حجم صغير مناسب للعناوين */
-  word-break: break-word; 
+.videoBox:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
 }
-.videoBox iframe { width:100%; height:200px; border-radius:10px; margin-bottom:10px; }
+.videoBox h6 {
+  color:#0d47a1;
+  margin-bottom:10px;
+  font-size:0.9rem;
+  pointer-events:none; /* يمنع الضغط على العنوان */
+}
 
-/* أزرار الفيديو */
-.videoBox .btnGroup { display:flex; justify-content:center; gap:10px; margin-top:5px; }
-.videoBox .btnGroup button { padding:5px 10px; border:none; border-radius:5px; cursor:pointer; }
-.videoBox .btnGroup .editBtn { background:#0d47a1; color:#fff; }
-.videoBox .btnGroup .deleteBtn { background:red; color:#fff; }
+/* iframe */
+.videoBox iframe { width:100%; height:200px; border-radius:10px; }
+
+/* أزرار الحذف والتعديل (يظهر فقط للادمن) */
+.videoButtons {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:10px;
+}
+.videoButtons button {
+  padding:5px 10px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:0.8rem;
+}
+.deleteBtn { background:red; color:#fff; }
+.editBtn { background:#1976d2; color:#fff; }
 
 /* PDF Resources */
 .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
@@ -132,8 +148,19 @@ footer a { color:#1976d2; text-decoration:none; }
 #videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
 #videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
 
-/* زر Load More */
-#loadMoreBtn { display:block; margin:20px auto; padding:10px 20px; background:#1976d2; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:bold; }
+/* Load More Button */
+#loadMoreBtn {
+  display:block;
+  margin:20px auto 50px;
+  padding:10px 20px;
+  border:none;
+  border-radius:6px;
+  background:#1976d2;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:1rem;
+}
 
 /* Responsive */
 @media(max-width:992px){
@@ -174,7 +201,6 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </header>
 
-<!-- About Section -->
 <section id="about">
   <h2>About This Website</h2>
   <p>This website teaches <strong>Egyptian Spoken Arabic</strong> through videos and downloadable PDFs. Simple and practical learning for everyone.</p>
@@ -183,9 +209,7 @@ footer a { color:#1976d2; text-decoration:none; }
 <!-- Video Lessons Section -->
 <section id="videos">
   <h2>Video Lessons</h2>
-  <div class="videos" id="videoList">
-    <!-- الفيديوهات ستظهر هنا ديناميكيًا من localStorage -->
-  </div>
+  <div class="videos" id="videoList"></div>
   <button id="loadMoreBtn">Load More</button>
 </section>
 
@@ -204,7 +228,6 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
-<!-- Contact Section -->
 <section id="contact">
   <h2>Contact Us</h2>
   <p>YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
@@ -216,8 +239,10 @@ footer a { color:#1976d2; text-decoration:none; }
 </footer>
 
 <script>
+// كلمة مرور الادمن
 const PASSWORD = "1234";
 let isAdmin = false;
+
 const showFormBtn = document.getElementById('showFormBtn');
 const videoForm = document.getElementById('videoForm');
 const addVideoBtn = document.getElementById('addVideoBtn');
@@ -228,71 +253,90 @@ const loadMoreBtn = document.getElementById('loadMoreBtn');
 
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
 
-// المتغير لتحديد عدد الفيديوهات المعروضة
-let videosPerPage = 6;
-let currentIndex = 0;
+// عدد الفيديوهات التي تظهر في البداية
+let visibleCount = 6;
 
-function createVideoElement(video){
+// دالة لإنشاء عنصر الفيديو
+function createVideoElement(video, index) {
   const box = document.createElement('div');
   box.classList.add('videoBox');
-  box.innerHTML = `
-    <h6>${video.title}</h6>
-    <iframe src="https://www.youtube.com/embed/${video.id}" allowfullscreen></iframe>
-    <div class="btnGroup">
-      <button class="editBtn">Edit</button>
-      <button class="deleteBtn">Delete</button>
-    </div>
-  `;
-  const deleteBtn = box.querySelector('.deleteBtn');
-  const editBtn = box.querySelector('.editBtn');
-  if(isAdmin) { deleteBtn.style.display="inline-block"; editBtn.style.display="inline-block"; }
-  
-  deleteBtn.addEventListener('click', () => {
-    if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
-      box.remove();
-      videos = videos.filter(v => v.id !== video.id);
-      localStorage.setItem('videos', JSON.stringify(videos));
-    }
-  });
-  
-  editBtn.addEventListener('click', () => {
-    const newTitle = prompt("أدخل العنوان الجديد للفيديو:", video.title);
-    if(newTitle){
-      video.title = newTitle;
-      box.querySelector('h6').innerText = newTitle;
-      localStorage.setItem('videos', JSON.stringify(videos));
-    }
-  });
-  
-  videoList.appendChild(box);
-}
+  box.dataset.index = index;
 
-// دالة لإظهار الفيديوهات حسب index
-function displayVideos(){
-  videoList.innerHTML = "";
-  const end = Math.min(currentIndex + videosPerPage, videos.length);
-  for(let i=currentIndex; i<end; i++){
-    createVideoElement(videos[i]);
+  // العنوان و iframe
+  const title = document.createElement('h6');
+  title.textContent = video.title;
+  box.appendChild(title);
+
+  const iframe = document.createElement('iframe');
+  iframe.src = `https://www.youtube.com/embed/${video.id}`;
+  iframe.allowFullscreen = true;
+  box.appendChild(iframe);
+
+  // إذا كان الادمن، أضف أزرار الحذف والتعديل
+  if(isAdmin){
+    const buttonsDiv = document.createElement('div');
+    buttonsDiv.classList.add('videoButtons');
+
+    const editBtn = document.createElement('button');
+    editBtn.textContent = "تعديل";
+    editBtn.classList.add('editBtn');
+    editBtn.addEventListener('click', ()=>{
+      const newTitle = prompt("ادخل عنوان جديد للفيديو:", video.title);
+      if(newTitle) {
+        video.title = newTitle;
+        localStorage.setItem('videos', JSON.stringify(videos));
+        title.textContent = newTitle;
+      }
+    });
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = "حذف";
+    deleteBtn.classList.add('deleteBtn');
+    deleteBtn.addEventListener('click', ()=>{
+      if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
+        videos.splice(index,1);
+        localStorage.setItem('videos', JSON.stringify(videos));
+        renderVideos();
+      }
+    });
+
+    buttonsDiv.appendChild(editBtn);
+    buttonsDiv.appendChild(deleteBtn);
+    box.appendChild(buttonsDiv);
   }
-  // إظهار زر Load More إذا تبقى فيديوهات
-  loadMoreBtn.style.display = (end < videos.length) ? "block" : "none";
-}
-displayVideos();
 
-loadMoreBtn.addEventListener('click', () => {
-  currentIndex += videosPerPage;
-  displayVideos();
+  return box;
+}
+
+// عرض الفيديوهات حسب العدد المرئي
+function renderVideos() {
+  videoList.innerHTML = "";
+  videos.slice(0, visibleCount).forEach((v,i)=>{
+    videoList.appendChild(createVideoElement(v,i));
+  });
+  loadMoreBtn.style.display = visibleCount >= videos.length ? 'none' : 'block';
+}
+
+// تحميل المزيد
+loadMoreBtn.addEventListener('click', ()=>{
+  visibleCount += 6;
+  renderVideos();
 });
+
+// إنشاء الفيديوهات المحفوظة عند تحميل الصفحة
+renderVideos();
 
 // عرض الفورم عند الضغط على زر إضافة فيديو
 showFormBtn.addEventListener('click', () => {
   if(!isAdmin){
     const pass = prompt("أدخل كلمة المرور:");
     if(pass === PASSWORD){
-      videoForm.style.display = "flex";
       isAdmin = true;
-      document.querySelectorAll('.deleteBtn, .editBtn').forEach(btn => btn.style.display="inline-block");
-    } else { alert("كلمة المرور غير صحيحة!"); }
+      videoForm.style.display = "flex";
+      renderVideos(); // لإظهار أزرار الحذف والتعديل للادمن
+    } else {
+      alert("كلمة المرور غير صحيحة!");
+    }
   }
 });
 
@@ -312,15 +356,17 @@ addVideoBtn.addEventListener('click', () => {
   videos.push(newVideo);
   localStorage.setItem('videos', JSON.stringify(videos));
 
-  displayVideos();
-
   videoTitleInput.value = "";
   videoURLInput.value = "";
+
+  renderVideos();
 });
 </script>
 
 </body>
 </html>
+
+
 
 
 
