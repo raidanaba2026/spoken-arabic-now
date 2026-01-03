@@ -9,7 +9,7 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: #f9f9f9;
+  background: #f0f4f8;
   color: #222;
   line-height: 1.6;
   display:flex;
@@ -27,41 +27,65 @@ body {
   top:0;
   height:100vh;
   overflow-y:auto;
+  border-right: 3px solid #1976d2;
 }
-.sidebar h2 { color:#1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom:2px solid #1976d2; padding-bottom:5px; }
+.sidebar h2 { 
+  color:#1976d2; 
+  margin-bottom:20px; 
+  font-size:1.6rem; 
+  border-bottom:2px solid #1976d2; 
+  padding-bottom:5px; 
+}
 .sidebar a { display:block; color:#fff; text-decoration:none; margin:10px 0; transition: color 0.3s ease; }
 .sidebar a:hover { color:#1976d2; }
-.sidebar button { width:100%; padding:10px; margin-top:20px; border:none; border-radius:6px; background:#0d47a1; color:#fff; cursor:pointer; }
+.sidebar button { 
+  width:100%; 
+  padding:10px; 
+  margin-top:20px; 
+  border:none; 
+  border-radius:6px; 
+  background:#0d47a1; 
+  color:#fff; 
+  cursor:pointer; 
+  font-weight:bold;
+}
 
 /* Main content */
 main { flex-grow:1; padding:20px 40px; max-width:1000px; margin:auto; }
 
 /* Header */
 header { display:flex; align-items:center; gap:30px; margin-bottom:30px; flex-wrap:wrap; }
-header img { height:140px; width:auto; border-radius:12px; border:2px solid #fff; }
-header div h1 { font-size:2.8rem; color:#0d47a1; margin-bottom:10px; }
-header div p { font-size:1.3rem; }
+header img { height:130px; width:auto; border-radius:12px; border:3px solid #1976d2; }
+header div h1 { font-size:2.4rem; color:#0d47a1; margin-bottom:8px; }
+header div p { font-size:1.2rem; color:#555; }
 
 /* Sections */
-section { margin-bottom:60px; }
-section h2 { color: #1976d2; margin-bottom:25px; font-size:2rem; border-bottom: 2px solid #1976d2; display:inline-block; padding-bottom:5px; }
+section { margin-bottom:50px; }
+section h2 { 
+  color: #1976d2; 
+  margin-bottom:20px; 
+  font-size:1.8rem; 
+  border-bottom: 2px solid #1976d2; 
+  display:inline-block; 
+  padding-bottom:4px; 
+}
 
 /* Boxes */
 .features, .videos, .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:25px; }
 .box {
-  background:#fff;
-  padding:25px;
+  background: #fff;
+  padding:20px;
   border-radius:15px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   position:relative;
 }
-.box:hover { transform: translateY(-6px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-.box h3 { color:#0d47a1; margin-bottom:12px; font-size:1.4rem; }
-.box p { flex-grow:1; margin-bottom:15px; }
+.box:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
+.box h3 { color:#0d47a1; margin-bottom:10px; font-size:1.2rem; }
+.box p { flex-grow:1; margin-bottom:12px; color:#444; font-size:0.95rem; }
 .box a.button {
   background-color:#1976d2;
   color:#fff;
@@ -73,17 +97,18 @@ section h2 { color: #1976d2; margin-bottom:25px; font-size:2rem; border-bottom: 
   transition: background-color 0.3s ease;
 }
 .box a.button:hover { background-color:#0d47a1; }
-iframe { width:100%; height:315px; border-radius:12px; }
+iframe { width:100%; height:280px; border-radius:12px; }
 
+/* Footer */
 footer { background: #1e1e1e; color: #fff; text-align:center; padding:25px 20px; font-size:0.9rem; }
 footer a { color:#1976d2; text-decoration:none; }
 
-/* نموذج إضافة الفيديو */
+/* Form */
 #videoForm { display:none; flex-direction:column; gap:10px; margin-top:15px; }
 #videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
 #videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
 
-/* زر الحذف فقط للمدير */
+/* Delete button */
 .deleteBtn {
   position:absolute;
   top:10px;
@@ -97,9 +122,10 @@ footer a { color:#1976d2; text-decoration:none; }
   display:none;
 }
 
+/* Responsive */
 @media(max-width:992px){
   body { flex-direction:column; }
-  .sidebar { width:100%; height:auto; position:relative; }
+  .sidebar { width:100%; height:auto; position:relative; border-right:none; border-bottom:3px solid #1976d2; }
   main { padding:20px; }
   header { justify-content:center; text-align:center; }
 }
@@ -117,10 +143,8 @@ footer a { color:#1976d2; text-decoration:none; }
   <a href="#egyptian">Egyptian Arabic</a>
   <a href="#contact">Contact</a>
 
-  <!-- زر إضافة فيديو -->
   <button id="showFormBtn">إضافة فيديو جديد</button>
 
-  <!-- نموذج إضافة الفيديو -->
   <div id="videoForm">
       <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
       <input type="text" id="videoURL" placeholder="رابط YouTube">
@@ -128,7 +152,6 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </div>
 
-<!-- Main content -->
 <main>
 <header>
   <img src="logo.png" alt="Spoken Arabic Now Logo">
@@ -163,9 +186,7 @@ footer a { color:#1976d2; text-decoration:none; }
 
 <section id="videos">
   <h2>Video Lessons</h2>
-  <div class="videos" id="videoList">
-    <!-- سيتم إضافة الفيديوهات هنا -->
-  </div>
+  <div class="videos" id="videoList"></div>
 </section>
 
 <section id="resources">
@@ -203,7 +224,7 @@ footer a { color:#1976d2; text-decoration:none; }
 </footer>
 
 <script>
-const PASSWORD = "1234"; // كلمة المرور للمدير
+const PASSWORD = "1234";
 let isAdmin = false;
 
 const showFormBtn = document.getElementById('showFormBtn');
@@ -213,10 +234,8 @@ const videoTitleInput = document.getElementById('videoTitle');
 const videoURLInput = document.getElementById('videoURL');
 const videoList = document.getElementById('videoList');
 
-// تحميل الفيديوهات من localStorage عند بدء الصفحة
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
 
-// دالة إنشاء عنصر الفيديو
 function createVideoElement(video) {
   const box = document.createElement('div');
   box.classList.add('box');
@@ -238,10 +257,8 @@ function createVideoElement(video) {
   videoList.appendChild(box);
 }
 
-// إضافة جميع الفيديوهات المحفوظة
 videos.forEach(v => createVideoElement(v));
 
-// عند الضغط على زر إضافة فيديو
 showFormBtn.addEventListener('click', () => {
   if(!isAdmin){
     const pass = prompt("أدخل كلمة المرور:");
@@ -255,7 +272,6 @@ showFormBtn.addEventListener('click', () => {
   }
 });
 
-// عند الضغط على زر "إضافة الفيديو" بعد إدخال البيانات
 addVideoBtn.addEventListener('click', () => {
   const title = videoTitleInput.value.trim();
   const url = videoURLInput.value.trim();
@@ -280,6 +296,7 @@ addVideoBtn.addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
 
