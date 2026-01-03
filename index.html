@@ -47,7 +47,7 @@ section { margin-bottom:60px; }
 section h2 { color: #1976d2; margin-bottom:25px; font-size:2rem; border-bottom: 2px solid #1976d2; display:inline-block; padding-bottom:5px; }
 
 /* Boxes */
-.features, .videos, .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:25px; }
+.features, .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:25px; }
 .box {
   background:#fff;
   padding:25px;
@@ -95,6 +95,34 @@ footer a { color:#1976d2; text-decoration:none; }
   padding:5px 8px;
   cursor:pointer;
   display:none;
+}
+
+/* شريط التمرير للفيديوهات */
+.video-carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap:10px;
+  overflow: hidden;
+}
+.video-carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom:10px;
+}
+.video-carousel::-webkit-scrollbar { height:8px; }
+.video-carousel::-webkit-scrollbar-thumb { background:#1976d2; border-radius:4px; }
+.prevBtn, .nextBtn {
+  background:#0d47a1;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  font-size:1.5rem;
+  cursor:pointer;
+  padding:5px 10px;
+  flex-shrink:0;
 }
 
 @media(max-width:992px){
@@ -161,10 +189,15 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
+<!-- Video Lessons مع شريط التمرير -->
 <section id="videos">
   <h2>Video Lessons</h2>
-  <div class="videos" id="videoList">
-    <!-- سيتم إضافة الفيديوهات هنا -->
+  <div class="video-carousel-wrapper">
+    <button class="prevBtn">&#10094;</button>
+    <div class="video-carousel" id="videoList">
+      <!-- سيتم إضافة الفيديوهات هنا -->
+    </div>
+    <button class="nextBtn">&#10095;</button>
   </div>
 </section>
 
@@ -186,14 +219,13 @@ footer a { color:#1976d2; text-decoration:none; }
 
 <section id="egyptian">
   <h2>Why Egyptian Arabic?</h2>
-  <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
-  <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
+  <p>Egyptian Arabic is the most widely understood dialect in the Arab world.</p>
 </section>
 
 <section id="contact">
   <h2>Contact</h2>
   <p>
-    YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
+    YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br>
     Email: spokenarabicnow@gmail.com
   </p>
 </section>
@@ -203,7 +235,8 @@ footer a { color:#1976d2; text-decoration:none; }
 </footer>
 
 <script>
-const PASSWORD = "1234"; // كلمة المرور للمدير
+// كلمة المرور للمدير
+const PASSWORD = "1234";
 let isAdmin = false;
 
 const showFormBtn = document.getElementById('showFormBtn');
@@ -217,7 +250,7 @@ const videoList = document.getElementById('videoList');
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
 
 // دالة إنشاء عنصر الفيديو
-function createVideoElement(video) {
+function createVideoElement(video){
   const box = document.createElement('div');
   box.classList.add('box');
   box.innerHTML = `
@@ -228,10 +261,10 @@ function createVideoElement(video) {
   `;
   const deleteBtn = box.querySelector('.deleteBtn');
   if(isAdmin) deleteBtn.style.display = "block";
-  deleteBtn.addEventListener('click', () => {
+  deleteBtn.addEventListener('click', ()=>{
     if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
       box.remove();
-      videos = videos.filter(v => v.id !== video.id);
+      videos = videos.filter(v=>v.id!==video.id);
       localStorage.setItem('videos', JSON.stringify(videos));
     }
   });
@@ -239,47 +272,54 @@ function createVideoElement(video) {
 }
 
 // إضافة جميع الفيديوهات المحفوظة
-videos.forEach(v => createVideoElement(v));
+videos.forEach(v=>createVideoElement(v));
 
-// عند الضغط على زر إضافة فيديو
-showFormBtn.addEventListener('click', () => {
+// زر إضافة فيديو: يظهر نموذج كلمة المرور مرة واحدة فقط
+showFormBtn.addEventListener('click', ()=>{
   if(!isAdmin){
     const pass = prompt("أدخل كلمة المرور:");
     if(pass === PASSWORD){
-      videoForm.style.display = "flex";
+      videoForm.style.display="flex";
       isAdmin = true;
-      document.querySelectorAll('.deleteBtn').forEach(btn => btn.style.display = "block");
-    } else {
-      alert("كلمة المرور غير صحيحة!");
-    }
+      document.querySelectorAll('.deleteBtn').forEach(btn=>btn.style.display="block");
+    } else { alert("كلمة المرور غير صحيحة!"); }
+  } else {
+    videoForm.style.display="flex";
   }
 });
 
-// عند الضغط على زر "إضافة الفيديو" بعد إدخال البيانات
-addVideoBtn.addEventListener('click', () => {
+// عند الضغط على زر "إضافة الفيديو"
+addVideoBtn.addEventListener('click', ()=>{
   const title = videoTitleInput.value.trim();
   const url = videoURLInput.value.trim();
   if(!title || !url){ alert("يرجى إدخال عنوان الفيديو والرابط!"); return; }
 
-  let videoId = "";
-  if(url.includes("youtu.be/")) videoId = url.split("youtu.be/")[1].split("?")[0];
-  else if(url.includes("youtube.com/watch?v=")) videoId = url.split("v=")[1].split("&")[0];
-  else if(url.includes("youtube.com/shorts/")) videoId = url.split("shorts/")[1].split("?")[0];
+  let videoId="";
+  if(url.includes("youtu.be/")) videoId=url.split("youtu.be/")[1].split("?")[0];
+  else if(url.includes("youtube.com/watch?v=")) videoId=url.split("v=")[1].split("&")[0];
+  else if(url.includes("youtube.com/shorts/")) videoId=url.split("shorts/")[1].split("?")[0];
   else { alert("رابط YouTube غير صالح!"); return; }
 
-  const newVideo = { title, url, id: videoId };
+  const newVideo={ title, url, id: videoId };
   videos.push(newVideo);
   localStorage.setItem('videos', JSON.stringify(videos));
 
   createVideoElement(newVideo);
 
-  videoTitleInput.value = "";
-  videoURLInput.value = "";
+  videoTitleInput.value="";
+  videoURLInput.value="";
 });
-</script>
 
+// أزرار التمرير للفيديوهات
+const prevBtn = document.querySelector('.prevBtn');
+const nextBtn = document.querySelector('.nextBtn');
+prevBtn.addEventListener('click', ()=>{ videoList.scrollBy({ left:-300, behavior:'smooth' }); });
+nextBtn.addEventListener('click', ()=>{ videoList.scrollBy({ left:300, behavior:'smooth' }); });
+
+</script>
 </body>
 </html>
+
 
 
 
