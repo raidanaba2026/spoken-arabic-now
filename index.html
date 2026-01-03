@@ -142,14 +142,22 @@ footer {
 }
 footer a { color:#1976d2; text-decoration:none; }
 
-/* زر إضافة الفيديو */
-#showAddVideoBtn, #addVideoBtn {
-  margin-top:10px;
+/* زر إضافة الفيديو في القائمة الجانبية */
+#addVideoSection {
+  margin-top:30px;
+  border-top:1px solid #444;
+  padding-top:15px;
 }
-#addVideoForm input {
-  margin-right:10px;
-  padding:8px;
-  width:250px;
+#addVideoSection button {
+  width:100%;
+  margin-bottom:10px;
+}
+#addVideoSection input {
+  width:100%;
+  padding:6px;
+  margin-bottom:8px;
+  border-radius:5px;
+  border:none;
 }
 
 /* Responsive */
@@ -172,6 +180,16 @@ footer a { color:#1976d2; text-decoration:none; }
   <a href="#resources">Resources</a>
   <a href="#egyptian">Egyptian Arabic</a>
   <a href="#contact">Contact</a>
+
+  <!-- قسم إضافة الفيديو في القائمة الجانبية -->
+  <div id="addVideoSection">
+    <button id="showAddVideoBtn" class="button">إضافة فيديو</button>
+    <div id="addVideoForm" style="display:none;">
+      <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
+      <input type="text" id="videoURL" placeholder="رابط الفيديو">
+      <button id="addVideoBtn" class="button">أضف الفيديو</button>
+    </div>
+  </div>
 </div>
 
 <!-- Main content -->
@@ -184,14 +202,12 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </header>
 
-<!-- قسم حول الموقع -->
 <section id="about">
   <h2>About This Website</h2>
   <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic. Communicate naturally with real-life expressions Egyptians use daily.</p>
   <p>Focus on conversation, pronunciation, and real phrases heard in streets, cafes, and daily life.</p>
 </section>
 
-<!-- قسم ما ستتعلمه -->
 <section id="lessons">
   <h2>What You Will Learn</h2>
   <div class="features">
@@ -210,21 +226,8 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
-<!-- قسم الفيديوهات -->
 <section id="videos">
   <h2>Video Lessons</h2>
-
-  <!-- زر إضافة الفيديو (يظهر فقط) -->
-  <button id="showAddVideoBtn" class="button">إضافة فيديو</button>
-
-  <!-- نموذج إضافة الفيديو مخفي افتراضياً -->
-  <div id="addVideoForm" style="display:none; margin-top:15px;">
-    <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
-    <input type="text" id="videoURL" placeholder="رابط الفيديو">
-    <button id="addVideoBtn" class="button">أضف الفيديو</button>
-  </div>
-
-  <!-- حاوية الفيديوهات -->
   <div class="videos" id="videoContainer">
     <!-- فيديوهات موجودة مسبقاً -->
     <div class="box">
@@ -247,12 +250,9 @@ footer a { color:#1976d2; text-decoration:none; }
       <a class="button" href="https://www.youtube.com/shorts/pn6B8bHghek" target="_blank">Watch on YouTube</a>
       <button class="deleteBtn">حذف</button>
     </div>
-
-    <!-- يمكنك إضافة باقي الفيديوهات هنا بنفس التنسيق -->
   </div>
 </section>
 
-<!-- قسم الموارد -->
 <section id="resources">
   <h2>Downloadable Resources</h2>
   <div class="resources">
@@ -269,14 +269,12 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
-<!-- قسم لماذا المصرية -->
 <section id="egyptian">
   <h2>Why Egyptian Arabic?</h2>
   <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
   <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
 </section>
 
-<!-- قسم الاتصال -->
 <section id="contact">
   <h2>Contact</h2>
   <p>
@@ -285,16 +283,12 @@ footer a { color:#1976d2; text-decoration:none; }
   </p>
 </section>
 
-<!-- Footer -->
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
-</main>
-
-<!-- سكريبت لإضافة وحذف الفيديوهات -->
 <script>
-const password = "1234"; // كلمة المرور المطلوبة لإضافة الفيديو
+const password = "1234";
 const showAddVideoBtn = document.getElementById('showAddVideoBtn');
 const addVideoForm = document.getElementById('addVideoForm');
 const addVideoBtn = document.getElementById('addVideoBtn');
@@ -319,7 +313,6 @@ addVideoBtn.addEventListener('click', () => {
     return;
   }
 
-  // استخراج ID الفيديو من الرابط
   let videoId = "";
   try{
     if(url.includes("youtube.com/watch?v=")){
@@ -337,7 +330,6 @@ addVideoBtn.addEventListener('click', () => {
     return;
   }
 
-  // إنشاء عنصر الفيديو الجديد
   const box = document.createElement('div');
   box.className = 'box';
   box.innerHTML = `
@@ -348,14 +340,12 @@ addVideoBtn.addEventListener('click', () => {
   `;
   videoContainer.appendChild(box);
 
-  // إضافة وظيفة الحذف
   box.querySelector('.deleteBtn').addEventListener('click', () => {
     if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
       box.remove();
     }
   });
 
-  // مسح الحقول بعد الإضافة
   document.getElementById('videoTitle').value = "";
   document.getElementById('videoURL').value = "";
 });
@@ -373,5 +363,7 @@ document.querySelectorAll('.deleteBtn').forEach(btn => {
 
 </body>
 </html>
+
+
 
 
