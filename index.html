@@ -287,23 +287,38 @@ addVideoBtn.addEventListener('click', ()=>{
   videoTitleInput.value=""; videoURLInput.value="";
 });
 
-/* زر Read More لإظهار القسم الموسع أسفل الصندوق */
+// زر Read More لإظهار القسم الموسع الخاص بالصندوق فقط
 document.querySelectorAll('.readMoreBtn').forEach(btn=>{
   btn.addEventListener('click',()=>{
-    const expanded=btn.nextElementSibling;
+    const parentBox = btn.closest('.box'); // الصندوق الذي ينتمي إليه الزر
+    const expanded = parentBox.querySelector('.expandedSection'); // القسم الموسع الخاص به
+
+    // إخفاء جميع الأقسام الموسعة الأخرى
+    document.querySelectorAll('.expandedSection').forEach(sec=>{
+      if(sec !== expanded){
+        sec.style.display = "none";
+        // إعادة نص زر Show Less إلى Read More لجميع الصناديق الأخرى
+        const otherBtn = sec.closest('.box').querySelector('.readMoreBtn');
+        if(otherBtn) otherBtn.textContent = "Read More";
+      }
+    });
+
+    // تبديل العرض للقسم الخاص بالصندوق الحالي
     if(expanded.style.display==="none" || expanded.style.display===""){
       expanded.style.display="block";
       btn.textContent="Show Less";
-    }else{
+    } else {
       expanded.style.display="none";
       btn.textContent="Read More";
     }
   });
 });
+
 </script>
 
 </body>
 </html>
+
 
 
 
