@@ -146,8 +146,6 @@ section h2 {
   word-break: break-word;
 }
 
-  
-.box h3 { color:#0d47a1; margin-bottom:10px; font-size:1.2rem; transition: color 0.3s ease; text-align:center; }
 .box:hover h3 { color:#0b3d91; }
 .box p { flex-grow:1; margin-bottom:12px; color:#444; font-size:0.95rem; text-align:center; }
 iframe { width:100%; height:200px; border-radius:12px; object-fit:cover; }
@@ -224,15 +222,18 @@ footer a { color:#1976d2; text-decoration:none; }
   <div class="features">
     <div class="box">
       <h3>Everyday Conversations</h3>
-      <p>Real Egyptian phrases used in daily situations, not formal Arabic.</p>
+      <p>Real phrases used daily / عبارات يومية</p>
+      <button class="readMoreBtn" data-target="expandedLessons">Read More</button>
     </div>
     <div class="box">
       <h3>Egyptian Pronunciation</h3>
-      <p>Learn how Egyptians actually pronounce words, sounds, and letters.</p>
+      <p>Learn pronunciation / تعلم النطق</p>
+      <button class="readMoreBtn" data-target="expandedLessons">Read More</button>
     </div>
     <div class="box">
       <h3>Speak with Confidence</h3>
-      <p>Stop translating in your head and start speaking naturally.</p>
+      <p>Start speaking naturally / تحدث بثقة</p>
+      <button class="readMoreBtn" data-target="expandedLessons">Read More</button>
     </div>
   </div>
 </section>
@@ -258,18 +259,10 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
-<section id="egyptian">
-  <h2>Why Egyptian Arabic?</h2>
-  <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
-  <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
-</section>
-
-
-  <!-- قسم العبارات الموسعة قبل Contact -->
+<!-- قسم العبارات الموسعة قبل Contact -->
 <section id="expandedLessons" style="display:none; margin-bottom:50px;">
   <h2>All Phrases / كل العبارات</h2>
   <div class="features">
-    <!-- كل صندوق يحتوي عبارة واحدة أو جملتين -->
     <div class="box"><h3>Sabah el-kheir</h3><p>Good morning / صباح الخير</p></div>
     <div class="box"><h3>Ezayak?</h3><p>How are you? / إزيك؟</p></div>
     <div class="box"><h3>Shokran</h3><p>Thank you / شكراً</p></div>
@@ -280,6 +273,12 @@ footer a { color:#1976d2; text-decoration:none; }
     <div class="box"><h3>Sahtain</h3><p>Bon appétit / صحتين</p></div>
     <!-- أضف باقي العبارات حسب الحاجة -->
   </div>
+</section>
+
+<section id="egyptian">
+  <h2>Why Egyptian Arabic?</h2>
+  <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
+  <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
 </section>
 
 <section id="contact">
@@ -362,10 +361,28 @@ addVideoBtn.addEventListener('click', () => {
   videoTitleInput.value = "";
   videoURLInput.value = "";
 });
+
+// زر Read More للانتقال للقسم الموسع وعرضه
+document.querySelectorAll('.readMoreBtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // اخفاء الصناديق الصغيرة في Lessons
+    document.querySelectorAll('#lessons .features').forEach(f => f.style.display = 'none');
+
+    // اظهار القسم الموسع
+    const targetId = btn.getAttribute('data-target');
+    const expandedSection = document.getElementById(targetId);
+    expandedSection.style.display = 'block';
+
+    // الانتقال بسلاسة إلى القسم الموسع
+    expandedSection.scrollIntoView({behavior: 'smooth'});
+  });
+});
 </script>
 
 </body>
 </html>
+
+
 
 
 
