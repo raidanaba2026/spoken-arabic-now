@@ -264,33 +264,93 @@ footer {
 </main>
 
 <script>
-const PASSWORD="1234";
-let isAdmin=false;
-const videoList=document.getElementById("videoList");
-const showFormBtn=document.getElementById("showFormBtn");
-const videoForm=document.getElementById("videoForm");
-const addVideoBtn=document.getElementById("addVideoBtn");
-const titleInput=document.getElementById("videoTitle");
-const urlInput=document.getElementById("videoURL");
+const PASSWORD = "1234";
+let isAdmin = false;
 
-let videos=JSON.parse(localStorage.getItem("videos"))||[];
+const showFormBtn = document.getElementById('showFormBtn');
+const videoForm = document.getElementById('videoForm');
+const addVideoBtn = document.getElementById('addVideoBtn');
+const videoTitleInput = document.getElementById('videoTitle');
+const videoURLInput = document.getElementById('videoURL');
+const videoList = document.getElementById('videoList');
 
-function createVideo(v){
-  const d=document.createElement("div");
-  d.className="box";
-  d.innerHTML=`
-    <h3>${v.title}</h3>
-    <iframe src="https://www.youtube.com/embed/${v.id}"></iframe>
-    <a class="button" href="${v.url}" target="_blank">Watch on YouTube</a>
-    <button class="deleteBtn">حذف</button>`;
-  if(isAdmin)d.querySelector(".deleteBtn").style.display="block";
-  videoList.appendChild(d);
+let videos = JSON.parse(localStorage.getItem('videos')) || [];
+
+function createVideoElement(video) {
+  const box = document.createElement('div');
+  box.classList.add('box');
+  box.innerHTML = `
+    <h3>${video.title}</h3>
+    <iframe src="https://www.youtube.com/embed/${video.id}" allowfullscreen></iframe>
+    <a class="button" href="${video.url}" target="_blank">Watch on YouTube</a>
+    <button class="deleteBtn">حذف الفيديو</button>
+  `;
+
+  const deleteBtn = box.querySelector('.deleteBtn');
+  if (isAdmin) deleteBtn.style.display = "block";
+
+  deleteBtn.addEventListener('click', () => {
+    if (confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")) {
+      box.remove();
+      videos = videos.filter(v => v.id !== video.id);
+      localStorage.setItem('videos', JSON.stringify(videos));
+    }
+  });
+
+  videoList.appendChild(box);
 }
-videos.forEach(createVideo);
+
+videos.forEach(v => createVideoElement(v));
+
+showFormBtn.addEventListener('click', () => {
+  if (!isAdmin) {
+    const pass = prompt("أدخل كلمة المرور:");
+    if (pass === PASSWORD) {
+      isAdmin = true;
+      videoForm.style.display = "flex";
+      document.querySelectorAll('.deleteBtn').forEach(btn => btn.style.display = "block");
+    } else {
+      alert("كلمة المرور غير صحيحة!");
+    }
+  }
+});
+
+addVideoBtn.addEventListener('click', () => {
+  const title = videoTitleInput.value.trim();
+  const url = videoURLInput.value.trim();
+
+  if (!title || !url) {
+    alert("يرجى إدخال عنوان الفيديو والرابط!");
+    return;
+  }
+
+  let videoId = "";
+  if (url.includes("youtu.be/")) {
+    videoId = url.split("youtu.be/")[1].split("?")[0];
+  } else if (url.includes("youtube.com/watch?v=")) {
+    videoId = url.split("v=")[1].split("&")[0];
+  } else if (url.includes("youtube.com/shorts/")) {
+    videoId = url.split("shorts/")[1].split("?")[0];
+  } else {
+    alert("رابط YouTube غير صالح!");
+    return;
+  }
+
+  const newVideo = { title, url, id: videoId };
+  videos.push(newVideo);
+  localStorage.setItem('videos', JSON.stringify(videos));
+
+  createVideoElement(newVideo);
+
+  videoTitleInput.value = "";
+  videoURLInput.value = "";
+});
 </script>
+
 
 </body>
 </html>
+
 
 
 
