@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Spoken Arabic Now – Egyptian Dialect</title>
 <style>
+/* =====================================
+   إعدادات أساسية للجسم وعناصر الصفحة
+===================================== */
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body {
@@ -13,21 +17,24 @@ body {
   color: #222;
   line-height: 1.6;
   display:flex;
-  min-height:100vh;
+  min-height:100vh; /* يملأ طول الشاشة */
 }
 
-/* Sidebar */
+/* =====================================
+   القائمة الجانبية Sidebar
+===================================== */
 .sidebar {
   width: 250px;
   background: #1e1e1e;
   color: #fff;
   flex-shrink:0;
   padding:20px;
-  position:sticky;
+  position:sticky; /* تبقى مثبتة عند التمرير */
   top:0;
   height:100vh;
-  overflow-y:auto;
+  overflow-y:auto; /* يسمح بالتمرير إذا كانت القائمة طويلة */
 }
+
 .sidebar h2 {
   color:#1976d2;
   margin-bottom:20px;
@@ -35,6 +42,7 @@ body {
   border-bottom:2px solid #1976d2;
   padding-bottom:5px;
 }
+
 .sidebar a {
   display:block;
   color:#fff;
@@ -42,9 +50,12 @@ body {
   margin:10px 0;
   transition: color 0.3s ease;
 }
+
 .sidebar a:hover { color:#1976d2; }
 
-/* Main content */
+/* =====================================
+   المحتوى الرئيسي Main
+===================================== */
 main {
   flex-grow:1;
   padding:20px 40px;
@@ -52,25 +63,32 @@ main {
   margin:auto;
 }
 
-/* Header */
+/* =====================================
+   Header (الشعار والنص الترحيبي)
+===================================== */
 header {
   display:flex;
   align-items:center;
-  gap:30px;
+  gap:30px; /* مسافة بين الشعار والنص */
   margin-bottom:30px;
-  flex-wrap:wrap;
+  flex-wrap:wrap; /* ليتجاوب مع الشاشات الصغيرة */
 }
+
 header img {
   height:140px;
   width:auto;
   border-radius:12px;
   border:2px solid #fff;
 }
+
 header div h1 { font-size:2.8rem; color:#0d47a1; margin-bottom:10px; }
 header div p { font-size:1.3rem; }
 
-/* Sections */
+/* =====================================
+   العناوين في الأقسام
+===================================== */
 section { margin-bottom:60px; }
+
 section h2 {
   color: #1976d2;
   margin-bottom:25px;
@@ -80,12 +98,15 @@ section h2 {
   padding-bottom:5px;
 }
 
-/* Boxes */
+/* =====================================
+   مربعات المحتوى Boxes
+===================================== */
 .features, .videos, .resources {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
   gap:25px;
 }
+
 .box {
   background:#fff;
   padding:25px;
@@ -96,12 +117,16 @@ section h2 {
   flex-direction:column;
   justify-content:space-between;
 }
+
 .box:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
+
 .box h3 { color:#0d47a1; margin-bottom:12px; font-size:1.4rem; }
 .box p { flex-grow:1; margin-bottom:15px; }
+
+/* زر التحميل أو رابط مشاهدة الفيديو */
 .box a.button {
   background-color:#1976d2;
   color:#fff;
@@ -112,11 +137,15 @@ section h2 {
   font-weight:bold;
   transition: background-color 0.3s ease;
 }
+
 .box a.button:hover { background-color:#0d47a1; }
 
+/* إعداد iframe للفيديوهات */
 iframe { width:100%; height:315px; border-radius:12px; }
 
-/* Footer */
+/* =====================================
+   Footer
+===================================== */
 footer {
   background: #1e1e1e;
   color: #fff;
@@ -126,6 +155,9 @@ footer {
 }
 footer a { color:#1976d2; text-decoration:none; }
 
+/* =====================================
+   تصميم متجاوب للشاشات الصغيرة
+===================================== */
 @media(max-width:992px){
   body { flex-direction:column; }
   .sidebar { width:100%; height:auto; position:relative; }
@@ -136,7 +168,9 @@ footer a { color:#1976d2; text-decoration:none; }
 </head>
 <body>
 
-<!-- Sidebar -->
+<!-- =====================================
+   القائمة الجانبية Sidebar
+===================================== -->
 <div class="sidebar">
   <h2>Navigation</h2>
   <a href="#about">About</a>
@@ -147,8 +181,14 @@ footer a { color:#1976d2; text-decoration:none; }
   <a href="#contact">Contact</a>
 </div>
 
-<!-- Main content -->
+<!-- =====================================
+   المحتوى الرئيسي Main
+===================================== -->
 <main>
+
+<!-- =====================================
+   Header (شعار الموقع والنص الترحيبي)
+===================================== -->
 <header>
   <img src="logo.png" alt="Spoken Arabic Now Logo">
   <div>
@@ -157,12 +197,18 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </header>
 
+<!-- =====================================
+   قسم About
+===================================== -->
 <section id="about">
   <h2>About This Website</h2>
   <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic. Communicate naturally with real-life expressions Egyptians use daily.</p>
   <p>Focus on conversation, pronunciation, and real phrases heard in streets, cafes, and daily life.</p>
 </section>
 
+<!-- =====================================
+   قسم What You Will Learn (الدروس والمميزات)
+===================================== -->
 <section id="lessons">
   <h2>What You Will Learn</h2>
   <div class="features">
@@ -181,58 +227,78 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
+<!-- =====================================
+   قسم الفيديوهات Video Lessons
+   يمكن إضافة فيديو جديد يدويًا هنا
+===================================== -->
 <section id="videos">
   <h2>Video Lessons</h2>
   <div class="videos">
+
+    <!-- مثال لفيديو درس 1 -->
     <div class="box">
       <h3>Lesson 1: Mind your own business</h3>
       <iframe src="https://www.youtube.com/embed/nKUIVL5RDaQ" allowfullscreen></iframe>
       <a class="button" href="https://www.youtube.com/shorts/nKUIVL5RDaQ" target="_blank">Watch on YouTube</a>
     </div>
+
+    <!-- فيديو درس 2 -->
     <div class="box">
       <h3>Lesson 2: You Command – I’m at Your Service</h3>
       <iframe src="https://www.youtube.com/embed/NXmhi7uiX7k" allowfullscreen></iframe>
       <a class="button" href="https://www.youtube.com/shorts/NXmhi7uiX7k" target="_blank">Watch on YouTube</a>
     </div>
+
+    <!-- فيديو درس 3 -->
     <div class="box">
       <h3>Lesson 3: Stop Showing Off</h3>
       <iframe src="https://www.youtube.com/embed/pn6B8bHghek" allowfullscreen></iframe>
       <a class="button" href="https://www.youtube.com/shorts/pn6B8bHghek" target="_blank">Watch on YouTube</a>
     </div>
+
+    <!-- فيديو درس 4 -->
     <div class="box">
       <h3>Lesson 4: Now way!, Holy cow</h3>
       <iframe src="https://www.youtube.com/embed/75DuYX3lNFw" allowfullscreen></iframe>
       <a class="button" href="https://www.youtube.com/shorts/75DuYX3lNFw" target="_blank">Watch on YouTube</a>
     </div>
+
+    <!-- فيديو درس 5 -->
     <div class="box">
       <h3>Lesson 5: I am so done with this</h3>
       <iframe src="https://www.youtube.com/embed/_fVm-Vwdr8k" allowfullscreen></iframe>
       <a class="button" href="https://www.youtube.com/shorts/_fVm-Vwdr8k" target="_blank">Watch on YouTube</a>
     </div>
+
+    <!-- فيديو درس 6 -->
     <div class="box">
       <h3>Lesson 6: Essential Phrases for Foreigners at Arab Airports – Part 01</h3>
       <iframe src="https://www.youtube.com/embed/_n0iZjkTZQI" allowfullscreen></iframe>
       <a class="button" href="https://www.youtube.com/shorts/_n0iZjkTZQI" target="_blank">Watch on YouTube</a>
     </div>
 
-    <!-- فيديو شورت 7 -->
+    <!-- فيديو درس 7 -->
     <div class="box">
       <h3>Lesson 7: Essential Phrases for Foreigners at Arab Airports – Part 02</h3>
       <iframe src="https://www.youtube.com/embed/YOmZGtcyDgo" allowfullscreen></iframe>
       <a class="button" href="https://www.youtube.com/watch?v=YOmZGtcyDgo" target="_blank">Watch on YouTube</a>
     </div>
 
-    <!-- فيديو شورت 8 -->
-<div class="box">
-  <h3>Lesson 8: Essential Phrases for Foreigners at Arab Airports – Part 03</h3>
-  <iframe src="https://www.youtube.com/embed/5dziHaKjj_g" allowfullscreen></iframe>
-  <a class="button" href="https://www.youtube.com/watch?v=5dziHaKjj_g" target="_blank">Watch on YouTube</a>
+    <!-- فيديو درس 8 -->
+    <div class="box">
+      <h3>Lesson 8: Essential Phrases for Foreigners at Arab Airports – Part 03</h3>
+      <iframe src="https://www.youtube.com/embed/5dziHaKjj_g" allowfullscreen></iframe>
+      <a class="button" href="https://www.youtube.com/watch?v=5dziHaKjj_g" target="_blank">Watch on YouTube</a>
+    </div>
+
+    <!-- لإضافة درس جديد:
+         انسخ div class="box" وعدل الرقم والرابط والعنوان فقط -->
   </div>
-    
 </section>
 
-
-
+<!-- =====================================
+   قسم ملفات PDF Resources
+===================================== -->
 <section id="resources">
   <h2>Downloadable Resources</h2>
   <div class="resources">
@@ -249,12 +315,18 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
+<!-- =====================================
+   قسم لماذا Egyptian Arabic
+===================================== -->
 <section id="egyptian">
   <h2>Why Egyptian Arabic?</h2>
   <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
   <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
 </section>
 
+<!-- =====================================
+   قسم الاتصال Contact
+===================================== -->
 <section id="contact">
   <h2>Contact</h2>
   <p>
@@ -263,6 +335,9 @@ footer a { color:#1976d2; text-decoration:none; }
   </p>
 </section>
 
+<!-- =====================================
+   Footer
+===================================== -->
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
@@ -270,3 +345,4 @@ footer a { color:#1976d2; text-decoration:none; }
 </main>
 </body>
 </html>
+
