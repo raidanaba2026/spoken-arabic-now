@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Spoken Arabic Now – Egyptian Dialect</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -141,7 +141,8 @@ footer a { color:#1976d2; text-decoration:none; }
   <h2>Navigation</h2>
   <a href="#about">About</a>
   <a href="#lessons">Lessons</a>
-  <a href="#videos">Video Lessons</a>
+  <a href="#videos-arabic-survival">Arabic Survival Phrases</a>
+  <a href="#videos-hotel-booking">Hotel & Booking Arabic</a>
   <a href="#resources">Resources</a>
   <a href="#egyptian">Egyptian Arabic</a>
   <a href="#contact">Contact</a>
@@ -157,12 +158,14 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </header>
 
+<!-- عن الموقع -->
 <section id="about">
   <h2>About This Website</h2>
-  <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic. Communicate naturally with real-life expressions Egyptians use daily.</p>
+  <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal Arabic. Communicate naturally with real-life expressions Egyptians use daily.</p>
   <p>Focus on conversation, pronunciation, and real phrases heard in streets, cafes, and daily life.</p>
 </section>
 
+<!-- الدروس -->
 <section id="lessons">
   <h2>What You Will Learn</h2>
   <div class="features">
@@ -181,13 +184,19 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
-<section id="videos">
-  <h2>Video Lessons</h2>
-  <div class="videos" id="videoContainer">
-    <!-- سيتم تعبئة الفيديوهات تلقائياً بواسطة JavaScript -->
-  </div>
+<!-- Arabic Survival Playlist -->
+<section id="videos-arabic-survival">
+  <h2>Arabic Survival Phrases</h2>
+  <div class="videos" id="arabic-survival-container"></div>
 </section>
 
+<!-- Hotel & Booking Playlist -->
+<section id="videos-hotel-booking">
+  <h2>Hotel & Booking Arabic</h2>
+  <div class="videos" id="hotel-booking-container"></div>
+</section>
+
+<!-- الموارد -->
 <section id="resources">
   <h2>Downloadable Resources</h2>
   <div class="resources">
@@ -204,16 +213,18 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
+<!-- لماذا اللهجة المصرية -->
 <section id="egyptian">
   <h2>Why Egyptian Arabic?</h2>
   <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
   <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
 </section>
 
+<!-- تواصل معنا -->
 <section id="contact">
   <h2>Contact</h2>
   <p>
-    YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br>
+    YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
     Email: spokenarabicnow@gmail.com
   </p>
 </section>
@@ -222,25 +233,31 @@ footer a { color:#1976d2; text-decoration:none; }
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
+</main>
+
+<!-- جافاسكريبت لجلب الفيديوهات من Playlists -->
 <script>
-// ======= إعدادات الـ YouTube API =======
-const API_KEY = 'AIzaSyBmqOXUU7Y78OwsuAQtiuXLv76m5fzFYdQ'; // مفتاح API الخاص بك
-const PLAYLIST_ID = 'PL8QWngw15QN42teodZwRlLvLlhhGhdJuJ'; // ضع هنا Playlist ID الخاص بك
-const MAX_RESULTS = 50; // أقصى عدد فيديوهات يمكن جلبها في مرة واحدة
+const API_KEY = 'AIzaSyBmqOXUU7Y78OwsuAQtiuXLv76m5fzFYdQ'; // مفتاحك من Google Cloud
 
-const videoContainer = document.getElementById('videoContainer');
+// قوائم التشغيل
+const playlists = [
+  {id:'PL8QWngw15QN7yGUvzEpQTrz5E0SDQW6kj', container:'arabic-survival'}, // Arabic Survival
+  {id:'PL8QWngw15QN42teodZwRlLvLlhhGhdJuJ', container:'hotel-booking'}     // Hotel & Booking
+];
 
-// ======= دالة جلب الفيديوهات =======
-async function fetchVideos(pageToken = '') {
-  const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=${MAX_RESULTS}&pageToken=${pageToken}&key=${API_KEY}`;
+// لكل قائمة، جلب الفيديوهات
+playlists.forEach(pl => fetchVideos(pl.id, pl.container));
 
+async function fetchVideos(playlistId, containerId, pageToken='') {
+  const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=50&pageToken=${pageToken}&key=${API_KEY}`;
   const response = await fetch(url);
   const data = await response.json();
+  const videoContainer = document.getElementById(containerId);
 
-  data.items.forEach((item, index) => {
+  data.items.forEach(item=>{
+    if(!item.snippet.title || item.snippet.title.toLowerCase().includes('private')) return; // تجاهل Private
     const videoId = item.snippet.resourceId.videoId;
     const title = item.snippet.title;
-
     const box = document.createElement('div');
     box.classList.add('box');
     box.innerHTML = `
@@ -251,17 +268,13 @@ async function fetchVideos(pageToken = '') {
     videoContainer.appendChild(box);
   });
 
-  // إذا كان هناك صفحة أخرى، جلبها تلقائياً
-  if(data.nextPageToken) {
-    fetchVideos(data.nextPageToken);
-  }
+  if(data.nextPageToken) fetchVideos(playlistId, containerId, data.nextPageToken);
 }
-
-// ======= بدء جلب الفيديوهات =======
-fetchVideos();
 </script>
 
 </body>
 </html>
+
+
 
 
