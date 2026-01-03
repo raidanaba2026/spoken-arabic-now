@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +63,7 @@ header {
   flex-wrap:wrap;
 }
 header img {
-  height:140px;
+  height:160px;
   width:auto;
   border-radius:12px;
   border:2px solid #fff;
@@ -142,7 +144,6 @@ footer a { color:#1976d2; text-decoration:none; }
   <a href="#about">About</a>
   <a href="#lessons">Lessons</a>
   <a href="#videos">Video Lessons</a>
-  <a href="#latest">Latest Lessons</a>
   <a href="#resources">Resources</a>
   <a href="#egyptian">Egyptian Arabic</a>
   <a href="#contact">Contact</a>
@@ -184,53 +185,8 @@ footer a { color:#1976d2; text-decoration:none; }
 
 <section id="videos">
   <h2>Video Lessons</h2>
-  <div class="videos">
-    <div class="box">
-      <h3>Lesson 1: Mind your own business</h3>
-      <iframe src="https://www.youtube.com/embed/nKUIVL5RDaQ" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/nKUIVL5RDaQ" target="_blank">Watch on YouTube</a>
-    </div>
-    <div class="box">
-      <h3>Lesson 2: You Command – I’m at Your Service</h3>
-      <iframe src="https://www.youtube.com/embed/NXmhi7uiX7k" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/NXmhi7uiX7k" target="_blank">Watch on YouTube</a>
-    </div>
-    <div class="box">
-      <h3>Lesson 3: Stop Showing Off</h3>
-      <iframe src="https://www.youtube.com/embed/pn6B8bHghek" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/pn6B8bHghek" target="_blank">Watch on YouTube</a>
-    </div>
-    <div class="box">
-      <h3>Lesson 4: Now way!, Holy cow</h3>
-      <iframe src="https://www.youtube.com/embed/75DuYX3lNFw" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/75DuYX3lNFw" target="_blank">Watch on YouTube</a>
-    </div>
-    <div class="box">
-      <h3>Lesson 5: I am so done with this</h3>
-      <iframe src="https://www.youtube.com/embed/_fVm-Vwdr8k" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/_fVm-Vwdr8k" target="_blank">Watch on YouTube</a>
-    </div>
-    <div class="box">
-      <h3>Lesson 6: Essential Phrases for Foreigners at Arab Airports – Part 01</h3>
-      <iframe src="https://www.youtube.com/embed/_n0iZjkTZQI" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/_n0iZjkTZQI" target="_blank">Watch on YouTube</a>
-    </div>
-  </div>
-</section>
-
-<section id="latest">
-  <h2>Latest Lessons</h2>
-  <div class="videos">
-    <div class="box">
-      <h3>Lesson 7: Add New Lesson Here</h3>
-      <iframe src="https://www.youtube.com/embed/EXAMPLE1" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/EXAMPLE1" target="_blank">Watch on YouTube</a>
-    </div>
-    <div class="box">
-      <h3>Lesson 8: Another Latest Lesson</h3>
-      <iframe src="https://www.youtube.com/embed/EXAMPLE2" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/EXAMPLE2" target="_blank">Watch on YouTube</a>
-    </div>
+  <div id="youtube-videos" class="videos">
+    <!-- الفيديوهات ستظهر تلقائيًا هنا -->
   </div>
 </section>
 
@@ -267,6 +223,32 @@ footer a { color:#1976d2; text-decoration:none; }
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
+
+<!-- Script لسحب آخر الفيديوهات تلقائيًا -->
+<script>
+  const apiKey = 'YOUR_YOUTUBE_API_KEY'; // ضع هنا مفتاح API
+  const channelId = 'UCpW7NwBkz1JqF9ZYwzKq_fA'; // ضع هنا معرف القناة (Channel ID)
+  const maxResults = 6; // عدد الفيديوهات التي تظهر
+
+  fetch(`https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=${maxResults}`)
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('youtube-videos');
+      data.items.forEach((item, index) => {
+        if(item.id.videoId){
+          const box = document.createElement('div');
+          box.className = 'box';
+          box.innerHTML = `
+            <h3>Lesson ${index + 1}: ${item.snippet.title}</h3>
+            <iframe src="https://www.youtube.com/embed/${item.id.videoId}" allowfullscreen></iframe>
+            <a class="button" href="https://www.youtube.com/watch?v=${item.id.videoId}" target="_blank">Watch on YouTube</a>
+          `;
+          container.appendChild(box);
+        }
+      });
+    })
+    .catch(error => console.error('Error fetching YouTube videos:', error));
+</script>
 
 </main>
 </body>
