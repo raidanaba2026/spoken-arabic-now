@@ -95,36 +95,20 @@ section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom
   position:relative;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.videoBox:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-}
+.videoBox:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
 .videoBox h6 { 
   color:#0d47a1; 
   margin-bottom:10px; 
-  font-size:0.85rem; /* حجم أصغر للعناوين */
-  word-break: break-word; /* لتجنب تداخل النص */
+  font-size:0.85rem; /* حجم صغير مناسب للعناوين */
+  word-break: break-word; 
 }
+.videoBox iframe { width:100%; height:200px; border-radius:10px; margin-bottom:10px; }
 
-.videoBox iframe { width:100%; height:200px; border-radius:10px; }
-
-/* أزرار تعديل وحذف الفيديو أسفل الفيديو */
-.videoBox .buttonsContainer {
-  display: flex;
-  justify-content: center;
-  gap:10px;
-  margin-top:10px;
-}
-.videoBox button {
-  padding:6px 12px;
-  border-radius:5px;
-  color:#fff;
-  cursor:pointer;
-  border:none;
-  font-size:0.9rem;
-}
-.videoBox .deleteBtn { background:red; display:none; }
-.videoBox .editBtn { background:orange; display:none; }
+/* أزرار الفيديو */
+.videoBox .btnGroup { display:flex; justify-content:center; gap:10px; margin-top:5px; }
+.videoBox .btnGroup button { padding:5px 10px; border:none; border-radius:5px; cursor:pointer; }
+.videoBox .btnGroup .editBtn { background:#0d47a1; color:#fff; }
+.videoBox .btnGroup .deleteBtn { background:red; color:#fff; }
 
 /* PDF Resources */
 .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
@@ -147,6 +131,9 @@ footer a { color:#1976d2; text-decoration:none; }
 #videoForm { display:none; flex-direction:column; gap:10px; margin-top:15px; }
 #videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
 #videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
+
+/* زر Load More */
+#loadMoreBtn { display:block; margin:20px auto; padding:10px 20px; background:#1976d2; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:bold; }
 
 /* Responsive */
 @media(max-width:992px){
@@ -199,6 +186,7 @@ footer a { color:#1976d2; text-decoration:none; }
   <div class="videos" id="videoList">
     <!-- الفيديوهات ستظهر هنا ديناميكيًا من localStorage -->
   </div>
+  <button id="loadMoreBtn">Load More</button>
 </section>
 
 <!-- PDF Section -->
@@ -227,46 +215,38 @@ footer a { color:#1976d2; text-decoration:none; }
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
-<!-- Script لإضافة الفيديوهات -->
 <script>
-// كلمة مرور للادمن
 const PASSWORD = "1234";
 let isAdmin = false;
-
-// عناصر الفورم
 const showFormBtn = document.getElementById('showFormBtn');
 const videoForm = document.getElementById('videoForm');
 const addVideoBtn = document.getElementById('addVideoBtn');
 const videoTitleInput = document.getElementById('videoTitle');
 const videoURLInput = document.getElementById('videoURL');
 const videoList = document.getElementById('videoList');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
 
-// جلب الفيديوهات من localStorage
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
 
-// دالة لإنشاء عنصر الفيديو
+// المتغير لتحديد عدد الفيديوهات المعروضة
+let videosPerPage = 6;
+let currentIndex = 0;
+
 function createVideoElement(video){
   const box = document.createElement('div');
   box.classList.add('videoBox');
   box.innerHTML = `
     <h6>${video.title}</h6>
     <iframe src="https://www.youtube.com/embed/${video.id}" allowfullscreen></iframe>
-    <div class="buttonsContainer">
-      <button class="editBtn">تعديل</button>
-      <button class="deleteBtn">حذف</button>
+    <div class="btnGroup">
+      <button class="editBtn">Edit</button>
+      <button class="deleteBtn">Delete</button>
     </div>
   `;
-
   const deleteBtn = box.querySelector('.deleteBtn');
   const editBtn = box.querySelector('.editBtn');
-
-  // إظهار الأزرار فقط للادمن
-  if(isAdmin){
-    deleteBtn.style.display = "block";
-    editBtn.style.display = "block";
-  }
-
-  // حدث الحذف
+  if(isAdmin) { deleteBtn.style.display="inline-block"; editBtn.style.display="inline-block"; }
+  
   deleteBtn.addEventListener('click', () => {
     if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
       box.remove();
@@ -274,22 +254,35 @@ function createVideoElement(video){
       localStorage.setItem('videos', JSON.stringify(videos));
     }
   });
-
-  // حدث التعديل
+  
   editBtn.addEventListener('click', () => {
     const newTitle = prompt("أدخل العنوان الجديد للفيديو:", video.title);
-    if(newTitle && newTitle.trim() !== ""){
-      video.title = newTitle.trim();
-      box.querySelector('h6').textContent = video.title;
+    if(newTitle){
+      video.title = newTitle;
+      box.querySelector('h6').innerText = newTitle;
       localStorage.setItem('videos', JSON.stringify(videos));
     }
   });
-
+  
   videoList.appendChild(box);
 }
 
-// إنشاء الفيديوهات المحفوظة عند تحميل الصفحة
-videos.forEach(v => createVideoElement(v));
+// دالة لإظهار الفيديوهات حسب index
+function displayVideos(){
+  videoList.innerHTML = "";
+  const end = Math.min(currentIndex + videosPerPage, videos.length);
+  for(let i=currentIndex; i<end; i++){
+    createVideoElement(videos[i]);
+  }
+  // إظهار زر Load More إذا تبقى فيديوهات
+  loadMoreBtn.style.display = (end < videos.length) ? "block" : "none";
+}
+displayVideos();
+
+loadMoreBtn.addEventListener('click', () => {
+  currentIndex += videosPerPage;
+  displayVideos();
+});
 
 // عرض الفورم عند الضغط على زر إضافة فيديو
 showFormBtn.addEventListener('click', () => {
@@ -298,10 +291,8 @@ showFormBtn.addEventListener('click', () => {
     if(pass === PASSWORD){
       videoForm.style.display = "flex";
       isAdmin = true;
-      document.querySelectorAll('.deleteBtn, .editBtn').forEach(btn => btn.style.display = "block");
-    } else {
-      alert("كلمة المرور غير صحيحة!");
-    }
+      document.querySelectorAll('.deleteBtn, .editBtn').forEach(btn => btn.style.display="inline-block");
+    } else { alert("كلمة المرور غير صحيحة!"); }
   }
 });
 
@@ -321,7 +312,7 @@ addVideoBtn.addEventListener('click', () => {
   videos.push(newVideo);
   localStorage.setItem('videos', JSON.stringify(videos));
 
-  createVideoElement(newVideo);
+  displayVideos();
 
   videoTitleInput.value = "";
   videoURLInput.value = "";
@@ -330,6 +321,8 @@ addVideoBtn.addEventListener('click', () => {
 
 </body>
 </html>
+
+
 
 
 
