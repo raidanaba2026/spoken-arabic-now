@@ -1,120 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Spoken Arabic Now – Egyptian Dialect</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f9f9f9;
-      color: #222;
-      line-height: 1.6;
-    }
-    header {
-      background: linear-gradient(135deg, #8e0e00, #c0392b);
-      color: #fff;
-      padding: 60px 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 3rem;
-    }
-    header p {
-      font-size: 1.3rem;
-      margin-top: 10px;
-    }
-    header {
-  display: flex;
-  align-items: center;
-  gap: 140px;          /* مسافة بين الشعار والنص */
-  padding: 20px;
-      padding-left: 80px;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Spoken Arabic Now – Egyptian Dialect</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f9f9f9;
+  color: #222;
+  line-height: 1.6;
+  display:flex;
+  min-height:100vh;
 }
-    nav {
-      background: #1e1e1e;
-      padding: 12px 0;
-      text-align: center;
-    }
-    nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    section {
-      padding: 60px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    section h2 {
-      color: #c0392b;
-      margin-bottom: 20px;
-    }
-    .features, .videos, .resources {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-    .box {
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    iframe {
-      width: 100%;
-      height: 315px;
-      border-radius: 10px;
-    }
-    footer {
-      background: #1e1e1e;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-    footer a {
-      color: #e74c3c;
-      text-decoration: none;
-    }
-  </style>
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: #1e1e1e;
+  color: #fff;
+  flex-shrink:0;
+  padding:20px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+}
+.sidebar h2 {
+  color:#1976d2;
+  margin-bottom:20px;
+  font-size:1.8rem;
+  border-bottom:2px solid #1976d2;
+  padding-bottom:5px;
+}
+.sidebar a {
+  display:block;
+  color:#fff;
+  text-decoration:none;
+  margin:10px 0;
+  transition: color 0.3s ease;
+}
+.sidebar a:hover { color:#1976d2; }
+
+/* Main content */
+main {
+  flex-grow:1;
+  padding:20px 40px;
+  max-width:1000px;
+  margin:auto;
+}
+
+/* Header */
+header {
+  display:flex;
+  align-items:center;
+  gap:30px;
+  margin-bottom:30px;
+  flex-wrap:wrap;
+}
+header img {
+  height:140px;
+  width:auto;
+  border-radius:12px;
+  border:2px solid #fff;
+}
+header div h1 { font-size:2.8rem; color:#0d47a1; margin-bottom:10px; }
+header div p { font-size:1.3rem; }
+
+/* Sections */
+section { margin-bottom:60px; }
+section h2 {
+  color: #1976d2;
+  margin-bottom:25px;
+  font-size:2rem;
+  border-bottom: 2px solid #1976d2;
+  display:inline-block;
+  padding-bottom:5px;
+}
+
+/* Boxes */
+.features, .videos, .resources {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap:25px;
+}
+.box {
+  background:#fff;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.box h3 { color:#0d47a1; margin-bottom:12px; font-size:1.4rem; }
+.box p { flex-grow:1; margin-bottom:15px; }
+.box a.button {
+  background-color:#1976d2;
+  color:#fff;
+  text-decoration:none;
+  padding:10px 15px;
+  border-radius:8px;
+  text-align:center;
+  font-weight:bold;
+  transition: background-color 0.3s ease;
+}
+.box a.button:hover { background-color:#0d47a1; }
+
+iframe { width:100%; height:315px; border-radius:12px; }
+
+/* Footer */
+footer {
+  background: #1e1e1e;
+  color: #fff;
+  text-align:center;
+  padding:25px 20px;
+  font-size:0.9rem;
+}
+footer a { color:#1976d2; text-decoration:none; }
+
+@media(max-width:992px){
+  body { flex-direction:column; }
+  .sidebar { width:100%; height:auto; position:relative; }
+  main { padding:20px; }
+  header { justify-content:center; text-align:center; }
+}
+</style>
 </head>
 <body>
 
-<header>
-  <img src="logo.png" alt="Spoken Arabic Now Logo" style="height:200px; width:auto;">
+<!-- Sidebar -->
+<div class="sidebar">
+  <h2>Navigation</h2>
+  <a href="#about">About</a>
+  <a href="#lessons">Lessons</a>
+  <a href="#videos">Video Lessons</a>
+  <a href="#latest">Latest Lessons</a>
+  <a href="#resources">Resources</a>
+  <a href="#egyptian">Egyptian Arabic</a>
+  <a href="#contact">Contact</a>
+</div>
 
+<!-- Main content -->
+<main>
+<header>
+  <img src="logo.png" alt="Spoken Arabic Now Logo">
   <div>
     <h1>Spoken Arabic Now</h1>
     <p>Learn Egyptian Arabic. Speak like real people.</p>
   </div>
-  
 </header>
-
-<nav>
-  <a href="#about">About</a>
-  <a href="#lessons">Lessons</a>
-  <a href="#videos">Video Lessons</a>
-  <a href="#resources">Resources</a>
-  <a href="#egyptian">Egyptian Arabic</a>
-  <a href="#contact">Contact</a>
-</nav>
 
 <section id="about">
   <h2>About This Website</h2>
-  <p>
-    Spoken Arabic Now is dedicated to teaching <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic.
-    Our goal is to help foreigners communicate naturally using the same expressions Egyptians use every day.
-  </p>
-  <p>
-    We focus on conversation, pronunciation, and real-life phrases — the Arabic you hear on the street, in cafes, and in daily life.
-  </p>
+  <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic. Communicate naturally with real-life expressions Egyptians use daily.</p>
+  <p>Focus on conversation, pronunciation, and real phrases heard in streets, cafes, and daily life.</p>
 </section>
 
 <section id="lessons">
@@ -138,48 +185,52 @@
 <section id="videos">
   <h2>Video Lessons</h2>
   <div class="videos">
-    <!-- فيديو شورت 1 -->
     <div class="box">
       <h3>Lesson 1: Mind your own business</h3>
-      <iframe src="https://www.youtube.com/embed/nKUIVL5RDaQ" title="YouTube Shorts Video" allowfullscreen></iframe>
-     
+      <iframe src="https://www.youtube.com/embed/nKUIVL5RDaQ" allowfullscreen></iframe>
+      <a class="button" href="https://www.youtube.com/shorts/nKUIVL5RDaQ" target="_blank">Watch on YouTube</a>
     </div>
-    <!-- يمكنك إضافة المزيد من الفيديوهات بنفس الطريقة -->
-          <div class="box">
-              <h3>Lesson 2: You Command – I’m at Your Service</h3>
-                <iframe src="https://www.youtube.com/embed/NXmhi7uiX7k" 
-                title="YouTube Shorts Video" allowfullscreen></iframe>
-             
-          </div>
-          <!-- فيديو شورت 3 -->
-            <div class="box">
-               <h3>Lesson 3:Stop Showing Off</h3>
-               <iframe src="https://www.youtube.com/embed/pn6B8bHghek" 
-               title="YouTube Shorts Video" allowfullscreen></iframe>
-             
-            </div>
-        <!-- فيديو شورت 4 -->
-            <div class="box">
-                <h3>Lesson 4: Now way!, Holy cow</h3>
-               <iframe src="https://www.youtube.com/embed/75DuYX3lNFw" 
-                title="YouTube Shorts Video" allowfullscreen></iframe>
-           </div>
-    
-            <!-- فيديو شورت 5 -->
-           <div class="box">
-               <h3>Lesson 5: I am so done with this</h3>
-               <iframe src="https://www.youtube.com/embed/_fVm-Vwdr8k" 
-                title="YouTube Shorts Video" allowfullscreen></iframe>
-             
-             <!-- فيديو شورت 6 -->
-          </div>
-          <div class="box">
-              <h3>Lesson 6: Essential Phrases for Foreigners at Arab Airports</h3>
-               <iframe src="https://www.youtube.com/embed/_n0iZjkTZQI?t=2" 
-                title="YouTube Shorts Video" allowfullscreen></iframe>
-         </div>
+    <div class="box">
+      <h3>Lesson 2: You Command – I’m at Your Service</h3>
+      <iframe src="https://www.youtube.com/embed/NXmhi7uiX7k" allowfullscreen></iframe>
+      <a class="button" href="https://www.youtube.com/shorts/NXmhi7uiX7k" target="_blank">Watch on YouTube</a>
+    </div>
+    <div class="box">
+      <h3>Lesson 3: Stop Showing Off</h3>
+      <iframe src="https://www.youtube.com/embed/pn6B8bHghek" allowfullscreen></iframe>
+      <a class="button" href="https://www.youtube.com/shorts/pn6B8bHghek" target="_blank">Watch on YouTube</a>
+    </div>
+    <div class="box">
+      <h3>Lesson 4: Now way!, Holy cow</h3>
+      <iframe src="https://www.youtube.com/embed/75DuYX3lNFw" allowfullscreen></iframe>
+      <a class="button" href="https://www.youtube.com/shorts/75DuYX3lNFw" target="_blank">Watch on YouTube</a>
+    </div>
+    <div class="box">
+      <h3>Lesson 5: I am so done with this</h3>
+      <iframe src="https://www.youtube.com/embed/_fVm-Vwdr8k" allowfullscreen></iframe>
+      <a class="button" href="https://www.youtube.com/shorts/_fVm-Vwdr8k" target="_blank">Watch on YouTube</a>
+    </div>
+    <div class="box">
+      <h3>Lesson 6: Essential Phrases for Foreigners at Arab Airports – Part 01</h3>
+      <iframe src="https://www.youtube.com/embed/_n0iZjkTZQI" allowfullscreen></iframe>
+      <a class="button" href="https://www.youtube.com/shorts/_n0iZjkTZQI" target="_blank">Watch on YouTube</a>
+    </div>
+  </div>
+</section>
 
-
+<section id="latest">
+  <h2>Latest Lessons</h2>
+  <div class="videos">
+    <div class="box">
+      <h3>Lesson 7: Add New Lesson Here</h3>
+      <iframe src="https://www.youtube.com/embed/EXAMPLE1" allowfullscreen></iframe>
+      <a class="button" href="https://www.youtube.com/shorts/EXAMPLE1" target="_blank">Watch on YouTube</a>
+    </div>
+    <div class="box">
+      <h3>Lesson 8: Another Latest Lesson</h3>
+      <iframe src="https://www.youtube.com/embed/EXAMPLE2" allowfullscreen></iframe>
+      <a class="button" href="https://www.youtube.com/shorts/EXAMPLE2" target="_blank">Watch on YouTube</a>
+    </div>
   </div>
 </section>
 
@@ -189,26 +240,20 @@
     <div class="box">
       <h3>PDF Lesson 1</h3>
       <p>Download phrases and vocabulary for Lesson 1.</p>
-      <a href="lesson1.pdf" download>Download PDF</a>
+      <a class="button" href="lesson1.pdf" download>Download PDF</a>
     </div>
     <div class="box">
       <h3>PDF Lesson 2</h3>
       <p>Download phrases and vocabulary for Lesson 2.</p>
-      <a href="lesson2.pdf" download>Download PDF</a>
+      <a class="button" href="lesson2.pdf" download>Download PDF</a>
     </div>
-    <!-- أضف المزيد من ملفات PDF حسب الحاجة -->
   </div>
 </section>
 
 <section id="egyptian">
   <h2>Why Egyptian Arabic?</h2>
-  <p>
-    Egyptian Arabic is the most widely understood dialect in the Arab world.
-    Learning it allows you to communicate with millions of people across different countries.
-  </p>
-  <p>
-    This platform teaches you how Egyptians really speak — simple, fast, and natural.
-  </p>
+  <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
+  <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
 </section>
 
 <section id="contact">
@@ -219,15 +264,13 @@
   </p>
 </section>
 
-
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
+</main>
 </body>
 </html>
-
-
 
 
 
