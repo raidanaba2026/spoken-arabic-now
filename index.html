@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -97,25 +98,25 @@ section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .videoBox:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   box-shadow: 0 12px 25px rgba(0,0,0,0.2);
 }
 .videoBox h6 { color:#0d47a1; margin-bottom:10px; font-size:1rem; }
 .videoBox iframe { width:100%; height:200px; border-radius:10px; }
 
-/* زر حذف الفيديو */
-.deleteBtn {
+/* أزرار تعديل وحذف الفيديو */
+.deleteBtn, .editBtn {
+  display:none; /* يظهر فقط للادمن */
   position:absolute;
   top:10px;
-  right:10px;
-  background:red;
-  color:#fff;
-  border:none;
-  border-radius:5px;
   padding:5px 8px;
+  border-radius:5px;
+  color:#fff;
   cursor:pointer;
-  display:none; /* يظهر فقط للادمن */
+  border:none;
 }
+.deleteBtn { right:10px; background:red; }
+.editBtn { right:80px; background:orange; }
 
 /* PDF Resources */
 .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
@@ -138,21 +139,6 @@ footer a { color:#1976d2; text-decoration:none; }
 #videoForm { display:none; flex-direction:column; gap:10px; margin-top:15px; }
 #videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
 #videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
-
-/* زر Load More */
-#loadMoreBtn {
-  display:block;
-  margin:20px auto;
-  padding:10px 15px;
-  border:none;
-  background:#0d47a1;
-  color:#fff;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:bold;
-  transition: background 0.3s;
-}
-#loadMoreBtn:hover { background:#1976d2; }
 
 /* Responsive */
 @media(max-width:992px){
@@ -202,8 +188,9 @@ footer a { color:#1976d2; text-decoration:none; }
 <!-- Video Lessons Section -->
 <section id="videos">
   <h2>Video Lessons</h2>
-  <div class="videos" id="videoList"></div>
-  <button id="loadMoreBtn">Load More</button>
+  <div class="videos" id="videoList">
+    <!-- الفيديوهات ستظهر هنا ديناميكيًا من localStorage -->
+  </div>
 </section>
 
 <!-- PDF Section -->
@@ -232,38 +219,44 @@ footer a { color:#1976d2; text-decoration:none; }
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
+<!-- Script لإضافة الفيديوهات -->
 <script>
 // كلمة مرور للادمن
 const PASSWORD = "1234";
 let isAdmin = false;
 
-// العناصر المتعلقة بالفورم
+// عناصر الفورم
 const showFormBtn = document.getElementById('showFormBtn');
 const videoForm = document.getElementById('videoForm');
 const addVideoBtn = document.getElementById('addVideoBtn');
 const videoTitleInput = document.getElementById('videoTitle');
 const videoURLInput = document.getElementById('videoURL');
 const videoList = document.getElementById('videoList');
-const loadMoreBtn = document.getElementById('loadMoreBtn');
 
-// جلب الفيديوهات المحفوظة من localStorage
+// جلب الفيديوهات من localStorage
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
-
-// عدد الفيديوهات المعروضة حاليًا
-let displayedCount = 0;
-const batchSize = 6; // عدد الفيديوهات المراد عرضها في البداية
 
 // دالة لإنشاء عنصر الفيديو
 function createVideoElement(video){
   const box = document.createElement('div');
   box.classList.add('videoBox');
   box.innerHTML = `
-    <h6>${video.title}</h5>
+    <h6>${video.title}</h6>
     <iframe src="https://www.youtube.com/embed/${video.id}" allowfullscreen></iframe>
+    <button class="editBtn">تعديل العنوان</button>
     <button class="deleteBtn">حذف الفيديو</button>
   `;
+
   const deleteBtn = box.querySelector('.deleteBtn');
-  if(isAdmin) deleteBtn.style.display = "block";
+  const editBtn = box.querySelector('.editBtn');
+
+  // إظهار الأزرار فقط للادمن
+  if(isAdmin){
+    deleteBtn.style.display = "block";
+    editBtn.style.display = "block";
+  }
+
+  // حدث الحذف
   deleteBtn.addEventListener('click', () => {
     if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
       box.remove();
@@ -271,25 +264,22 @@ function createVideoElement(video){
       localStorage.setItem('videos', JSON.stringify(videos));
     }
   });
-  return box;
+
+  // حدث التعديل
+  editBtn.addEventListener('click', () => {
+    const newTitle = prompt("أدخل العنوان الجديد للفيديو:", video.title);
+    if(newTitle && newTitle.trim() !== ""){
+      video.title = newTitle.trim();
+      box.querySelector('h6').textContent = video.title;
+      localStorage.setItem('videos', JSON.stringify(videos));
+    }
+  });
+
+  videoList.appendChild(box);
 }
 
-// دالة لعرض الفيديوهات حسب batchSize
-function displayVideos() {
-  const remaining = videos.slice(displayedCount, displayedCount + batchSize);
-  remaining.forEach(v => videoList.appendChild(createVideoElement(v)));
-  displayedCount += remaining.length;
-  // إخفاء زر Load More إذا تم عرض جميع الفيديوهات
-  if(displayedCount >= videos.length){
-    loadMoreBtn.style.display = "none";
-  }
-}
-
-// إنشاء الفيديوهات المعروضة عند تحميل الصفحة
-displayVideos();
-
-// زر Load More
-loadMoreBtn.addEventListener('click', displayVideos);
+// إنشاء الفيديوهات المحفوظة عند تحميل الصفحة
+videos.forEach(v => createVideoElement(v));
 
 // عرض الفورم عند الضغط على زر إضافة فيديو
 showFormBtn.addEventListener('click', () => {
@@ -298,7 +288,7 @@ showFormBtn.addEventListener('click', () => {
     if(pass === PASSWORD){
       videoForm.style.display = "flex";
       isAdmin = true;
-      document.querySelectorAll('.deleteBtn').forEach(btn => btn.style.display = "block");
+      document.querySelectorAll('.deleteBtn, .editBtn').forEach(btn => btn.style.display = "block");
     } else {
       alert("كلمة المرور غير صحيحة!");
     }
@@ -321,11 +311,7 @@ addVideoBtn.addEventListener('click', () => {
   videos.push(newVideo);
   localStorage.setItem('videos', JSON.stringify(videos));
 
-  // إذا كان عدد الفيديوهات المعروضة أقل من batchSize، اعرضه مباشرة
-  if(displayedCount < batchSize){
-    videoList.appendChild(createVideoElement(newVideo));
-    displayedCount++;
-  }
+  createVideoElement(newVideo);
 
   videoTitleInput.value = "";
   videoURLInput.value = "";
@@ -334,7 +320,6 @@ addVideoBtn.addEventListener('click', () => {
 
 </body>
 </html>
-
 
 
 
