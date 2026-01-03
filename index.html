@@ -277,7 +277,7 @@ function createVideo(v){
   d.innerHTML=`
     <h3>${v.title}</h3>
     <iframe src="https://www.youtube.com/embed/${v.id}"></iframe>
-    <a class="button" href="${v.url}" target="_blank">Watch</a>
+    <a class="button" href="${v.url}" target="_blank">Watch on YouTube</a>
     <button class="deleteBtn">حذف</button>`;
   if(isAdmin)d.querySelector(".deleteBtn").style.display="block";
   videoList.appendChild(d);
@@ -287,6 +287,7 @@ videos.forEach(createVideo);
 
 </body>
 </html>
+
 
 
 
