@@ -38,6 +38,18 @@ section h2 { color:#1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom:
 .pdfBox h3 { color:#0d47a1; margin-bottom:8px; font-size:1.1rem; }
 .pdfBox a { display:inline-block; padding:8px 12px; background:#1976d2; color:#fff; border-radius:6px; text-decoration:none; transition: background 0.3s; }
 .pdfBox a:hover { background:#0b3d91; }
+#loadMoreBtn {
+  display:block;
+  margin:20px auto 50px;
+  padding:10px 20px;
+  border:none;
+  border-radius:6px;
+  background:#1976d2;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:1rem;
+}
 footer { background:#1e1e1e; color:#fff; text-align:center; padding:25px 20px; font-size:0.9rem; }
 footer a { color:#1976d2; text-decoration:none; }
 @media(max-width:992px){ body{ flex-direction:column; } .sidebar{ width:100%; height:auto; position:relative; border-right:none; border-bottom:3px solid #1976d2; } main{ padding:20px; } header{ justify-content:center; text-align:center; } }
@@ -70,6 +82,7 @@ footer a { color:#1976d2; text-decoration:none; }
 <section id="videos">
   <h2>Video Lessons</h2>
   <div class="videos" id="videoList"></div>
+  <button id="loadMoreBtn">Load More</button>
 </section>
 
 <section id="pdfs">
@@ -97,32 +110,58 @@ footer a { color:#1976d2; text-decoration:none; }
 </footer>
 
 <script>
-// قراءة الفيديوهات من JSON ثابت
+// عدد الفيديوهات الأولية المعروضة
+let visibleCount = 6;
+
+let videosData = []; // سيتم تخزين الفيديوهات هنا
+
+const videoList = document.getElementById('videoList');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+// جلب الفيديوهات من JSON
 fetch('videos.json')
   .then(res => res.json())
   .then(videos => {
-    const videoList = document.getElementById('videoList');
-    videos.forEach(video => {
-      const container = document.createElement('div');
-      const title = document.createElement('div');
-      title.className = 'videoTitle';
-      title.textContent = video.title;
-      const box = document.createElement('div');
-      box.className = 'videoBox';
-      const iframe = document.createElement('iframe');
-      iframe.src = video.url; // رابط كامل من JSON
-      iframe.allowFullscreen = true;
-      box.appendChild(iframe);
-      container.appendChild(title);
-      container.appendChild(box);
-      videoList.appendChild(container);
-    });
+    videosData = videos;
+    renderVideos();
   })
   .catch(err => console.error(err));
+
+// دالة عرض الفيديوهات حسب visibleCount
+function renderVideos() {
+  videoList.innerHTML = "";
+  videosData.slice(0, visibleCount).forEach(video => {
+    const container = document.createElement('div');
+    const title = document.createElement('div');
+    title.className = 'videoTitle';
+    title.textContent = video.title;
+
+    const box = document.createElement('div');
+    box.className = 'videoBox';
+    const iframe = document.createElement('iframe');
+    iframe.src = video.url;
+    iframe.allowFullscreen = true;
+    box.appendChild(iframe);
+
+    container.appendChild(title);
+    container.appendChild(box);
+    videoList.appendChild(container);
+  });
+
+  loadMoreBtn.style.display = visibleCount >= videosData.length ? 'none' : 'block';
+}
+
+// زر تحميل المزيد
+loadMoreBtn.addEventListener('click', () => {
+  visibleCount += 6;
+  renderVideos();
+});
 </script>
 
 </body>
 </html>
+
+
 
 
 
