@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spoken Arabic Now – Egyptian Dialect</title>
 <style>
+/* ==========================================================
+   إعدادات عامة للجسم والعناصر
+========================================================== */
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body {
@@ -16,7 +19,9 @@ body {
   min-height:100vh;
 }
 
-/* Sidebar */
+/* ==========================================================
+   الشريط الجانبي (Sidebar)
+========================================================== */
 .sidebar {
   width: 250px;
   background: #1e1e1e;
@@ -29,6 +34,7 @@ body {
   overflow-y:auto;
   border-right: 3px solid #1976d2;
 }
+
 .sidebar h2 { 
   color:#1976d2; 
   margin-bottom:20px; 
@@ -36,8 +42,17 @@ body {
   border-bottom:2px solid #1976d2; 
   padding-bottom:5px; 
 }
-.sidebar a { display:block; color:#fff; text-decoration:none; margin:10px 0; transition: color 0.3s ease; }
+
+.sidebar a { 
+  display:block; 
+  color:#fff; 
+  text-decoration:none; 
+  margin:10px 0; 
+  transition: color 0.3s ease; 
+}
+
 .sidebar a:hover { color:#1976d2; }
+
 .sidebar button { 
   width:100%; 
   padding:10px; 
@@ -50,16 +65,14 @@ body {
   font-weight:bold;
 }
 
-/* Main content */
+/* ==========================================================
+   المحتوى الرئيسي
+========================================================== */
 main { flex-grow:1; padding:20px 40px; max-width:1000px; margin:auto; }
 
-/* Header */
-header { display:flex; align-items:center; gap:30px; margin-bottom:30px; flex-wrap:wrap; }
-header img { height:130px; width:auto; border-radius:12px; border:3px solid #1976d2; }
-header div h1 { font-size:2.4rem; color:#0d47a1; margin-bottom:8px; }
-header div p { font-size:1.2rem; color:#555; }
-
-/* Header */
+/* ==========================================================
+   ترويسة الصفحة
+========================================================== */
 header {
   display:flex;
   align-items:center;
@@ -73,6 +86,7 @@ header {
   box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   border: 2px solid #1976d2;
 }
+
 header img {
   height:140px;
   width:auto;
@@ -80,28 +94,38 @@ header img {
   border:3px solid #fff;
   box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 }
+
 header div h1 {
   font-size:2.8rem;
   color:#fff;
   margin-bottom:8px;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
 }
+
 header div p {
   font-size:1.3rem;
   color:#e0f7fa;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
-/* Responsive */
+/* ==========================================================
+   استجابة الأجهزة الصغيرة
+========================================================== */
 @media(max-width:992px){
-  header { justify-content:center; text-align:center; padding:15px 20px; }
+  body { flex-direction:column; }
+  .sidebar { width:100%; height:auto; position:relative; border-right:none; border-bottom:3px solid #1976d2; }
+  main { padding:20px; }
+  header { justify-content:center; text-align:center; }
   header div h1 { font-size:2.2rem; }
   header div p { font-size:1.1rem; }
   header img { height:120px; }
 }
 
-/* Sections */
+/* ==========================================================
+   الأقسام والعناوين
+========================================================== */
 section { margin-bottom:50px; }
+
 section h2 { 
   color: #1976d2; 
   margin-bottom:20px; 
@@ -111,8 +135,11 @@ section h2 {
   padding-bottom:4px; 
 }
 
-/* Boxes with gradient hover */
+/* ==========================================================
+   الصناديق (Boxes) مع تأثيرات hover
+========================================================== */
 .features, .videos, .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:25px; }
+
 .box {
   background: linear-gradient(145deg, #e3f2fd, #bbdefb);
   padding:20px;
@@ -125,12 +152,14 @@ section h2 {
   align-items:center;
   position:relative;
 }
+
 .box:hover { 
   transform: translateY(-6px); 
   box-shadow: 0 12px 30px rgba(0,0,0,0.2); 
   background: linear-gradient(145deg, #bbdefb, #90caf9);
 }
 
+/* النصوص داخل الصندوق */
 .box h3 { 
   color:#0d47a1; 
   margin-bottom:10px; 
@@ -147,19 +176,14 @@ section h2 {
 }
 
 .box:hover h3 { color:#0b3d91; }
+
 .box p { flex-grow:1; margin-bottom:12px; color:#444; font-size:0.95rem; text-align:center; }
+
 iframe { width:100%; height:200px; border-radius:12px; object-fit:cover; }
 
-/* Footer */
-footer { background: #1e1e1e; color: #fff; text-align:center; padding:25px 20px; font-size:0.9rem; }
-footer a { color:#1976d2; text-decoration:none; }
-
-/* Form */
-#videoForm { display:none; flex-direction:column; gap:10px; margin-top:15px; }
-#videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
-#videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
-
-/* Delete button */
+/* ==========================================================
+   زر الحذف للفيديوهات (يظهر فقط للمسؤول)
+========================================================== */
 .deleteBtn {
   position:absolute;
   top:10px;
@@ -173,18 +197,26 @@ footer a { color:#1976d2; text-decoration:none; }
   display:none;
 }
 
-/* Responsive */
-@media(max-width:992px){
-  body { flex-direction:column; }
-  .sidebar { width:100%; height:auto; position:relative; border-right:none; border-bottom:3px solid #1976d2; }
-  main { padding:20px; }
-  header { justify-content:center; text-align:center; }
-}
+/* ==========================================================
+   Footer
+========================================================== */
+footer { background: #1e1e1e; color: #fff; text-align:center; padding:25px 20px; font-size:0.9rem; }
+footer a { color:#1976d2; text-decoration:none; }
+
+/* ==========================================================
+   Form إضافة الفيديو الجديد
+========================================================== */
+#videoForm { display:none; flex-direction:column; gap:10px; margin-top:15px; }
+#videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
+#videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
+
 </style>
 </head>
 <body>
 
-<!-- Sidebar -->
+<!-- ==========================================================
+   Sidebar
+========================================================== -->
 <div class="sidebar">
   <h2>Navigation</h2>
   <a href="#about">About</a>
@@ -212,37 +244,87 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </header>
 
+<!-- ==========================================================
+   About Section
+========================================================== -->
 <section id="about">
   <h2>About This Website</h2>
   <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic.</p>
 </section>
 
+<!-- ==========================================================
+   Lessons Section (الأقسام الرئيسية الثلاثة)
+========================================================== -->
 <section id="lessons">
   <h2>What You Will Learn</h2>
   <div class="features">
+    <!-- صندوق Everyday Conversations -->
     <div class="box">
       <h3>Everyday Conversations</h3>
-      <p>Real phrases used daily / عبارات يومية</p>
-      <button class="readMoreBtn" data-target="expandedLessons">Read More</button>
+      <p>Real phrases used daily</p>
+      <button class="readMoreBtn" data-target="expandedEveryday">Read More</button>
     </div>
+    <!-- صندوق Egyptian Pronunciation -->
     <div class="box">
       <h3>Egyptian Pronunciation</h3>
-      <p>Learn pronunciation / تعلم النطق</p>
-      <button class="readMoreBtn" data-target="expandedLessons">Read More</button>
+      <p>Learn pronunciation</p>
+      <button class="readMoreBtn" data-target="expandedPronunciation">Read More</button>
     </div>
+    <!-- صندوق Speak with Confidence -->
     <div class="box">
       <h3>Speak with Confidence</h3>
-      <p>Start speaking naturally / تحدث بثقة</p>
-      <button class="readMoreBtn" data-target="expandedLessons">Read More</button>
+      <p>Start speaking naturally</p>
+      <button class="readMoreBtn" data-target="expandedConfidence">Read More</button>
     </div>
   </div>
 </section>
 
+<!-- ==========================================================
+   الأقسام الموسعة لكل صندوق
+   عند الضغط على Read More، الزائر ينقل لهذا القسم
+========================================================== -->
+
+<!-- Everyday Conversations الموسع -->
+<section id="expandedEveryday" style="margin-bottom:50px;">
+  <h2>Everyday Conversations – موسع</h2>
+  <div class="features">
+    <div class="box"><h3>Sabah el-kheir</h3><p>Good morning</p></div>
+    <div class="box"><h3>Ezayak?</h3><p>How are you?</p></div>
+    <div class="box"><h3>Shokran</h3><p>Thank you</p></div>
+  </div>
+</section>
+
+<!-- Egyptian Pronunciation الموسع -->
+<section id="expandedPronunciation" style="margin-bottom:50px;">
+  <h2>Egyptian Pronunciation – موسع</h2>
+  <div class="features">
+    <div class="box"><h3>Sahtain</h3><p>Bon appétit</p></div>
+    <div class="box"><h3>Mashy</h3><p>OK</p></div>
+    <div class="box"><h3>Maalesh</h3><p>Never mind</p></div>
+  </div>
+</section>
+
+<!-- Speak with Confidence الموسع -->
+<section id="expandedConfidence" style="margin-bottom:50px;">
+  <h2>Speak with Confidence – موسع</h2>
+  <div class="features">
+    <div class="box"><h3>Ahlan</h3><p>Hello</p></div>
+    <div class="box"><h3>Forsa Saeeda</h3><p>Nice to meet you</p></div>
+    <div class="box"><h3>Shokran kteer</h3><p>Thanks a lot</p></div>
+  </div>
+</section>
+
+<!-- ==========================================================
+   Video Lessons
+========================================================== -->
 <section id="videos">
   <h2>Video Lessons</h2>
   <div class="videos" id="videoList"></div>
 </section>
 
+<!-- ==========================================================
+   Downloadable Resources
+========================================================== -->
 <section id="resources">
   <h2>Downloadable Resources</h2>
   <div class="resources">
@@ -259,28 +341,18 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
-<!-- قسم العبارات الموسعة قبل Contact -->
-<section id="expandedLessons" style="display:none; margin-bottom:50px;">
-  <h2>All Phrases / كل العبارات</h2>
-  <div class="features">
-    <div class="box"><h3>Sabah el-kheir</h3><p>Good morning / صباح الخير</p></div>
-    <div class="box"><h3>Ezayak?</h3><p>How are you? / إزيك؟</p></div>
-    <div class="box"><h3>Shokran</h3><p>Thank you / شكراً</p></div>
-    <div class="box"><h3>Ahlan</h3><p>Hello / أهلاً</p></div>
-    <div class="box"><h3>Mashy</h3><p>OK / ماشي</p></div>
-    <div class="box"><h3>Maalesh</h3><p>Never mind / معلش</p></div>
-    <div class="box"><h3>Forsa Saeeda</h3><p>Nice to meet you / فرصة سعيدة</p></div>
-    <div class="box"><h3>Sahtain</h3><p>Bon appétit / صحتين</p></div>
-    <!-- أضف باقي العبارات حسب الحاجة -->
-  </div>
-</section>
-
+<!-- ==========================================================
+   Egyptian Arabic Section
+========================================================== -->
 <section id="egyptian">
   <h2>Why Egyptian Arabic?</h2>
   <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
   <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
 </section>
 
+<!-- ==========================================================
+   Contact Section
+========================================================== -->
 <section id="contact">
   <h2>Contact</h2>
   <p>
@@ -289,10 +361,16 @@ footer a { color:#1976d2; text-decoration:none; }
   </p>
 </section>
 
+<!-- ==========================================================
+   Footer
+========================================================== -->
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
+<!-- ==========================================================
+   JavaScript لإضافة الفيديوهات وRead More
+========================================================== -->
 <script>
 const PASSWORD = "1234";
 let isAdmin = false;
@@ -306,6 +384,9 @@ const videoList = document.getElementById('videoList');
 
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
 
+/* ==========================
+   إنشاء عناصر الفيديو وعرضها
+========================== */
 function createVideoElement(video) {
   const box = document.createElement('div');
   box.classList.add('box');
@@ -328,6 +409,9 @@ function createVideoElement(video) {
 
 videos.forEach(v => createVideoElement(v));
 
+/* ==========================
+   زر عرض نموذج إضافة الفيديو
+========================== */
 showFormBtn.addEventListener('click', () => {
   if(!isAdmin){
     const pass = prompt("أدخل كلمة المرور:");
@@ -341,6 +425,9 @@ showFormBtn.addEventListener('click', () => {
   }
 });
 
+/* ==========================
+   إضافة فيديو جديد
+========================== */
 addVideoBtn.addEventListener('click', () => {
   const title = videoTitleInput.value.trim();
   const url = videoURLInput.value.trim();
@@ -362,25 +449,23 @@ addVideoBtn.addEventListener('click', () => {
   videoURLInput.value = "";
 });
 
-// زر Read More للانتقال للقسم الموسع وعرضه
+/* ==========================
+   أزرار Read More لكل صندوق
+   تنقل المستخدم إلى القسم الموسع الخاص بكل صندوق
+========================== */
 document.querySelectorAll('.readMoreBtn').forEach(btn => {
   btn.addEventListener('click', () => {
-    // اخفاء الصناديق الصغيرة في Lessons
-    document.querySelectorAll('#lessons .features').forEach(f => f.style.display = 'none');
-
-    // اظهار القسم الموسع
     const targetId = btn.getAttribute('data-target');
-    const expandedSection = document.getElementById(targetId);
-    expandedSection.style.display = 'block';
-
-    // الانتقال بسلاسة إلى القسم الموسع
-    expandedSection.scrollIntoView({behavior: 'smooth'});
+    const section = document.getElementById(targetId);
+    section.scrollIntoView({behavior: 'smooth'});
   });
 });
 </script>
 
 </body>
 </html>
+
+
 
 
 
