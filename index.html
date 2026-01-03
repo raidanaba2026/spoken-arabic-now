@@ -135,7 +135,7 @@ footer { background: #1e1e1e; color: #fff; text-align:center; padding:25px 20px;
 footer a { color:#1976d2; text-decoration:none; }
 
 /* Form لإضافة فيديو */
-#videoForm { display:none; flex-direction:column; gap:10px; margin-top:15px; }
+#videoForm { display:flex; flex-direction:column; gap:10px; margin-top:15px; }
 #videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
 #videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
 
@@ -228,9 +228,7 @@ footer a { color:#1976d2; text-decoration:none; }
 </footer>
 
 <script>
-// كلمة مرور الادمن
-const PASSWORD = "1234";
-let isAdmin = false;
+let isAdmin = true; // جعل المستخدم دائمًا أدمين
 
 const showFormBtn = document.getElementById('showFormBtn');
 const videoForm = document.getElementById('videoForm');
@@ -270,7 +268,7 @@ function createVideoElement(video, index) {
     const editBtn = document.createElement('button');
     editBtn.textContent = "تعديل";
     editBtn.classList.add('editBtn');
-    editBtn.addEventListener('click', ()=>{
+    editBtn.addEventListener('click', ()=> {
       const newTitle = prompt("ادخل عنوان جديد للفيديو:", video.title);
       if(newTitle) {
         video.title = newTitle;
@@ -282,7 +280,7 @@ function createVideoElement(video, index) {
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = "حذف";
     deleteBtn.classList.add('deleteBtn');
-    deleteBtn.addEventListener('click', ()=>{
+    deleteBtn.addEventListener('click', ()=> {
       if(confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")){
         videos.splice(index,1);
         localStorage.setItem('videos', JSON.stringify(videos));
@@ -308,7 +306,7 @@ function renderVideos() {
 }
 
 // تحميل المزيد
-loadMoreBtn.addEventListener('click', ()=>{
+loadMoreBtn.addEventListener('click', ()=> {
   visibleCount += 6;
   renderVideos();
 });
@@ -316,18 +314,9 @@ loadMoreBtn.addEventListener('click', ()=>{
 // إنشاء الفيديوهات المحفوظة عند تحميل الصفحة
 renderVideos();
 
-// عرض الفورم عند الضغط على زر إضافة فيديو
+// عرض الفورم عند الضغط على زر إضافة فيديو (دائمًا للأدمين)
 showFormBtn.addEventListener('click', () => {
-  if(!isAdmin){
-    const pass = prompt("أدخل كلمة المرور:");
-    if(pass === PASSWORD){
-      isAdmin = true;
-      videoForm.style.display = "flex";
-      renderVideos(); // لإظهار أزرار الحذف والتعديل للادمن
-    } else {
-      alert("كلمة المرور غير صحيحة!");
-    }
-  }
+  videoForm.style.display = videoForm.style.display === "flex" ? "none" : "flex";
 });
 
 // إضافة فيديو جديد
@@ -355,6 +344,7 @@ addVideoBtn.addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
 
