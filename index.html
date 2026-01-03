@@ -42,7 +42,6 @@ body {
   color:#fff;
   text-decoration:none;
   margin:10px 0;
-  transition: color 0.3s ease;
 }
 .sidebar a:hover { color:#1976d2; }
 .sidebar button {
@@ -86,7 +85,6 @@ header img {
 }
 header h1 {
   font-size:2.8rem;
-  text-shadow:1px 1px 4px rgba(0,0,0,0.4);
 }
 header p {
   font-size:1.3rem;
@@ -104,12 +102,15 @@ section h2 {
   padding-bottom:4px;
 }
 
-/* Cards */
+/* Grid */
 .features, .videos, .resources {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:25px;
+  align-items:stretch;
 }
+
+/* Card */
 .box {
   background: linear-gradient(145deg,#e3f2fd,#bbdefb);
   padding:20px;
@@ -117,21 +118,50 @@ section h2 {
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
   transition:all 0.3s ease;
   position:relative;
+  display:flex;
+  flex-direction:column;
+  height:100%;
 }
 .box:hover {
   transform:translateY(-6px);
   box-shadow:0 12px 30px rgba(0,0,0,0.2);
-  background: linear-gradient(145deg,#bbdefb,#90caf9);
 }
+
+/* Title – FIX */
 .box h3 {
-  font-size:1.2rem;
+  font-size:1.15rem;
   color:#0d47a1;
+  margin-bottom:12px;
+  min-height:48px;
+  line-height:1.2;
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
 }
+
 .box p { font-size:0.95rem; color:#444; }
 
+/* Video wrapper – FIX */
+.video-wrapper {
+  position:relative;
+  width:100%;
+  padding-top:56.25%;
+  margin-bottom:12px;
+}
+.video-wrapper iframe {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  border-radius:12px;
+}
+
+/* Button */
 .box a.button {
-  margin-top:15px;
-  display:inline-block;
+  margin-top:auto;
+  display:block;
   background:#1976d2;
   color:#fff;
   padding:10px;
@@ -141,13 +171,6 @@ section h2 {
   text-decoration:none;
 }
 .box a.button:hover { background:#0d47a1; }
-
-iframe {
-  width:100%;
-  height:280px;
-  border-radius:12px;
-  margin:10px 0;
-}
 
 /* Delete */
 .deleteBtn {
@@ -189,7 +212,6 @@ footer {
   <a href="#lessons">Lessons</a>
   <a href="#videos">Video Lessons</a>
   <a href="#resources">Resources</a>
-  <a href="#egyptian">Egyptian Arabic</a>
   <a href="#contact">Contact</a>
 
   <button id="showFormBtn">إضافة فيديو جديد</button>
@@ -215,42 +237,16 @@ footer {
   <h2>About This Website</h2>
   <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic.</p>
 
-  <!-- Why Egyptian Arabic مباشرة أسفل About -->
-  <div id="egyptian" style="margin-top:25px;">
+  <div style="margin-top:25px;">
     <h2>Why Egyptian Arabic?</h2>
-    <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
+    <p>Egyptian Arabic is the most widely understood dialect in the Arab world.</p>
     <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
-  </div>
-</section>
-
-<section id="lessons">
-  <h2>What You Will Learn</h2>
-  <div class="features">
-    <div class="box"><h3>Everyday Conversations</h3><p>Real phrases used daily.</p></div>
-    <div class="box"><h3>Pronunciation</h3><p>How Egyptians actually speak.</p></div>
-    <div class="box"><h3>Confidence</h3><p>Speak naturally.</p></div>
   </div>
 </section>
 
 <section id="videos">
   <h2>Video Lessons</h2>
   <div class="videos" id="videoList"></div>
-</section>
-
-<section id="resources">
-  <h2>Downloadable Resources</h2>
-  <div class="resources">
-    <div class="box"><h3>PDF Lesson 1</h3><a class="button">Download</a></div>
-    <div class="box"><h3>PDF Lesson 2</h3><a class="button">Download</a></div>
-  </div>
-</section>
-
-<section id="contact">
-  <h2>Contact</h2>
-  <p>
-    YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
-    Email: spokenarabicnow@gmail.com
-  </p>
 </section>
 
 <footer>
@@ -262,6 +258,7 @@ footer {
 <script>
 const PASSWORD="1234";
 let isAdmin=false;
+
 const videoList=document.getElementById("videoList");
 const showFormBtn=document.getElementById("showFormBtn");
 const videoForm=document.getElementById("videoForm");
@@ -276,17 +273,22 @@ function createVideo(v){
   d.className="box";
   d.innerHTML=`
     <h3>${v.title}</h3>
-    <iframe src="https://www.youtube.com/embed/${v.id}"></iframe>
-    <a class="button" href="${v.url}" target="_blank">Watch on YouTube</a>
-    <button class="deleteBtn">حذف</button>`;
-  if(isAdmin)d.querySelector(".deleteBtn").style.display="block";
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/${v.id}" allowfullscreen></iframe>
+    </div>
+    <a class="button" href="${v.url}" target="_blank">شاهد على يوتيوب</a>
+    <button class="deleteBtn">حذف</button>
+  `;
+  if(isAdmin) d.querySelector(".deleteBtn").style.display="block";
   videoList.appendChild(d);
 }
+
 videos.forEach(createVideo);
 </script>
 
 </body>
 </html>
+
 
 
 
