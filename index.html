@@ -131,6 +131,23 @@ section h2 {
   box-shadow: 0 12px 30px rgba(0,0,0,0.2); 
   background: linear-gradient(145deg, #bbdefb, #90caf9);
 }
+
+.box h3 { 
+  color:#0d47a1; 
+  margin-bottom:10px; 
+  font-size:1.2rem; 
+  transition: color 0.3s ease; 
+  text-align:center; 
+
+  display: -webkit-box;       /* دعم تقليدي لقص النص */
+  -webkit-line-clamp: 2;      /* الحد الأقصى: سطرين */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;     /* ... إذا تجاوز النص السطرين */
+  word-break: break-word;
+}
+
+  
 .box h3 { color:#0d47a1; margin-bottom:10px; font-size:1.2rem; transition: color 0.3s ease; text-align:center; }
 .box:hover h3 { color:#0b3d91; }
 .box p { flex-grow:1; margin-bottom:12px; color:#444; font-size:0.95rem; text-align:center; }
@@ -332,6 +349,7 @@ addVideoBtn.addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
 
