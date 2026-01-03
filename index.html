@@ -16,7 +16,7 @@ body {
   min-height:100vh;
 }
 
-/* Sidebar - القائمة الجانبية */
+/* Sidebar */
 .sidebar {
   width: 250px;
   background: #1e1e1e;
@@ -44,7 +44,7 @@ body {
 }
 .sidebar a:hover { color:#1976d2; }
 
-/* Main content - المحتوى الرئيسي */
+/* Main content */
 main {
   flex-grow:1;
   padding:20px 40px;
@@ -80,7 +80,7 @@ section h2 {
   padding-bottom:5px;
 }
 
-/* Boxes for features, videos, resources */
+/* Boxes */
 .features, .videos, .resources {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
@@ -95,7 +95,6 @@ section h2 {
   display:flex;
   flex-direction:column;
   justify-content:space-between;
-  position:relative;
 }
 .box:hover {
   transform: translateY(-6px);
@@ -115,19 +114,6 @@ section h2 {
 }
 .box a.button:hover { background-color:#0d47a1; }
 
-/* زر الحذف */
-.delete-button {
-  background-color:#e74c3c;
-  color:#fff;
-  border:none;
-  padding:8px 12px;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:bold;
-  margin-top:10px;
-}
-.delete-button:hover { background-color:#c0392b; }
-
 iframe { width:100%; height:315px; border-radius:12px; }
 
 /* Footer */
@@ -140,7 +126,33 @@ footer {
 }
 footer a { color:#1976d2; text-decoration:none; }
 
-/* Responsive */
+/* Form for adding video */
+#addVideoForm {
+  background: #fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+  margin-bottom:30px;
+}
+#addVideoForm input {
+  width: calc(50% - 10px);
+  padding:8px 12px;
+  margin-right:10px;
+  margin-bottom:10px;
+  border:1px solid #ccc;
+  border-radius:6px;
+}
+#addVideoForm button {
+  padding:10px 15px;
+  background:#1976d2;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:bold;
+}
+#addVideoForm button:hover { background:#0d47a1; }
+
 @media(max-width:992px){
   body { flex-direction:column; }
   .sidebar { width:100%; height:auto; position:relative; }
@@ -160,12 +172,6 @@ footer a { color:#1976d2; text-decoration:none; }
   <a href="#resources">Resources</a>
   <a href="#egyptian">Egyptian Arabic</a>
   <a href="#contact">Contact</a>
-
-  <!-- قسم إضافة فيديو جديد -->
-  <h2>Add New Video</h2>
-  <input type="text" id="newVideoTitle" placeholder="Enter Video Title" style="width:100%; margin-bottom:8px; padding:5px;">
-  <input type="text" id="newVideoURL" placeholder="Enter YouTube URL" style="width:100%; margin-bottom:8px; padding:5px;">
-  <button id="addVideoBtn" style="width:100%; padding:10px; background:#1976d2; color:white; border:none; border-radius:6px; cursor:pointer;">Add Video</button>
 </div>
 
 <!-- Main content -->
@@ -178,14 +184,14 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </header>
 
-<!-- قسم About -->
+<!-- About Section -->
 <section id="about">
   <h2>About This Website</h2>
   <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic. Communicate naturally with real-life expressions Egyptians use daily.</p>
   <p>Focus on conversation, pronunciation, and real phrases heard in streets, cafes, and daily life.</p>
 </section>
 
-<!-- قسم Lessons -->
+<!-- Lessons Section -->
 <section id="lessons">
   <h2>What You Will Learn</h2>
   <div class="features">
@@ -204,71 +210,46 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
-<!-- قسم Video Lessons -->
+<!-- Video Lessons Section -->
 <section id="videos">
   <h2>Video Lessons</h2>
+
+  <!-- نموذج لإضافة فيديو جديد -->
+  <div id="addVideoForm">
+    <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
+    <input type="text" id="videoURL" placeholder="رابط الفيديو">
+    <button onclick="addVideo()">إضافة فيديو</button>
+  </div>
+
+  <!-- حاوية الفيديوهات -->
   <div class="videos" id="videosContainer">
-    <!-- الفيديوهات الموجودة مسبقًا -->
+
+    <!-- فيديوهات مضافة يدويًا سابقًا -->
     <div class="box">
       <h3>Lesson 1: Mind your own business</h3>
       <iframe src="https://www.youtube.com/embed/nKUIVL5RDaQ" allowfullscreen></iframe>
       <a class="button" href="https://www.youtube.com/shorts/nKUIVL5RDaQ" target="_blank">Watch on YouTube</a>
-      <button class="delete-button">Delete</button>
+      <button onclick="deleteVideo(this)">حذف الفيديو</button>
     </div>
 
     <div class="box">
       <h3>Lesson 2: You Command – I’m at Your Service</h3>
       <iframe src="https://www.youtube.com/embed/NXmhi7uiX7k" allowfullscreen></iframe>
       <a class="button" href="https://www.youtube.com/shorts/NXmhi7uiX7k" target="_blank">Watch on YouTube</a>
-      <button class="delete-button">Delete</button>
+      <button onclick="deleteVideo(this)">حذف الفيديو</button>
     </div>
 
     <div class="box">
       <h3>Lesson 3: Stop Showing Off</h3>
       <iframe src="https://www.youtube.com/embed/pn6B8bHghek" allowfullscreen></iframe>
       <a class="button" href="https://www.youtube.com/shorts/pn6B8bHghek" target="_blank">Watch on YouTube</a>
-      <button class="delete-button">Delete</button>
-    </div>
-
-    <div class="box">
-      <h3>Lesson 4: Now way!, Holy cow</h3>
-      <iframe src="https://www.youtube.com/embed/75DuYX3lNFw" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/75DuYX3lNFw" target="_blank">Watch on YouTube</a>
-      <button class="delete-button">Delete</button>
-    </div>
-
-    <div class="box">
-      <h3>Lesson 5: I am so done with this</h3>
-      <iframe src="https://www.youtube.com/embed/_fVm-Vwdr8k" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/_fVm-Vwdr8k" target="_blank">Watch on YouTube</a>
-      <button class="delete-button">Delete</button>
-    </div>
-
-    <div class="box">
-      <h3>Lesson 6: Essential Phrases for Foreigners at Arab Airports – Part 01</h3>
-      <iframe src="https://www.youtube.com/embed/_n0iZjkTZQI" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/shorts/_n0iZjkTZQI" target="_blank">Watch on YouTube</a>
-      <button class="delete-button">Delete</button>
-    </div>
-
-    <div class="box">
-      <h3>Lesson 7: Essential Phrases for Foreigners at Arab Airports – Part 02</h3>
-      <iframe src="https://www.youtube.com/embed/YOmZGtcyDgo" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/watch?v=YOmZGtcyDgo" target="_blank">Watch on YouTube</a>
-      <button class="delete-button">Delete</button>
-    </div>
-
-    <div class="box">
-      <h3>Lesson 8: Essential Phrases for Foreigners at Arab Airports – Part 03</h3>
-      <iframe src="https://www.youtube.com/embed/5dziHaKjj_g" allowfullscreen></iframe>
-      <a class="button" href="https://www.youtube.com/watch?v=5dziHaKjj_g" target="_blank">Watch on YouTube</a>
-      <button class="delete-button">Delete</button>
+      <button onclick="deleteVideo(this)">حذف الفيديو</button>
     </div>
 
   </div>
 </section>
 
-<!-- قسم الموارد -->
+<!-- Resources Section -->
 <section id="resources">
   <h2>Downloadable Resources</h2>
   <div class="resources">
@@ -285,14 +266,14 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </section>
 
-<!-- قسم Egyptian Arabic -->
+<!-- Egyptian Arabic Section -->
 <section id="egyptian">
   <h2>Why Egyptian Arabic?</h2>
   <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
   <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
 </section>
 
-<!-- قسم الاتصال -->
+<!-- Contact Section -->
 <section id="contact">
   <h2>Contact</h2>
   <p>
@@ -306,66 +287,54 @@ footer a { color:#1976d2; text-decoration:none; }
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
-</main>
-
-<!-- سكربت لإضافة وحذف الفيديوهات -->
+<!-- سكربت لإضافة الفيديو وحذف الفيديو مع تأكيد -->
 <script>
-  const addBtn = document.getElementById('addVideoBtn');
-  const videosContainer = document.getElementById('videosContainer');
+function addVideo() {
+  const title = document.getElementById('videoTitle').value.trim();
+  const url = document.getElementById('videoURL').value.trim();
+  if (!title || !url) { alert("الرجاء إدخال عنوان ورابط الفيديو"); return; }
 
-  addBtn.addEventListener('click', function() {
-    const title = document.getElementById('newVideoTitle').value.trim();
-    const url = document.getElementById('newVideoURL').value.trim();
+  // استخراج الـ Video ID من أي رابط يوتيوب
+  let videoID = "";
+  try {
+    const ytRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtube\.com\/shorts\/|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const match = url.match(ytRegex);
+    if (match && match[1]) { videoID = match[1]; }
+    else { throw "Invalid URL"; }
+  } catch {
+    alert("رابط فيديو يوتيوب غير صالح!");
+    return;
+  }
 
-    if(title === '' || url === '') {
-      alert('Please enter both title and URL');
-      return;
-    }
+  // إنشاء العنصر الجديد
+  const container = document.getElementById('videosContainer');
+  const box = document.createElement('div');
+  box.className = 'box';
+  box.innerHTML = `
+    <h3>${title}</h3>
+    <iframe src="https://www.youtube.com/embed/${videoID}" allowfullscreen></iframe>
+    <a class="button" href="${url}" target="_blank">Watch on YouTube</a>
+    <button onclick="deleteVideo(this)">حذف الفيديو</button>
+  `;
+  container.appendChild(box);
 
-    // تحويل الرابط لأي صيغة YouTube embed صحيحة
-    let videoId = '';
-    if(url.includes('youtube.com/watch')) {
-      const params = new URL(url).searchParams;
-      videoId = params.get('v');
-    } else if(url.includes('youtu.be/')) {
-      videoId = url.split('youtu.be/')[1].split('?')[0];
-    } else if(url.includes('youtube.com/shorts/')) {
-      videoId = url.split('shorts/')[1].split('?')[0];
-    } else {
-      alert('Invalid YouTube URL!');
-      return;
-    }
+  // إعادة تعيين الحقول
+  document.getElementById('videoTitle').value = '';
+  document.getElementById('videoURL').value = '';
+}
 
-    // إنشاء صندوق الفيديو الجديد
-    const box = document.createElement('div');
-    box.className = 'box';
-    box.innerHTML = `
-      <h3>${title}</h3>
-      <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
-      <a class="button" href="${url}" target="_blank">Watch on YouTube</a>
-      <button class="delete-button">Delete</button>
-    `;
-    videosContainer.appendChild(box);
-
-    // تفعيل زر الحذف
-    box.querySelector('.delete-button').addEventListener('click', function() {
-      this.parentElement.remove();
-    });
-
-    // مسح الخانات بعد الإضافة
-    document.getElementById('newVideoTitle').value = '';
-    document.getElementById('newVideoURL').value = '';
-  });
-
-  // تفعيل زر الحذف للفيديوهات الموجودة مسبقًا
-  document.querySelectorAll('.delete-button').forEach(btn => {
-    btn.addEventListener('click', function() {
-      this.parentElement.remove();
-    });
-  });
+// حذف الفيديو مع رسالة تأكيد
+function deleteVideo(button) {
+  if (confirm("هل أنت متأكد أنك تريد حذف هذا الفيديو؟")) {
+    button.parentElement.remove();
+  }
+}
 </script>
 
+</main>
 </body>
 </html>
+
+
 
 
