@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -29,13 +31,7 @@ body {
   overflow-y:auto;
   border-right: 3px solid #1976d2;
 }
-.sidebar h2 { 
-  color:#1976d2; 
-  margin-bottom:20px; 
-  font-size:1.6rem; 
-  border-bottom:2px solid #1976d2; 
-  padding-bottom:5px; 
-}
+.sidebar h2 { color:#1976d2; margin-bottom:20px; font-size:1.6rem; border-bottom:2px solid #1976d2; padding-bottom:5px; }
 .sidebar a { display:block; color:#fff; text-decoration:none; margin:10px 0; transition: color 0.3s ease; }
 .sidebar a:hover { color:#1976d2; }
 .sidebar button { 
@@ -52,12 +48,6 @@ body {
 
 /* Main content */
 main { flex-grow:1; padding:20px 40px; max-width:1000px; margin:auto; }
-
-/* Header */
-header { display:flex; align-items:center; gap:30px; margin-bottom:30px; flex-wrap:wrap; }
-header img { height:130px; width:auto; border-radius:12px; border:3px solid #1976d2; }
-header div h1 { font-size:2.4rem; color:#0d47a1; margin-bottom:8px; }
-header div p { font-size:1.2rem; color:#555; }
 
 /* Header */
 header {
@@ -92,76 +82,24 @@ header div p {
   text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
 }
 
-/* Responsive */
-@media(max-width:992px){
-  header { justify-content:center; text-align:center; padding:15px 20px; }
-  header div h1 { font-size:2.2rem; }
-  header div p { font-size:1.1rem; }
-  header img { height:120px; }
-}
-
 /* Sections */
 section { margin-bottom:50px; }
-section h2 { 
-  color: #1976d2; 
-  margin-bottom:20px; 
-  font-size:1.8rem; 
-  border-bottom: 2px solid #1976d2; 
-  display:inline-block; 
-  padding-bottom:4px; 
-}
+section h2 { color: #1976d2; margin-bottom:20px; font-size:1.8rem; border-bottom: 2px solid #1976d2; display:inline-block; padding-bottom:4px; }
 
-/* Boxes with gradient hover */
-.features, .videos, .resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:25px; }
-.box {
-  background: linear-gradient(145deg, #e3f2fd, #bbdefb);
-  padding:20px;
-  border-radius:15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  align-items:center;
+/* Video Lessons */
+.videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:25px; }
+.videoBox {
+  background: #e3f2fd;
+  padding:15px;
+  border-radius:12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  text-align:center;
   position:relative;
 }
-.box:hover { 
-  transform: translateY(-6px); 
-  box-shadow: 0 12px 30px rgba(0,0,0,0.2); 
-  background: linear-gradient(145deg, #bbdefb, #90caf9);
-}
+.videoBox h3 { color:#0d47a1; margin-bottom:10px; font-size:1.1rem; }
+.videoBox iframe { width:100%; height:200px; border-radius:10px; }
 
-.box h3 { 
-  color:#0d47a1; 
-  margin-bottom:10px; 
-  font-size:1.2rem; 
-  transition: color 0.3s ease; 
-  text-align:center; 
-
-  display: -webkit-box;       /* دعم تقليدي لقص النص */
-  -webkit-line-clamp: 2;      /* الحد الأقصى: سطرين */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;     /* ... إذا تجاوز النص السطرين */
-  word-break: break-word;
-}
-
-  
-.box h3 { color:#0d47a1; margin-bottom:10px; font-size:1.2rem; transition: color 0.3s ease; text-align:center; }
-.box:hover h3 { color:#0b3d91; }
-.box p { flex-grow:1; margin-bottom:12px; color:#444; font-size:0.95rem; text-align:center; }
-iframe { width:100%; height:200px; border-radius:12px; object-fit:cover; }
-
-/* Footer */
-footer { background: #1e1e1e; color: #fff; text-align:center; padding:25px 20px; font-size:0.9rem; }
-footer a { color:#1976d2; text-decoration:none; }
-
-/* Form */
-#videoForm { display:none; flex-direction:column; gap:10px; margin-top:15px; }
-#videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
-#videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
-
-/* Delete button */
+/* زر حذف الفيديو */
 .deleteBtn {
   position:absolute;
   top:10px;
@@ -172,8 +110,30 @@ footer a { color:#1976d2; text-decoration:none; }
   border-radius:5px;
   padding:5px 8px;
   cursor:pointer;
-  display:none;
+  display:none; /* يظهر فقط للادمن */
 }
+
+/* PDF Resources */
+.resources { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
+.pdfBox {
+  background: #d0e8ff;
+  padding:15px;
+  border-radius:12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  text-align:center;
+}
+.pdfBox h3 { color:#0d47a1; margin-bottom:8px; font-size:1.1rem; }
+.pdfBox a { display:inline-block; padding:8px 12px; background:#1976d2; color:#fff; border-radius:6px; text-decoration:none; transition: background 0.3s; }
+.pdfBox a:hover { background:#0b3d91; }
+
+/* Footer */
+footer { background: #1e1e1e; color: #fff; text-align:center; padding:25px 20px; font-size:0.9rem; }
+footer a { color:#1976d2; text-decoration:none; }
+
+/* Form لإضافة فيديو */
+#videoForm { display:none; flex-direction:column; gap:10px; margin-top:15px; }
+#videoForm input { padding:8px 10px; border-radius:5px; border:1px solid #ccc; width:100%; }
+#videoForm button { padding:8px 10px; border:none; border-radius:5px; background:#0d47a1; color:#fff; cursor:pointer; }
 
 /* Responsive */
 @media(max-width:992px){
@@ -190,14 +150,14 @@ footer a { color:#1976d2; text-decoration:none; }
 <div class="sidebar">
   <h2>Navigation</h2>
   <a href="#about">About</a>
-  <a href="#lessons">Lessons</a>
   <a href="#videos">Video Lessons</a>
-  <a href="#resources">Resources</a>
-  <a href="#egyptian">Egyptian Arabic</a>
-  <a href="#contact">Contact</a>
+  <a href="#pdfs">PDF</a>
+  <a href="#contact">Contact Us</a>
 
+  <!-- زر لإظهار الفورم لإضافة فيديو -->
   <button id="showFormBtn">إضافة فيديو جديد</button>
 
+  <!-- الفورم لإضافة الفيديو -->
   <div id="videoForm">
       <input type="text" id="videoTitle" placeholder="عنوان الفيديو">
       <input type="text" id="videoURL" placeholder="رابط YouTube">
@@ -214,72 +174,61 @@ footer a { color:#1976d2; text-decoration:none; }
   </div>
 </header>
 
+<!-- About Section -->
 <section id="about">
   <h2>About This Website</h2>
-  <p>Spoken Arabic Now teaches <strong>Egyptian Spoken Arabic</strong>, not formal or textbook Arabic.</p>
+  <p>This website teaches <strong>Egyptian Spoken Arabic</strong> through videos and downloadable PDFs. Simple and practical learning for everyone.</p>
 </section>
 
-<section id="lessons">
-  <h2>What You Will Learn</h2>
-  <div class="features">
-    <div class="box">
-      <h3>Everyday Conversations</h3>
-      <p>Real Egyptian phrases used in daily situations, not formal Arabic.</p>
-    </div>
-    <div class="box">
-      <h3>Egyptian Pronunciation</h3>
-      <p>Learn how Egyptians actually pronounce words, sounds, and letters.</p>
-    </div>
-    <div class="box">
-      <h3>Speak with Confidence</h3>
-      <p>Stop translating in your head and start speaking naturally.</p>
-    </div>
-  </div>
-</section>
-
+<!-- Video Lessons Section -->
 <section id="videos">
   <h2>Video Lessons</h2>
-  <div class="videos" id="videoList"></div>
-</section>
-
-<section id="resources">
-  <h2>Downloadable Resources</h2>
-  <div class="resources">
-    <div class="box">
-      <h3>PDF Lesson 1</h3>
-      <p>Download phrases and vocabulary for Lesson 1.</p>
-      <a class="button" href="lesson1.pdf" download>Download PDF</a>
+  <div class="videos" id="videoList">
+    <!-- مثال على فيديو -->
+    <div class="videoBox">
+      <h3>Lesson 1: Greetings</h3>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
     </div>
-    <div class="box">
-      <h3>PDF Lesson 2</h3>
-      <p>Download phrases and vocabulary for Lesson 2.</p>
-      <a class="button" href="lesson2.pdf" download>Download PDF</a>
+    <div class="videoBox">
+      <h3>Lesson 2: Daily Conversations</h3>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
     </div>
   </div>
 </section>
 
-<section id="egyptian">
-  <h2>Why Egyptian Arabic?</h2>
-  <p>Egyptian Arabic is the most widely understood dialect in the Arab world. Learning it allows you to communicate with millions of people across different countries.</p>
-  <p>This platform teaches you how Egyptians really speak — simple, fast, and natural.</p>
+<!-- PDF Section -->
+<section id="pdfs">
+  <h2>Downloadable PDFs</h2>
+  <div class="resources">
+    <div class="pdfBox">
+      <h3>Lesson 1 PDF</h3>
+      <a href="lesson1.pdf" download>Download PDF</a>
+    </div>
+    <div class="pdfBox">
+      <h3>Lesson 2 PDF</h3>
+      <a href="lesson2.pdf" download>Download PDF</a>
+    </div>
+  </div>
 </section>
 
+<!-- Contact Section -->
 <section id="contact">
-  <h2>Contact</h2>
-  <p>
-    YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
-    Email: spokenarabicnow@gmail.com
-  </p>
+  <h2>Contact Us</h2>
+  <p>YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
+  Email: spokenarabicnow@gmail.com</p>
 </section>
 
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
+<!-- Script لإضافة الفيديوهات مباشرة -->
 <script>
+// كلمة مرور للادمن
 const PASSWORD = "1234";
 let isAdmin = false;
 
+// العناصر المتعلقة بالفورم
 const showFormBtn = document.getElementById('showFormBtn');
 const videoForm = document.getElementById('videoForm');
 const addVideoBtn = document.getElementById('addVideoBtn');
@@ -287,11 +236,13 @@ const videoTitleInput = document.getElementById('videoTitle');
 const videoURLInput = document.getElementById('videoURL');
 const videoList = document.getElementById('videoList');
 
+// جلب الفيديوهات المحفوظة من localStorage
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
 
-function createVideoElement(video) {
+// دالة لإنشاء عنصر الفيديو
+function createVideoElement(video){
   const box = document.createElement('div');
-  box.classList.add('box');
+  box.classList.add('videoBox');
   box.innerHTML = `
     <h3>${video.title}</h3>
     <iframe src="https://www.youtube.com/embed/${video.id}" allowfullscreen></iframe>
@@ -309,8 +260,10 @@ function createVideoElement(video) {
   videoList.appendChild(box);
 }
 
+// إنشاء الفيديوهات المحفوظة عند تحميل الصفحة
 videos.forEach(v => createVideoElement(v));
 
+// عرض الفورم عند الضغط على زر إضافة فيديو
 showFormBtn.addEventListener('click', () => {
   if(!isAdmin){
     const pass = prompt("أدخل كلمة المرور:");
@@ -324,6 +277,7 @@ showFormBtn.addEventListener('click', () => {
   }
 });
 
+// إضافة فيديو جديد
 addVideoBtn.addEventListener('click', () => {
   const title = videoTitleInput.value.trim();
   const url = videoURLInput.value.trim();
