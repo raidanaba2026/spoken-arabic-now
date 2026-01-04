@@ -1,5 +1,8 @@
 [
-  { "title": "Lesson 01 –Stay in your lane!", "url": "https://www.youtube.com/embed/y3oE7u-X_Kg" },
+  { "title": "Lesson 01 –Stay in your lane!",
+    "url": "https://www.youtube.com/embed/y3oE7u-X_Kg" },
+    "description": "Used to tell someone to mind their own business."
+
   { "title": "Lesson 02 –I am at your service!", "url": "https://www.youtube.com/embed/NXmhi7uiX7k" },
   { "title": "Lesson 03 –Mind your own bsns!", "url": "https://www.youtube.com/embed/nKUIVL5RDaQ" },
   { "title": "Lesson 04 –STOP FLEXING!", "url": "https://www.youtube.com/embed/pn6B8bHghek" },
@@ -10,6 +13,7 @@
   { "title": "Lesson 09 – Arabic Cooking: Onion & Butter!", "url": "https://www.youtube.com/embed/caZ62ccoKbM" },
   { "title": "Lesson 10 –Cut the Onion Like a Pro!", "url": "https://www.youtube.com/embed/hKPbsgqJCWs" }
 ]
+
 
 
 
