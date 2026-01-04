@@ -4,11 +4,20 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spoken Arabic Now – Egyptian Dialect</title>
-<style>
-/* Reset */
-* { margin:0; padding:0; box-sizing:border-box; }
 
-/* ثيم داكن */
+<style>
+/*==============================
+  إعدادات أساسية وإعادة تعيين
+==============================*/
+* { 
+  margin:0; 
+  padding:0; 
+  box-sizing:border-box; 
+}
+
+/*==============================
+  الثيم العام - داكن احترافي
+==============================*/
 body { 
   font-family: 'Arial', Helvetica, sans-serif; 
   background: #121212; 
@@ -18,7 +27,9 @@ body {
   min-height:100vh; 
 }
 
-/* Sidebar */
+/*==============================
+  الشريط الجانبي Sidebar
+==============================*/
 .sidebar { 
   width:250px; 
   background:#1b1b1b; 
@@ -38,6 +49,7 @@ body {
   border-bottom:2px solid #42a5f5; 
   padding-bottom:5px; 
 }
+/* الروابط في الشريط الجانبي */
 .sidebar a { 
   display:flex; 
   align-items:center; 
@@ -47,12 +59,23 @@ body {
   margin:10px 0; 
   transition:color 0.3s; 
 }
-.sidebar a:hover { color:#42a5f5; }
+.sidebar a:hover { 
+  color:#42a5f5; 
+}
 
-/* Main content */
-main { flex-grow:1; padding:20px 40px; max-width:1000px; margin:auto; }
+/*==============================
+  المحتوى الرئيسي Main
+==============================*/
+main { 
+  flex-grow:1; 
+  padding:20px 40px; 
+  max-width:1000px; 
+  margin:auto; 
+}
 
-/* Header */
+/*==============================
+  الهيدر Header
+==============================*/
 header { 
   display:flex; 
   align-items:center; 
@@ -85,8 +108,12 @@ header div p {
   text-shadow:1px 1px 4px rgba(0,0,0,0.3); 
 }
 
-/* Sections */
-section { margin-bottom:50px; }
+/*==============================
+  الأقسام Sections
+==============================*/
+section { 
+  margin-bottom:50px; 
+}
 section h2 { 
   color:#42a5f5; 
   margin-bottom:20px; 
@@ -96,22 +123,28 @@ section h2 {
   padding-bottom:4px; 
 }
 
-/* Video grid */
+/*==============================
+  شبكة الفيديوهات Video Grid
+==============================*/
 .videos { 
   display:grid; 
   grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); 
   gap:40px; 
 }
+
+/* عنوان كل فيديو */
 .videoTitle {
   font-size: 0.95rem;
   color: #bbdefb;
   text-align: center;
   margin-bottom: 8px;
   font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap;      
+  overflow: hidden;         
+  text-overflow: ellipsis;  
 }
+
+/* صندوق الفيديو */
 .videoBox { 
   background:#1e1e2f; 
   padding:0; 
@@ -130,7 +163,9 @@ section h2 {
   border:none;
 }
 
-/* PDFs */
+/*==============================
+  ملفات PDF Resources
+==============================*/
 .resources { 
   display:grid; 
   grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); 
@@ -151,6 +186,7 @@ section h2 {
   box-shadow:0 12px 25px rgba(0,0,0,0.7); 
 }
 .pdfBox h3 { color:#42a5f5; margin-bottom:10px; font-size:1.2rem; }
+/* رابط تحميل PDF */
 .pdfBox a { 
   display:inline-block; 
   margin-top:10px; 
@@ -163,7 +199,9 @@ section h2 {
 }
 .pdfBox a:hover { background:#1e88e5; }
 
-/* Load More Button */
+/*==============================
+  زر تحميل المزيد Load More
+==============================*/
 #loadMoreBtn {
   display:block;
   margin:20px auto 50px;
@@ -182,7 +220,9 @@ section h2 {
   transform:translateY(-3px);
 }
 
-/* Footer */
+/*==============================
+  الفوتر Footer
+==============================*/
 footer { 
   background:#1b1b1b; 
   color:#bbb; 
@@ -192,7 +232,9 @@ footer {
 }
 footer a { color:#42a5f5; text-decoration:none; }
 
-/* Responsive */
+/*==============================
+  تصميم متجاوب Responsive
+==============================*/
 @media(max-width:992px){ 
   body{ flex-direction:column; } 
   .sidebar{ width:100%; height:auto; position:relative; border-right:none; border-bottom:3px solid #42a5f5; } 
@@ -203,6 +245,9 @@ footer a { color:#42a5f5; text-decoration:none; }
 </head>
 <body>
 
+<!--==============================
+  الشريط الجانبي Sidebar
+==============================-->
 <div class="sidebar">
   <h2>Navigation</h2>
   <a href="#about">ℹ️ About</a>
@@ -211,6 +256,9 @@ footer a { color:#42a5f5; text-decoration:none; }
   <a href="#contact">✉️ Contact Us</a>
 </div>
 
+<!--==============================
+  المحتوى الرئيسي Main
+==============================-->
 <main>
 <header>
   <img src="logo.png" alt="Spoken Arabic Now Logo">
@@ -220,25 +268,32 @@ footer a { color:#42a5f5; text-decoration:none; }
   </div>
 </header>
 
+<!-- قسم عن الموقع About -->
 <section id="about">
   <h2>About This Website</h2>
   <p>This website teaches <strong>Egyptian Spoken Arabic</strong> through engaging videos and downloadable PDFs.</p>
 </section>
 
+<!-- قسم الفيديوهات Video Lessons -->
 <section id="videos">
   <h2>Video Lessons</h2>
+  
+  <!-- هنا ستضاف الفيديوهات ديناميكياً -->
   <div class="videos" id="videoList"></div>
+  <!-- زر تحميل المزيد -->
   <button id="loadMoreBtn">Load More</button>
 </section>
 
-<!-- قسم ملفات PDF: يتيح للزائر تحميل ملفات تعليمية -->
+<!-- قسم ملفات PDF -->
 <section id="pdfs">
   <h2>Downloadable PDFs</h2>
   <div class="resources">
+    <!-- PDF 1 -->
     <div class="pdfBox">
       <h3>30 Airport Phrases</h3>
       <a href="30_Airport_Phrases.pdf" download>Download PDF</a>
     </div>
+    <!-- PDF 2 -->
     <div class="pdfBox">
       <h3>30 Restaurant Phrases</h3>
       <a href="30_Restaurant_Phrases_Egyptian_Arabic.pdf" download>Download PDF</a>
@@ -246,42 +301,57 @@ footer a { color:#42a5f5; text-decoration:none; }
   </div>
 </section>
 
-<section id="contact">
+<!-- إضافة مسافة كبيرة قبل قسم التواصل Contact -->
+<section id="contact" style="margin-top:80px;">
   <h2>Contact Us</h2>
-  <p>YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
-  Email: spokenarabicnow@gmail.com</p>
+  <p>
+    <span style="color:#ffffff; font-weight:bold;">YouTube Channel:</span>
+    <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank" style="color:#FFD700; font-weight:bold; text-decoration:none;">Spoken Arabic Now</a>
+    <br />
+    <span style="color:#ffffff; font-weight:bold;">Email:</span>
+    <a href="mailto:spokenarabicnow@gmail.com" style="color:#00e5ff; font-weight:bold; text-decoration:none;">spokenarabicnow@gmail.com</a>
+  </p>
 </section>
 
+<!-- الفوتر Footer -->
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
+<!--==============================
+  جافاسكربت لإظهار الفيديوهات وLoad More
+==============================-->
 <script>
-// عدد الفيديوهات الأولية المعروضة
+// عدد الفيديوهات المعروضة في البداية
 let visibleCount = 6;
+
+// مصفوفة لتخزين البيانات
 let videosData = [];
+
 const videoList = document.getElementById('videoList');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 
-// جلب الفيديوهات من JSON
+// جلب الفيديوهات من ملف JSON خارجي
 fetch('videos.json')
   .then(res => res.json())
   .then(videos => {
     videosData = videos;
-    renderVideos();
+    renderVideos(); // عرض الفيديوهات
   })
   .catch(err => console.error(err));
 
-// دالة عرض الفيديوهات حسب visibleCount
+// دالة لعرض الفيديوهات حسب العدد المحدد
 function renderVideos() {
-  videoList.innerHTML = "";
+  videoList.innerHTML = ""; // مسح الفيديوهات السابقة
   videosData.slice(0, visibleCount).forEach(video => {
     const container = document.createElement('div');
 
+    // عنوان الفيديو
     const title = document.createElement('div');
     title.className = 'videoTitle';
     title.textContent = video.title;
 
+    // صندوق الفيديو iframe
     const box = document.createElement('div');
     box.className = 'videoBox';
     const iframe = document.createElement('iframe');
@@ -294,18 +364,22 @@ function renderVideos() {
     videoList.appendChild(container);
   });
 
+  // إخفاء زر Load More إذا تم عرض كل الفيديوهات
   loadMoreBtn.style.display = visibleCount >= videosData.length ? 'none' : 'block';
 }
 
-// زر تحميل المزيد
+// حدث الضغط على زر Load More
 loadMoreBtn.addEventListener('click', () => {
-  visibleCount += 6;
+  visibleCount += 6; // عرض 6 فيديوهات إضافية
   renderVideos();
 });
 </script>
 
 </body>
 </html>
+
+
+
 
 
 
