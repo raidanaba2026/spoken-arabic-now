@@ -1,415 +1,443 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spoken Arabic Now – Egyptian Dialect</title>
 
- <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B4X87QT7K"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-3B4X87QT7K');
-  </script>
-
-  
 <style>
-/*==============================
-  إعدادات أساسية وإعادة تعيين
-==============================*/
-* { 
-  margin:0; 
-  padding:0; 
-  box-sizing:border-box; 
+/* ================= إعدادات أساسية ================= */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#1a1a1a;
+  color:#e0e0e0;
 }
 
-/*==============================
-  الثيم العام - داكن متوسط
-==============================*/
-body { 
-  font-family: 'Arial', Helvetica, sans-serif; 
-  background: #1a1a1a; /* أخف من السابق */
-  color: #e0e0e0; 
-  line-height:1.6; 
-  display:flex; 
-  min-height:100vh; 
+/* ================= الشريط الجانبي Sidebar ثابت ================= */
+.sidebar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:240px;
+  height:100vh;
+  background:#222;
+  padding:20px;
+  border-right:3px solid #42a5f5;
+  overflow-y:auto;
+  z-index:1001;
 }
-
-/*==============================
-  الشريط الجانبي Sidebar
-==============================*/
-.sidebar { 
-  width:250px; 
-  background:#222; 
-  color:#fff; 
-  flex-shrink:0; 
-  padding:20px; 
-  position:sticky; 
-  top:0; 
-  height:100vh; 
-  overflow-y:auto; 
-  border-right:3px solid #42a5f5; 
+.sidebar h2{
+  color:#42a5f5;
+  margin-bottom:40px; /* مسافة أكبر بين العنوان والروابط */
+  font-size:1.8rem;
 }
-.sidebar h2 { 
-  color:#42a5f5; 
-  margin-bottom:20px; 
-  font-size:1.5rem; 
-  border-bottom:2px solid #42a5f5; 
-  padding-bottom:5px; 
-}
-/* روابط الشريط الجانبي */
-.sidebar a { 
-  display:flex; 
-  align-items:center; 
-  gap:8px; 
-  color:#fff; 
-  text-decoration:none; 
-  margin:10px 0; 
-  transition:color 0.3s; 
-}
-.sidebar a:hover { color:#42a5f5; }
-
-/*==============================
-  المحتوى الرئيسي Main
-==============================*/
-main { 
-  flex-grow:1; 
-  padding:20px 40px; 
-  max-width:1000px; 
-  margin:auto; 
-}
-
-/*==============================
-  الهيدر Header
-==============================*/
-header { 
-  display:flex; 
-  align-items:center; 
-  gap:30px; 
-  margin-bottom:40px; 
-  flex-wrap:wrap; 
-  padding:20px 30px; 
-  border-radius:15px; 
-  background: linear-gradient(135deg, #2196f3, #64b5f6); 
-  color:#fff; 
-  box-shadow:0 8px 25px rgba(0,0,0,0.25); 
-  border:2px solid #1976d2; 
-}
-header img { 
-  height:140px; 
-  width:auto; 
-  border-radius:12px; 
-  border:3px solid #fff; 
-  box-shadow:0 4px 15px rgba(0,0,0,0.2); 
-}
-header div h1 { 
-  font-size:2.8rem; 
-  color:#fff; 
-  margin-bottom:8px; 
-  text-shadow:1px 1px 6px rgba(0,0,0,0.4); 
-}
-header div p { 
-  font-size:1.3rem; 
-  color:#f0f0f0; 
-  text-shadow:1px 1px 4px rgba(0,0,0,0.3); 
-}
-/* تحسين المسافات بين الأقسام */
-#about {
-  margin-bottom:100px; /* فراغ بين About و Video Lessons */
-}
-
-#videos {
-  margin-bottom:100px; /* فراغ بين Video Lessons و PDFs */
-}
-
-/*==============================
-  الأقسام Sections
-==============================*/
-section { 
-  margin-bottom:50px; 
-}
-section h2 { 
-  color:#42a5f5; 
-  margin-bottom:20px; 
-  font-size:1.4rem; /* حجم أصغر للعناوين */
-  border-bottom:2px solid #42a5f5; 
-  display:inline-block; 
-  padding-bottom:4px; 
-}
-
-/*==============================
-  شبكة الفيديوهات Video Grid
-==============================*/
-.videos { 
-  display:grid; 
-  grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); 
-  gap:40px; 
-}
-.videoTitle {
-  font-size: 0.95rem;
-  color: #bbdefb;
-  text-align: center;
-  margin-bottom: 8px;
-  font-weight: bold;
-  white-space: nowrap;      
-  overflow: hidden;         
-  text-overflow: ellipsis;  
-}
-.videoBox { 
-  background:#2a2a3b; 
-  padding:0; 
-  border-radius:15px; 
-  box-shadow:0 6px 20px rgba(0,0,0,0.5); 
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
-}
-.videoBox:hover { 
-  transform:translateY(-6px); 
-  box-shadow:0 12px 28px rgba(0,0,0,0.6); 
-}
-.videoBox iframe { 
-  width:100%; 
-  height:200px; 
-  border-radius:12px; 
-  border:none;
-}
-
-/*==============================
-  ملفات PDF Resources
-==============================*/
-.resources { 
-  display:grid; 
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); 
-  gap:20px; 
-}
-.pdfBox { 
-  background:#2a2a3b; 
-  color:#fff;
-  padding:20px; 
-  border-radius:15px; 
-  box-shadow:0 6px 25px rgba(0,0,0,0.5); 
-  text-align:center; 
-  font-weight:bold; 
-  transition: transform 0.3s, box-shadow 0.3s; 
-}
-.pdfBox:hover { 
-  transform: translateY(-5px); 
-  box-shadow:0 10px 25px rgba(0,0,0,0.6); 
-}
-.pdfBox h3 { color:#ffeb3b; margin-bottom:10px; font-size:1.1rem; }
-/* رابط تحميل PDF */
-.pdfBox a { 
-  display:inline-block; 
-  margin-top:10px; 
-  padding:10px 15px; 
-  background:#42a5f5; 
-  color:#fff; 
-  border-radius:8px; 
-  text-decoration:none; 
-  transition: background 0.3s; 
-}
-.pdfBox a:hover { background:#1e88e5; }
-
-/*==============================
-  زر تحميل المزيد Load More
-==============================*/
-#loadMoreBtn {
+.sidebar a{
   display:block;
-  margin:20px auto 50px;
-  padding:12px 25px;
+  color:#fff;
+  text-decoration:none;
+  margin:16px 0; /* مسافة أكبر بين الروابط */
+  font-size:1.1rem;
+  transition: color 0.3s;
+}
+.sidebar a:hover{color:#42a5f5}
+
+/* ================= الهيدر Header ثابت ================= */
+header{
+  position:fixed;
+  top:0;
+  left:240px;
+  right:0;
+  height:180px;
+  background:linear-gradient(135deg,#2196f3,#64b5f6);
+  display:flex;
+  align-items:center;
+  gap:25px;
+  padding:20px;
+  z-index:1000;
+}
+header img{
+  height:120px;
+  border-radius:12px;
+  border:3px solid #fff;
+}
+header h1{font-size:2.4rem}
+header p{font-size:1.2rem}
+
+/* ================= الشريط المتحرك Ticker ================= */
+.ticker-container {
+  position: fixed;
+  top:180px;
+  left:240px;
+  right:0;
+  height:45px;
+  background: linear-gradient(90deg,#2196f3,#64b5f6);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border-bottom:2px solid #1976d2;
+  z-index: 999;
+}
+.ticker-content {
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #006400; /* أخضر غامق لامع */
+  text-shadow: 1px 1px 3px rgba(255,255,255,0.5);
+}
+
+/* ================= المحتوى الرئيسي Main ================= */
+main{
+  margin-left:240px;
+  padding-top:260px; /* مساحة للهيدر + الشريط المتحرك */
+  padding-left:40px;
+  padding-right:40px;
+  max-width:1000px;
+}
+
+/* ================= الأقسام Sections ================= */
+section{
+  margin-bottom:120px; /* مسافة كبيرة بين الأقسام */
+  scroll-margin-top:230px; /* لتجنب اختفاء المحتوى تحت الهيدر */
+}
+section h2{
+  color:#42a5f5;
+  margin-bottom:20px;
+  border-bottom:2px solid #42a5f5;
+  display:inline-block;
+}
+
+/* ================= الفيديوهات ================= */
+.videos{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+.videoItem{
+  background:#2a2a3b;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 6px 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display:flex;
+  flex-direction:column;
+}
+.videoItem:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 28px rgba(0,0,0,0.6);
+}
+.videoTitle{
+  padding:10px 12px;
+  font-size:1rem;
+  font-weight:bold;
+  color:#ffeb3b;
+  text-align:center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  background:#1f1f2f;
+}
+.videoBox iframe{
+  width:100%;
+  height:200px;
   border:none;
-  border-radius:8px;
+  display:block;
+}
+
+/* ================= PDF Resources ================= */
+.resources{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.pdfBox{
+  background:#2a2a3b;
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 6px 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.pdfBox:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.6);
+}
+.pdfBox h3{
+  color:#ffeb3b;
+  margin-bottom:10px;
+}
+.pdfBox a{
+  display:inline-block;
+  padding:10px 15px;
   background:#42a5f5;
   color:#fff;
+  border-radius:8px;
+  text-decoration:none;
+  transition: background 0.3s;
+}
+.pdfBox a:hover{background:#1e88e5}
+
+/* ================= زر Load More ================= */
+#loadMoreBtn{
+  display:block;
+  margin:30px auto;
+  padding:12px 30px;
+  background:#42a5f5;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-size:1rem;
   font-weight:bold;
   cursor:pointer;
-  font-size:1rem;
-  transition: background 0.3s, transform 0.2s;
+  transition:background 0.3s, transform 0.2s;
 }
-#loadMoreBtn:hover { 
+#loadMoreBtn:hover{
   background:#1e88e5;
   transform:translateY(-3px);
 }
 
-/*==============================
-  قسم التواصل Contact
-==============================*/
-#contact { 
-  margin-top:60px; /* مسافة بينه وبين PDF */
-}
-#contact h2 { font-size:1.4rem; }
-#contact a { color:#ffeb3b; text-decoration:none; font-weight:bold; }
-#contact a:hover { text-decoration:underline; }
-#contact p { color:#fff; }
-
-
-  /* قسم ملفات PDF */
-#pdfs {
-  margin-bottom:200px; /* مسافة كبيرة بين PDF وContact */
+/* ================= الفوتر ================= */
+footer{
+  background:#222;
+  text-align:center;
+  padding:20px;
+  color:#bbb;
+  font-size:0.9rem;
 }
 
-/*==============================
-  الفوتر Footer
-==============================*/
-footer { 
-  background:#222; 
-  color:#bbb; 
-  text-align:center; 
-  padding:25px 20px; 
-  font-size:0.9rem; 
-}
-footer a { color:#42a5f5; text-decoration:none; }
-
-/*==============================
-  تصميم متجاوب Responsive
-==============================*/
-@media(max-width:992px){ 
-  body{ flex-direction:column; } 
-  .sidebar{ width:100%; height:auto; position:relative; border-right:none; border-bottom:3px solid #42a5f5; } 
-  main{ padding:20px; } 
-  header{ justify-content:center; text-align:center; } 
+/* ================= متجاوب Responsive ================= */
+@media(max-width:900px){
+  .sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+  }
+  header{
+    position:relative;
+    left:0;
+    height:auto;
+  }
+  main{
+    margin-left:0;
+    padding-top:40px;
+  }
+  .ticker-container{
+    left:0;
+    top:140px;
+  }
 }
 </style>
 </head>
+
 <body>
 
-<!--==============================
-  الشريط الجانبي Sidebar
-==============================-->
+<!-- ================= الشريط الجانبي Sidebar ================= -->
 <div class="sidebar">
   <h2>Navigation</h2>
-  <a href="#about">ℹ️ About</a>
-  <a href="#videos">📺 Video Lessons</a>
-  <a href="#pdfs">📄 PDF</a>
-  <a href="#contact">✉️ Contact Us</a>
+  <a href="#about">📖 About</a>
+  <a href="#videos">🎥 Video Lessons</a>
+  <a href="#pdfs">📄 PDF Resources</a>
+  <a href="#contact">✉️ Contact</a>
 </div>
 
-<!--==============================
-  المحتوى الرئيسي Main
-==============================-->
-<main>
+<!-- ================= الهيدر Header ================= -->
 <header>
-  <img src="logo.png" alt="Spoken Arabic Now Logo">
+  <img src="logo.png" alt="Logo">
   <div>
     <h1>Spoken Arabic Now</h1>
     <p>Learn Egyptian Arabic and speak like a local.</p>
   </div>
 </header>
 
-<!-- قسم عن الموقع About -->
+<!-- ================= الشريط المتحرك Ticker ================= -->
+<div class="ticker-container">
+  <div class="ticker-content" id="tickerContent"></div>
+</div>
+
+<!-- ================= المحتوى الرئيسي Main ================= -->
+<main>
+
 <section id="about">
-  <h2>About This Website</h2>
-  <p>This website teaches <strong>Egyptian Spoken Arabic</strong> through engaging videos and downloadable PDFs.</p>
+  <h2>About</h2>
+  <p>
+    Learn real Egyptian Arabic through practical videos and downloadable PDFs. 
+    Whether you're a foreigner wanting to speak like a local or an Arabic speaker looking to master everyday English phrases, this site has you covered.
+  </p>
+  
 </section>
 
-<!-- قسم الفيديوهات Video Lessons -->
 <section id="videos">
   <h2>Video Lessons</h2>
   <div class="videos" id="videoList"></div>
   <button id="loadMoreBtn">Load More</button>
 </section>
 
-<!--==============================
-  قسم ملفات PDF - Downloadable PDFs
-  يتيح للزائر تحميل ملفات تعليمية مختلفة
-==============================-->
 <section id="pdfs">
   <h2>Downloadable PDFs</h2>
   <div class="resources">
-    
-<!-- ---------------------------------------------------------------------------------->
-    <!-- ملف PDF الأول: عبارات المطار -->
     <div class="pdfBox">
       <h3>30 Airport Phrases</h3>
-      <a href="30_Airport_Phrases.pdf" download>Download PDF</a>
+      <a href="#" onclick="friendlyGate('30_Airport_Phrases.pdf'); return false;">Download PDF</a>
     </div>
-
-    <!-- ملف PDF الثاني: عبارات المطعم باللهجة المصرية -->
     <div class="pdfBox">
       <h3>30 Restaurant Phrases</h3>
-      <a href="30_Restaurant_Phrases_Egyptian_Arabic.pdf" download>Download PDF</a>
+      <a href="#" onclick="friendlyGate('30_Restaurant_Phrases_Egyptian_Arabic.pdf'); return false;">Download PDF</a>
     </div>
-
-    <!-- ملف PDF الثالث: 30 عبارة للتحيات العربية -->
-    <div class="pdfBox">
-      <h3>30 Arabic Greetings</h3>
-      <a href="30_Arabic_Greetings_Fancy.pdf" download>Download PDF</a>
-    </div>
-
   </div>
 </section>
-<!-- ---------------------------------------------------------------------------------->
 
-<!-- قسم التواصل Contact -->
 <section id="contact">
-  <h2>Contact Us</h2>
-  <p>YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
-  Email: <a href="mailto:spokenarabicnow@gmail.com">spokenarabicnow@gmail.com</a></p>
+  <h2>Contact</h2>
+  <p>
+    YouTube:
+    <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br>
+    Email: spokenarabicnow@gmail.com
+  </p>
 </section>
 
-<!-- الفوتر Footer -->
 <footer>
-  <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
+  &copy; 2026 Spoken Arabic Now. All rights reserved.
 </footer>
 
-<!--==============================
-  جافاسكربت لإظهار الفيديوهات وLoad More
-==============================-->
+<!-- ================= JAVASCRIPT ================= -->
 <script>
-// عدد الفيديوهات المعروضة في البداية
-let visibleCount = 6;
-let videosData = [];
-const videoList = document.getElementById('videoList');
-const loadMoreBtn = document.getElementById('loadMoreBtn');
+/* ================= الفيديوهات ================= */
+let visibleCount=6;
+let videosData=[];
+const videoList=document.getElementById("videoList");
+const loadMoreBtn=document.getElementById("loadMoreBtn");
 
-// جلب الفيديوهات من ملف JSON خارجي
-fetch('videos.json')
-  .then(res => res.json())
-  .then(videos => {
-    videosData = videos;
-    renderVideos(); // عرض الفيديوهات
-  })
-  .catch(err => console.error(err));
+fetch("videos.json")
+.then(r=>r.json())
+.then(d=>{videosData=d;renderVideos()});
 
-// دالة لعرض الفيديوهات حسب العدد المحدد
-function renderVideos() {
-  videoList.innerHTML = "";
-  videosData.slice(0, visibleCount).forEach(video => {
-    const container = document.createElement('div');
-
-    // عنوان الفيديو
-    const title = document.createElement('div');
-    title.className = 'videoTitle';
-    title.textContent = video.title;
-
-    // صندوق الفيديو iframe
-    const box = document.createElement('div');
-    box.className = 'videoBox';
-    const iframe = document.createElement('iframe');
-    iframe.src = video.url;
-    iframe.allowFullscreen = true;
-
-    box.appendChild(iframe);
-    container.appendChild(title);
-    container.appendChild(box);
-    videoList.appendChild(container);
+function renderVideos(){
+  videoList.innerHTML="";
+  videosData.slice(0,visibleCount).forEach(v=>{
+    const div=document.createElement("div");
+    div.className="videoItem";
+    div.innerHTML=`
+      <div class="videoTitle">${v.title}</div>
+      <div class="videoBox">
+        <iframe src="${v.url}" allowfullscreen></iframe>
+      </div>`;
+    videoList.appendChild(div);
   });
 
-  // إخفاء زر Load More إذا تم عرض كل الفيديوهات
-  loadMoreBtn.style.display = visibleCount >= videosData.length ? 'none' : 'block';
+  const remaining = videosData.length - visibleCount;
+  if(remaining > 0){
+    const loadCount = Math.min(6, remaining);
+    loadMoreBtn.textContent = `Load ${loadCount} More (${remaining} left)`;
+    loadMoreBtn.style.display = "block";
+  } else {
+    loadMoreBtn.style.display = "none";
+  }
+}
+loadMoreBtn.onclick = () => {
+  visibleCount += 6;
+  renderVideos();
+};
+
+/* ================= PDF Gate و الرسالة الودية ================= */
+function friendlyGate(file){
+  alert(
+    "Welcome 🌿\n\n" +
+    "Thank you for visiting Spoken Arabic Now.\n" +
+    "If you find our content helpful, we’d really appreciate your support " +
+    "by subscribing to our YouTube channel.\n\n" +
+    "Enjoy learning!"
+  );
+  window.open(
+    "https://www.youtube.com/@SpokenArabicNow/featured",
+    "_blank",
+    "noopener"
+  );
+
+  const a=document.createElement("a");
+  a.href="download.php?file="+encodeURIComponent(file);
+  a.download=file;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
-// حدث الضغط على زر Load More
-loadMoreBtn.addEventListener('click', () => {
-  visibleCount += 6; // عرض 6 فيديوهات إضافية
-  renderVideos();
+/* ================= الشريط المتحرك Ticker ================= */
+const tickerContent = document.getElementById('tickerContent');
+const tickerContainer = document.querySelector('.ticker-container');
+let msgIndex = 0;
+let tickerTimeout;
+let startTime, remainingTime;
+let paused = false;
+
+const messages = [
+  '🌟 Welcome to Spoken Arabic Now! Enjoy learning Egyptian Arabic!',
+  '💬 Leave a comment or suggestion to help us improve!',
+  '🎉 Don’t forget to support our YouTube channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank" style="color:#00ff00; text-decoration:underline;">Subscribe Now!</a>',
+  '✨ Explore all sections and resources for better learning!'
+];
+
+function showNextMessage() {
+  tickerContent.innerHTML = messages[msgIndex];
+  const contentWidth = tickerContent.offsetWidth;
+  const containerWidth = tickerContainer.offsetWidth;
+  const duration = (contentWidth + containerWidth)/300; 
+
+  tickerContent.style.transition = 'none';
+  tickerContent.style.transform = `translateX(${containerWidth}px)`;
+
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      startTime = Date.now();
+      remainingTime = duration*1000;
+      tickerContent.style.transition = `transform ${duration}s linear`;
+      tickerContent.style.transform = `translateX(-${contentWidth}px)`;
+    });
+  });
+
+  tickerTimeout = setTimeout(()=>{
+    msgIndex = (msgIndex +1) % messages.length;
+    showNextMessage();
+  }, duration*1000);
+}
+
+tickerContainer.addEventListener('mouseenter', ()=>{
+  if(paused) return;
+  paused = true;
+  const style = window.getComputedStyle(tickerContent);
+  const matrix = new WebKitCSSMatrix(style.transform);
+  const currentX = matrix.m41;
+  tickerContent.style.transition = 'none';
+  tickerContent.style.transform = `translateX(${currentX}px)`;
+  clearTimeout(tickerTimeout);
+  const elapsed = Date.now() - startTime;
+  remainingTime -= elapsed;
 });
+
+tickerContainer.addEventListener('mouseleave', ()=>{
+  if(!paused) return;
+  paused = false;
+  const style = window.getComputedStyle(tickerContent);
+  const matrix = new WebKitCSSMatrix(style.transform);
+  const currentX = matrix.m41;
+  const contentWidth = tickerContent.offsetWidth;
+  const containerWidth = tickerContainer.offsetWidth;
+  tickerContent.style.transition = `transform ${remainingTime/1000}s linear`;
+  tickerContent.style.transform = `translateX(-${contentWidth}px)`;
+  tickerTimeout = setTimeout(()=>{
+    msgIndex = (msgIndex +1) % messages.length;
+    showNextMessage();
+  }, remainingTime);
+});
+
+window.addEventListener('load', showNextMessage);
+
 </script>
 
 </body>
 </html>
+
+
 
 
 
