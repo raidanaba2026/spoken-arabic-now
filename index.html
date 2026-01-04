@@ -16,12 +16,12 @@
 }
 
 /*==============================
-  الثيم العام - داكن احترافي
+  الثيم العام - داكن معتدل
 ==============================*/
 body { 
   font-family: 'Arial', Helvetica, sans-serif; 
-  background: #121212; 
-  color: #e0e0e0; 
+  background: #1f1f2e; /* داكن متوسط */
+  color: #e5e5e5;      /* نص أساسي واضح */
   line-height:1.6; 
   display:flex; 
   min-height:100vh; 
@@ -32,7 +32,7 @@ body {
 ==============================*/
 .sidebar { 
   width:250px; 
-  background:#1b1b1b; 
+  background:#2a2a3d; /* داكن معتدل للشريط الجانبي */
   color:#fff; 
   flex-shrink:0; 
   padding:20px; 
@@ -49,7 +49,6 @@ body {
   border-bottom:2px solid #42a5f5; 
   padding-bottom:5px; 
 }
-/* الروابط في الشريط الجانبي */
 .sidebar a { 
   display:flex; 
   align-items:center; 
@@ -131,22 +130,18 @@ section h2 {
   grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); 
   gap:40px; 
 }
-
-/* عنوان كل فيديو */
 .videoTitle {
   font-size: 0.95rem;
   color: #bbdefb;
   text-align: center;
   margin-bottom: 8px;
   font-weight: bold;
-  white-space: nowrap;      
-  overflow: hidden;         
-  text-overflow: ellipsis;  
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
-/* صندوق الفيديو */
 .videoBox { 
-  background:#1e1e2f; 
+  background:#2b2b44; /* صندوق فيديو معتدل */
   padding:0; 
   border-radius:15px; 
   box-shadow:0 8px 20px rgba(0,0,0,0.5); 
@@ -172,7 +167,7 @@ section h2 {
   gap:20px; 
 }
 .pdfBox { 
-  background:#1e1e2f; 
+  background:#2b2b44; /* صندوق PDF */
   color:#fff;
   padding:20px; 
   border-radius:15px; 
@@ -186,7 +181,6 @@ section h2 {
   box-shadow:0 12px 25px rgba(0,0,0,0.7); 
 }
 .pdfBox h3 { color:#42a5f5; margin-bottom:10px; font-size:1.2rem; }
-/* رابط تحميل PDF */
 .pdfBox a { 
   display:inline-block; 
   margin-top:10px; 
@@ -221,11 +215,18 @@ section h2 {
 }
 
 /*==============================
+  مسافة بين PDF وContact
+==============================*/
+#contact {
+  margin-top:70px; /* مسافة إضافية */
+}
+
+/*==============================
   الفوتر Footer
 ==============================*/
 footer { 
-  background:#1b1b1b; 
-  color:#bbb; 
+  background:#2a2a3d; 
+  color:#e5e5e5; 
   text-align:center; 
   padding:25px 20px; 
   font-size:0.9rem; 
@@ -245,9 +246,7 @@ footer a { color:#42a5f5; text-decoration:none; }
 </head>
 <body>
 
-<!--==============================
-  الشريط الجانبي Sidebar
-==============================-->
+<!-- الشريط الجانبي Sidebar -->
 <div class="sidebar">
   <h2>Navigation</h2>
   <a href="#about">ℹ️ About</a>
@@ -256,9 +255,7 @@ footer a { color:#42a5f5; text-decoration:none; }
   <a href="#contact">✉️ Contact Us</a>
 </div>
 
-<!--==============================
-  المحتوى الرئيسي Main
-==============================-->
+<!-- المحتوى الرئيسي Main -->
 <main>
 <header>
   <img src="logo.png" alt="Spoken Arabic Now Logo">
@@ -268,32 +265,27 @@ footer a { color:#42a5f5; text-decoration:none; }
   </div>
 </header>
 
-<!-- قسم عن الموقع About -->
+<!-- About -->
 <section id="about">
   <h2>About This Website</h2>
   <p>This website teaches <strong>Egyptian Spoken Arabic</strong> through engaging videos and downloadable PDFs.</p>
 </section>
 
-<!-- قسم الفيديوهات Video Lessons -->
+<!-- Video Lessons -->
 <section id="videos">
   <h2>Video Lessons</h2>
-  
-  <!-- هنا ستضاف الفيديوهات ديناميكياً -->
   <div class="videos" id="videoList"></div>
-  <!-- زر تحميل المزيد -->
   <button id="loadMoreBtn">Load More</button>
 </section>
 
-<!-- قسم ملفات PDF -->
+<!-- Downloadable PDFs -->
 <section id="pdfs">
   <h2>Downloadable PDFs</h2>
   <div class="resources">
-    <!-- PDF 1 -->
     <div class="pdfBox">
       <h3>30 Airport Phrases</h3>
       <a href="30_Airport_Phrases.pdf" download>Download PDF</a>
     </div>
-    <!-- PDF 2 -->
     <div class="pdfBox">
       <h3>30 Restaurant Phrases</h3>
       <a href="30_Restaurant_Phrases_Egyptian_Arabic.pdf" download>Download PDF</a>
@@ -301,57 +293,42 @@ footer a { color:#42a5f5; text-decoration:none; }
   </div>
 </section>
 
-<!-- إضافة مسافة كبيرة قبل قسم التواصل Contact -->
-<section id="contact" style="margin-top:80px;">
+<!-- Contact Us -->
+<section id="contact">
   <h2>Contact Us</h2>
-  <p>
-    <span style="color:#ffffff; font-weight:bold;">YouTube Channel:</span>
-    <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank" style="color:#FFD700; font-weight:bold; text-decoration:none;">Spoken Arabic Now</a>
-    <br />
-    <span style="color:#ffffff; font-weight:bold;">Email:</span>
-    <a href="mailto:spokenarabicnow@gmail.com" style="color:#00e5ff; font-weight:bold; text-decoration:none;">spokenarabicnow@gmail.com</a>
-  </p>
+  <p>YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank" style="color:#ffd700;">Spoken Arabic Now</a><br />
+  Email: <span style="color:#ffd700;">spokenarabicnow@gmail.com</span></p>
 </section>
 
-<!-- الفوتر Footer -->
+<!-- Footer -->
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
-<!--==============================
-  جافاسكربت لإظهار الفيديوهات وLoad More
-==============================-->
+<!-- JavaScript -->
 <script>
-// عدد الفيديوهات المعروضة في البداية
 let visibleCount = 6;
-
-// مصفوفة لتخزين البيانات
 let videosData = [];
-
 const videoList = document.getElementById('videoList');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 
-// جلب الفيديوهات من ملف JSON خارجي
 fetch('videos.json')
   .then(res => res.json())
   .then(videos => {
     videosData = videos;
-    renderVideos(); // عرض الفيديوهات
+    renderVideos();
   })
   .catch(err => console.error(err));
 
-// دالة لعرض الفيديوهات حسب العدد المحدد
 function renderVideos() {
-  videoList.innerHTML = ""; // مسح الفيديوهات السابقة
+  videoList.innerHTML = "";
   videosData.slice(0, visibleCount).forEach(video => {
     const container = document.createElement('div');
 
-    // عنوان الفيديو
     const title = document.createElement('div');
     title.className = 'videoTitle';
     title.textContent = video.title;
 
-    // صندوق الفيديو iframe
     const box = document.createElement('div');
     box.className = 'videoBox';
     const iframe = document.createElement('iframe');
@@ -364,19 +341,18 @@ function renderVideos() {
     videoList.appendChild(container);
   });
 
-  // إخفاء زر Load More إذا تم عرض كل الفيديوهات
   loadMoreBtn.style.display = visibleCount >= videosData.length ? 'none' : 'block';
 }
 
-// حدث الضغط على زر Load More
 loadMoreBtn.addEventListener('click', () => {
-  visibleCount += 6; // عرض 6 فيديوهات إضافية
+  visibleCount += 6;
   renderVideos();
 });
 </script>
 
 </body>
 </html>
+
 
 
 
