@@ -16,12 +16,12 @@
 }
 
 /*==============================
-  الثيم العام - داكن معتدل
+  الثيم العام - داكن متوسط
 ==============================*/
 body { 
   font-family: 'Arial', Helvetica, sans-serif; 
-  background: #1f1f2e; /* داكن متوسط */
-  color: #e5e5e5;      /* نص أساسي واضح */
+  background: #1a1a1a; /* أخف من السابق */
+  color: #e0e0e0; 
   line-height:1.6; 
   display:flex; 
   min-height:100vh; 
@@ -32,7 +32,7 @@ body {
 ==============================*/
 .sidebar { 
   width:250px; 
-  background:#2a2a3d; /* داكن معتدل للشريط الجانبي */
+  background:#222; 
   color:#fff; 
   flex-shrink:0; 
   padding:20px; 
@@ -45,10 +45,11 @@ body {
 .sidebar h2 { 
   color:#42a5f5; 
   margin-bottom:20px; 
-  font-size:1.6rem; 
+  font-size:1.5rem; 
   border-bottom:2px solid #42a5f5; 
   padding-bottom:5px; 
 }
+/* روابط الشريط الجانبي */
 .sidebar a { 
   display:flex; 
   align-items:center; 
@@ -58,9 +59,7 @@ body {
   margin:10px 0; 
   transition:color 0.3s; 
 }
-.sidebar a:hover { 
-  color:#42a5f5; 
-}
+.sidebar a:hover { color:#42a5f5; }
 
 /*==============================
   المحتوى الرئيسي Main
@@ -83,9 +82,9 @@ header {
   flex-wrap:wrap; 
   padding:20px 30px; 
   border-radius:15px; 
-  background: linear-gradient(135deg, #1e88e5, #42a5f5); 
+  background: linear-gradient(135deg, #2196f3, #64b5f6); 
   color:#fff; 
-  box-shadow:0 8px 25px rgba(0,0,0,0.3); 
+  box-shadow:0 8px 25px rgba(0,0,0,0.25); 
   border:2px solid #1976d2; 
 }
 header img { 
@@ -99,11 +98,11 @@ header div h1 {
   font-size:2.8rem; 
   color:#fff; 
   margin-bottom:8px; 
-  text-shadow:1px 1px 6px rgba(0,0,0,0.5); 
+  text-shadow:1px 1px 6px rgba(0,0,0,0.4); 
 }
 header div p { 
   font-size:1.3rem; 
-  color:#e0f7fa; 
+  color:#f0f0f0; 
   text-shadow:1px 1px 4px rgba(0,0,0,0.3); 
 }
 
@@ -116,7 +115,7 @@ section {
 section h2 { 
   color:#42a5f5; 
   margin-bottom:20px; 
-  font-size:1.8rem; 
+  font-size:1.4rem; /* حجم أصغر للعناوين */
   border-bottom:2px solid #42a5f5; 
   display:inline-block; 
   padding-bottom:4px; 
@@ -136,20 +135,20 @@ section h2 {
   text-align: center;
   margin-bottom: 8px;
   font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap;      
+  overflow: hidden;         
+  text-overflow: ellipsis;  
 }
 .videoBox { 
-  background:#2b2b44; /* صندوق فيديو معتدل */
+  background:#2a2a3b; 
   padding:0; 
   border-radius:15px; 
-  box-shadow:0 8px 20px rgba(0,0,0,0.5); 
+  box-shadow:0 6px 20px rgba(0,0,0,0.5); 
   transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 .videoBox:hover { 
-  transform:translateY(-7px); 
-  box-shadow:0 14px 30px rgba(0,0,0,0.7); 
+  transform:translateY(-6px); 
+  box-shadow:0 12px 28px rgba(0,0,0,0.6); 
 }
 .videoBox iframe { 
   width:100%; 
@@ -167,20 +166,21 @@ section h2 {
   gap:20px; 
 }
 .pdfBox { 
-  background:#2b2b44; /* صندوق PDF */
+  background:#2a2a3b; 
   color:#fff;
   padding:20px; 
   border-radius:15px; 
-  box-shadow:0 8px 25px rgba(0,0,0,0.5); 
+  box-shadow:0 6px 25px rgba(0,0,0,0.5); 
   text-align:center; 
   font-weight:bold; 
   transition: transform 0.3s, box-shadow 0.3s; 
 }
 .pdfBox:hover { 
   transform: translateY(-5px); 
-  box-shadow:0 12px 25px rgba(0,0,0,0.7); 
+  box-shadow:0 10px 25px rgba(0,0,0,0.6); 
 }
-.pdfBox h3 { color:#42a5f5; margin-bottom:10px; font-size:1.2rem; }
+.pdfBox h3 { color:#ffeb3b; margin-bottom:10px; font-size:1.1rem; }
+/* رابط تحميل PDF */
 .pdfBox a { 
   display:inline-block; 
   margin-top:10px; 
@@ -215,18 +215,22 @@ section h2 {
 }
 
 /*==============================
-  مسافة بين PDF وContact
+  قسم التواصل Contact
 ==============================*/
-#contact {
-  margin-top:70px; /* مسافة إضافية */
+#contact { 
+  margin-top:60px; /* مسافة بينه وبين PDF */
 }
+#contact h2 { font-size:1.4rem; }
+#contact a { color:#ffeb3b; text-decoration:none; font-weight:bold; }
+#contact a:hover { text-decoration:underline; }
+#contact p { color:#fff; }
 
 /*==============================
   الفوتر Footer
 ==============================*/
 footer { 
-  background:#2a2a3d; 
-  color:#e5e5e5; 
+  background:#222; 
+  color:#bbb; 
   text-align:center; 
   padding:25px 20px; 
   font-size:0.9rem; 
@@ -246,7 +250,9 @@ footer a { color:#42a5f5; text-decoration:none; }
 </head>
 <body>
 
-<!-- الشريط الجانبي Sidebar -->
+<!--==============================
+  الشريط الجانبي Sidebar
+==============================-->
 <div class="sidebar">
   <h2>Navigation</h2>
   <a href="#about">ℹ️ About</a>
@@ -255,7 +261,9 @@ footer a { color:#42a5f5; text-decoration:none; }
   <a href="#contact">✉️ Contact Us</a>
 </div>
 
-<!-- المحتوى الرئيسي Main -->
+<!--==============================
+  المحتوى الرئيسي Main
+==============================-->
 <main>
 <header>
   <img src="logo.png" alt="Spoken Arabic Now Logo">
@@ -265,20 +273,20 @@ footer a { color:#42a5f5; text-decoration:none; }
   </div>
 </header>
 
-<!-- About -->
+<!-- قسم عن الموقع About -->
 <section id="about">
   <h2>About This Website</h2>
   <p>This website teaches <strong>Egyptian Spoken Arabic</strong> through engaging videos and downloadable PDFs.</p>
 </section>
 
-<!-- Video Lessons -->
+<!-- قسم الفيديوهات Video Lessons -->
 <section id="videos">
   <h2>Video Lessons</h2>
   <div class="videos" id="videoList"></div>
   <button id="loadMoreBtn">Load More</button>
 </section>
 
-<!-- Downloadable PDFs -->
+<!-- قسم ملفات PDF -->
 <section id="pdfs">
   <h2>Downloadable PDFs</h2>
   <div class="resources">
@@ -293,42 +301,49 @@ footer a { color:#42a5f5; text-decoration:none; }
   </div>
 </section>
 
-<!-- Contact Us -->
+<!-- قسم التواصل Contact -->
 <section id="contact">
   <h2>Contact Us</h2>
-  <p>YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank" style="color:#ffd700;">Spoken Arabic Now</a><br />
-  Email: <span style="color:#ffd700;">spokenarabicnow@gmail.com</span></p>
+  <p>YouTube Channel: <a href="https://www.youtube.com/@SpokenArabicNow/featured" target="_blank">Spoken Arabic Now</a><br />
+  Email: <a href="mailto:spokenarabicnow@gmail.com">spokenarabicnow@gmail.com</a></p>
 </section>
 
-<!-- Footer -->
+<!-- الفوتر Footer -->
 <footer>
   <p>&copy; 2026 Spoken Arabic Now. All rights reserved.</p>
 </footer>
 
-<!-- JavaScript -->
+<!--==============================
+  جافاسكربت لإظهار الفيديوهات وLoad More
+==============================-->
 <script>
+// عدد الفيديوهات المعروضة في البداية
 let visibleCount = 6;
 let videosData = [];
 const videoList = document.getElementById('videoList');
 const loadMoreBtn = document.getElementById('loadMoreBtn');
 
+// جلب الفيديوهات من ملف JSON خارجي
 fetch('videos.json')
   .then(res => res.json())
   .then(videos => {
     videosData = videos;
-    renderVideos();
+    renderVideos(); // عرض الفيديوهات
   })
   .catch(err => console.error(err));
 
+// دالة لعرض الفيديوهات حسب العدد المحدد
 function renderVideos() {
   videoList.innerHTML = "";
   videosData.slice(0, visibleCount).forEach(video => {
     const container = document.createElement('div');
 
+    // عنوان الفيديو
     const title = document.createElement('div');
     title.className = 'videoTitle';
     title.textContent = video.title;
 
+    // صندوق الفيديو iframe
     const box = document.createElement('div');
     box.className = 'videoBox';
     const iframe = document.createElement('iframe');
@@ -341,22 +356,19 @@ function renderVideos() {
     videoList.appendChild(container);
   });
 
+  // إخفاء زر Load More إذا تم عرض كل الفيديوهات
   loadMoreBtn.style.display = visibleCount >= videosData.length ? 'none' : 'block';
 }
 
+// حدث الضغط على زر Load More
 loadMoreBtn.addEventListener('click', () => {
-  visibleCount += 6;
+  visibleCount += 6; // عرض 6 فيديوهات إضافية
   renderVideos();
 });
 </script>
 
 </body>
 </html>
-
-
-
-
-
 
 
 
